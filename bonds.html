@@ -22,6 +22,7 @@
 				<nav>
 					<ul>
 						<li><a href="index.html">Back to projects</a></li>
+						<li><a href="#eda">EDA</a></li>
 					</ul>
 				</nav>
 			</header>
@@ -30,8 +31,8 @@
 			<div id="wrapper">
 
 				<!-- Main -->
-					<section id="main" class="wrapper">
-						<div class="inner">
+					<section id="dataset" class="wrapper">
+						<div class="inner" style="font-size: large;">
 							<h1 class="major">Government bonds buyer predictions</h1>
 							<p style="font-size: large;">The analysis is conducted to predict how much government bonds the company has to order based on the users behaviour.
 								The dataset is sourced from Indonesia Fintech StartUp between August and October 2021.
@@ -42,10 +43,10 @@
 										<ul style="list-style-type: circle;">
 											<li>user_id - User's identity</li>
 											<li>registration_import_datetime - Date of user registered</li>
-											<li>user_gender - Gender of the user, 'Male' or 'Female'</li>
+											<li>user_gender - Gender of the user</li>
 											<li>user_age - Age of the user</li>
 											<li>user_occupation - Occupation of the user</li>
-											<li>user_income_range - Range of income, '> Rp 500 Juta - 1 Miliar', '> Rp 50 Juta - 100 Juta', 'Rp 10 Juta - 50 Juta', '< 10 Juta', '> Rp 100 Juta - 500 Juta', '> Rp 1 Miliar'</li>
+											<li>user_income_range - Range income of the user</li>
 											<li>referral_code_used - If the user using referral code during registration or not</li>
 											<li>user_income_source - The source of income from the user</li>
 										</ul>
@@ -302,46 +303,141 @@
 									</li>
 								</ol>
 							</p>
-							<h2>Explanatory Data Analysis</h2>
-							<p>After a quick dataset explanation, we will dig deeper about the data to see the user behaviour and a better understanding about the data.
-								We will see how much data that we have and the structure.
-								<pre><code>print(f'Total Row: {data1.shape[0]} , Column: {data1.shape[1]}')
+							<div id="eda">
+								<h2 class="major">Explanatory Data Analysis</h2>
+								<p>After a quick dataset exploration, we can see the structure of the data. The next thing we will do is to dig deeper the dataset to see the user behaviour and a better understanding about the data.
+									We will see how much the total of data that we have, the datatype, if there are any duplicate in our data, null value or any other problem that we need to taking care of.
+									<pre><code>print(f'Total Row: {data1.shape[0]} , Column: {data1.shape[1]}')
 data1.info()</code></pre>
-<pre>Total Row: 14712 , Column: 8
-RangeIndex: 14712 entries, 0 to 14711
-Data columns (total 8 columns):
-#   Column                        Non-Null Count  Dtype    
----  ------                        --------------  -----    
-0   user_id                       14712 non-null  int64    
-1   registration_import_datetime  14712 non-null  period[D]
-2   user_gender                   14712 non-null  object   
-3   user_age                      14712 non-null  int64    
-4   user_occupation               14712 non-null  object   
-5   user_income_range             14712 non-null  object   
-6   referral_code_used            5604 non-null   object   
-7   user_income_source            14712 non-null  object   
-dtypes: int64(2), object(5), period[D](1)</pre>
-							We can see there are 14712 rows of data with 8 columns for the dataset 1. The next step that we will do is to check if any duplicate user_id and null value in the dataset.
-<pre><code>is_duplicate_data1 = data1.user_id.duplicated().sum()
+	<pre>	Total Row: 14712 , Column: 8
+	RangeIndex: 14712 entries, 0 to 14711
+	Data columns (total 8 columns):
+	#   Column                        Non-Null Count  Dtype    
+	---  ------                        --------------  -----    
+	0   user_id                       14712 non-null  int64    
+	1   registration_import_datetime  14712 non-null  period[D]
+	2   user_gender                   14712 non-null  object   
+	3   user_age                      14712 non-null  int64    
+	4   user_occupation               14712 non-null  object   
+	5   user_income_range             14712 non-null  object   
+	6   referral_code_used            5604 non-null   object   
+	7   user_income_source            14712 non-null  object   
+	dtypes: int64(2), object(5), period[D](1)</pre>
+								There are 14712 rows of data with 8 columns for the dataset 1, we can see that on the column referral_code_used there are only 5604 rows of non-null data
+								 the next step that we will do is to double check null value in the dataset and if any duplicate user_id since the user_id is our primary key.
+	<pre><code>is_duplicate_data1 = data1.user_id.duplicated().sum()
 total_user = data1.user_id.count()
 print(f'Total Duplicate User_ID : {is_duplicate_data1}')
 print(f'Total User : {total_user}')
-data1.isnull().sum()
-</code></pre>
-<pre>Total Duplicate User_ID : 0
-Total User : 14712
-user_id                            0
-registration_import_datetime       0
-user_gender                        0
-user_age                           0
-user_occupation                    0
-user_income_range                  0
-referral_code_used              9108
-user_income_source                 0
-dtype: int64
-</pre>
-						</p>
-						<img src="/images/bonds/user_growth_linechart.png" alt="">
+data1.isnull().sum()</code></pre>
+	<pre>	Total Duplicate User_ID : 0
+	Total User : 14712
+	user_id                            0
+	registration_import_datetime       0
+	user_gender                        0
+	user_age                           0
+	user_occupation                    0
+	user_income_range                  0
+	referral_code_used              9108
+	user_income_source                 0
+	dtype: int64
+	</pre>
+						From the result above, it's confirmed that we have 9108 rows of null value in column referral_code_used
+						and luckily we don't have any duplicate data for the user_id so we can continue to decide what to do with the null value.
+						We will be checking for the unique value from each column in the dataset.
+<pre><code>for x in data1:
+	uniqueValues = data1[x].unique()
+	n_values = len(uniqueValues)
+	if n_values <=50:
+	print(f'Column: {x} -- total unique value: ({n_values}) {uniqueValues}')</code></pre>
+<pre style="overflow-x: auto;">	Column: user_gender -- total unique value: (2) ['Female' 'Male']
+	Column: user_occupation -- total unique value: (9) ['Swasta' 'Others' 'IRT' 'PNS' 'Pengusaha' 'Pensiunan' 'TNI/Polisi' 'Guru''Pelajar']
+	Column: user_income_range -- total unique value: (6) ['> Rp 500 Juta - 1 Miliar' '> Rp 50 Juta - 100 Juta' 'Rp 10 Juta - 50 Juta' '< 10 Juta' '> Rp 100 Juta - 500 Juta' '> Rp 1 Miliar']
+	Column: referral_code_used -- total unique value: (2) [nan 'used referral']
+	Column: user_income_source -- total unique value: (10) ['Gaji' 'Keuntungan Bisnis' 'Lainnya' 'Dari Orang Tua / Anak' 'Undian' 'Tabungan' 'Warisan' 'Hasil Investasi' 'Dari Suami / istri' 'Bunga Simpanan']
+	</pre>
+	By checking the unique value, we can see the categorical data of each column. We notice that there are only 2 category from referral_code_used, which is nan or 'used referral'.
+	We will be converting the null value to none instead of nan or deleting the data.
+	<pre><code>data1.referral_code_used.fillna('None', inplace = True)
+data1.referral_code_used.unique()
+data1.isnull().sum()</code></pre>
+	<pre style="overflow-x: auto;">	array(['None', 'used referral'], dtype=object)
+	user_id                         0
+	registration_import_datetime    0
+	user_gender                     0
+	user_age                        0
+	user_occupation                 0
+	user_income_range               0
+	referral_code_used              0
+	user_income_source              0
+	dtype: int64
+	</pre>
+	We succesfully convert the null value to none. Then we will start our analysis by checking the user registration growth between August and October 2021.
+	We will visualise the chart by daily and monthly registration.
+	<pre><code>data1['registration_import_datetime'].value_counts().sort_index().plot()
+plt.title('User Join Growth by Day')
+data1['registration_month'] = data1.registration_import_datetime.dt.to_timestamp('m').copy()
+data1.registration_month.value_counts().sort_index().plot()
+plt.title('User Join Growth by Month')
+plt.show()</code></pre>
+	<img src="/images/bonds/user_growth_linechart.png" alt="" class="vis"> <img src="/images/bonds/user_month.png" alt=""  class="vis">
+	<div>In the daily registration chart, we can see that October is the month with the lowest and highest number of registration,
+		meanwhile when we try to visualise by monthly basis we can see that September is the month with the highest number of registration, around 5200 users signed up.
+		Next, we want to see the comparison by user's gender.</div>
+	<pre><code>gender = data1[['user_id', 'user_gender']].groupby('user_gender').count()
+plt.pie(gender.user_id, labels=gender.index , startangle=90, shadow=True,explode=(0.1, 0.1), autopct='%1.2f%%')
+plt.title('Users\' Gender Distribution')
+plt.show()			</code></pre>	
+<img src="/images/bonds/user_gender.png" alt="" class="center">
+<div>The user's gender distribution chart show that around 61.02% of our users are male, meanwhile the rest are female.
+	Then we will try to visualise the user's range and source of income to see more details of it.
+</div>
+<pre><code>fig, ax = plt.subplots(figsize=(8, 8), subplot_kw=dict(aspect="equal"))
+income_source = data1[['user_id', 'user_income_source']].groupby('user_income_source').count
+def func(pct, allvals):
+	absolute = int(np.round(pct/100.*np.sum(allvals)))
+	return "{:.1f}%\n({:d} users)".format(pct, absolute)
+
+wedges, texts, autotexts = ax.pie(income_source.user_id, autopct=lambda pct: func(pct, income_source.user_id),
+	textprops=dict(color="black"), explode=(1,0,0,0,0,0,0,0,0,0))
+ax.legend(wedges, income_source.index,
+	title="Income Source",
+	loc="upper left",
+	bbox_to_anchor=(1, 0, 0.5, 1))
+plt.setp(autotexts, size=8, weight="bold")
+ax.set_title("User's Income Source"
+plt.show()			</code></pre>	
+<img src="/images/bonds/user_income_source.png" alt="" class="center">
+<div>We read the chart counterclockwise start from the exploded pie.
+	It shows that the lowest income source is from Bunga Simpanan (Saving's interest) with 0.2%.
+whilst the majority of the income source is from Gaji (Salary) with 62.1% or equal to 9131 users.
+Then we will see for the user's income range.</div>
+<pre><code>fig, ax = plt.subplots(figsize=(6, 5))
+ax = sns.countplot(y= data1.user_income_range, data = data1)
+
+ax.set_title('User Income Range')
+for x in ax.containers:
+	ax.bar_label(x, label_type='edge')
+
+plt.show()			</code></pre>
+<img src="/images/bonds/user_income_range.png" alt="" class="center">
+<div>In the user income range chart, it shows the majority of user's income range is less than 10 Million Rupiah (approx 630USD) with 6275 users.
+	Nevertheless, there are 27 users with the highest income range (approx 63000USD) which is our potential big investor.
+	We also, will try to combine between income source and range to see the breakdown of it.
+</div>	
+<pre><code>fig, ax = plt.subplots(figsize=(12, 8))
+ax = sns.countplot(y= data1.user_income_source, hue=data1.user_income_range, data = data1)
+ax.set_title('Income source and range')
+for x in ax.containers:
+	ax.bar_label(x, label_type='edge')
+ax.legend(loc='best', fontsize=8)
+plt.show()</code></pre>
+<img src="/images/bonds/income_source_range.png" alt="" class="center">
+<div>The income range and source chart, we can see there are 2835 of our users had wages less than 10 Million Rupiah.
+	Moreover, the majority of our user's salary income range is between 10 Million to 50 Million Rupiah with the total of 3483 users.
+</div>
+							</p>
+							</div>
 						</div>
 					</section>
 			</div>
@@ -352,7 +448,6 @@ dtype: int64
 				<ul class="menu">
 					<li>&copy; Devy Ratnasari</li>
 					<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-					<li>Pictures: <a href="https://www.canva.com/">Canva</a></li>
 				</ul>
 			</div>
 		</footer>
