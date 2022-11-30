@@ -388,7 +388,7 @@ plt.show()</code></pre>
 plt.pie(gender.user_id, labels=gender.index , startangle=90, shadow=True,explode=(0.1, 0.1), autopct='%1.2f%%')
 plt.title('Users\' Gender Distribution')
 plt.show()			</code></pre>	
-<img src="/images/bonds/user_gender.png" alt="" class="center">
+<div class="center"><img src="/images/bonds/user_gender.png" alt="" class="center"></div>
 <div>The user's gender distribution chart show that around 61.02% of our users are male, meanwhile the rest are female.
 	Then we will try to visualise the user's range and source of income to see more details of it.
 </div>
@@ -407,7 +407,7 @@ ax.legend(wedges, income_source.index,
 plt.setp(autotexts, size=8, weight="bold")
 ax.set_title("User's Income Source"
 plt.show()			</code></pre>	
-<img src="/images/bonds/user_income_source.png" alt="" class="center">
+<div class="center"><img src="/images/bonds/user_income_source.png" alt=""></div>
 <div>We read the chart counterclockwise start from the exploded pie.
 	It shows that the lowest income source is from Bunga Simpanan (Saving's interest) with 0.2%.
 whilst the majority of the income source is from Gaji (Salary) with 62.1% or equal to 9131 users.
@@ -420,9 +420,9 @@ for x in ax.containers:
 	ax.bar_label(x, label_type='edge')
 
 plt.show()			</code></pre>
-<img src="/images/bonds/user_income_range.png" alt="" class="center">
+<div class="center"><img src="/images/bonds/user_income_range.png" alt="" class="center"></div>
 <div>In the user income range chart, it shows the majority of user's income range is less than 10 Million Rupiah (approx 630USD) with 6275 users.
-	Nevertheless, there are 27 users with the highest income range (approx 63000USD) which is our potential big investor.
+	Nevertheless, there are 27 users with the highest income range - 1 Billion Rupiah (approx 63000USD) which is our potential big investor.
 	We also, will try to combine between income source and range to see the breakdown of it.
 </div>	
 <pre><code>fig, ax = plt.subplots(figsize=(12, 8))
@@ -432,10 +432,33 @@ for x in ax.containers:
 	ax.bar_label(x, label_type='edge')
 ax.legend(loc='best', fontsize=8)
 plt.show()</code></pre>
-<img src="/images/bonds/income_source_range.png" alt="" class="center">
+<div class="center"><img src="/images/bonds/income_source_range.png" alt=""></div>
 <div>The income range and source chart, we can see there are 2835 of our users had wages less than 10 Million Rupiah.
 	Moreover, the majority of our user's salary income range is between 10 Million to 50 Million Rupiah with the total of 3483 users.
+	We can also notice that there are 10 of users had salary more than 1 Billion Rupiah. We will try to visualise the distribution of our user's occupation.
 </div>
+<pre><code>fig, ax = plt.subplots(figsize=(10, 5))
+ax =sns.countplot(x=data1.user_occupation)
+for x in ax.containers:
+	ax.bar_label(x, label_type='edge')
+ax.set_title('User occupation')
+plt.show()</code></pre>
+<div class="center"><img src="/images/bonds/occupation.png" alt=""></div>
+<div>The users' occupation chart shows that the majority of our users are Pelajar (Student) with total of 7887 user.
+	Which is make sense that our majority income range is less than 10 Million.
+	We will try to combine the income range and user occupation to see more details of it.</div>
+<pre><code>fig, ax = plt.subplots(figsize=(12, 8))
+ax = sns.countplot(y= data1.user_occupation, hue=data1.user_income_range, data = data1)
+ax.set_title('Income range and occupation')
+for x in ax.containers:
+	ax.bar_label(x, label_type='edge')
+ax.legend(loc='right', fontsize=8)
+plt.show()</code></pre>
+<div class="center"><img src="/images/bonds/income_range_occupation.png" alt=""></div>
+<div>When we combined the income range and occupation, we found an interesting information that we have 17 students with income range more than 500 Million Rupiah.
+	So we will investigate a little bit further about the 17 students.
+</div>
+<pre><code>pelajar_age = data1.query('user_occupation == \'Pelajar\' and (user_income_range == \'> Rp 500 Juta - 1 Miliar\' or user_income_range == \'> Rp 1 Miliar\')')</code></pre>
 							</p>
 							</div>
 						</div>
