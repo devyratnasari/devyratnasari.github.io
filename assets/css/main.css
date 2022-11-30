@@ -45,12 +45,10 @@ blockquote, q {
 		content: none;
 	}
 
-img.center{
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	width: 50%;
-	height: 499px;
+.center{
+	display: grid;
+	justify-content: center;
+	margin-bottom: 1em;
 }
 img.vis{
 	width: 544px;
