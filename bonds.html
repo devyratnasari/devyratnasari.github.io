@@ -305,8 +305,8 @@
 							</p>
 							<div id="eda">
 								<h2 class="major">Explanatory Data Analysis</h2>
-								<p>After a quick dataset exploration, we can see the structure of the data. The next thing we will do is to dig deeper the dataset to see the user behaviour and a better understanding about the data.
-									We will see how much the total of data that we have, the datatype, if there are any duplicate in our data, null value or any other problem that we need to taking care of.
+								<p><div class="desc">After a quick dataset exploration, we can see the structure of the data. The next thing we will do is to dig deeper the dataset to see the user behaviour and a better understanding about the data.
+									We will see how much the total of data that we have, the datatype, if there are any duplicate in our data, null value or any other problem that we need to taking care of.</div>
 									<pre><code>print(f'Total Row: {data1.shape[0]} , Column: {data1.shape[1]}')
 data1.info()</code></pre>
 	<pre>	Total Row: 14712 , Column: 8
@@ -323,8 +323,8 @@ data1.info()</code></pre>
 	6   referral_code_used            5604 non-null   object   
 	7   user_income_source            14712 non-null  object   
 	dtypes: int64(2), object(5), period[D](1)</pre>
-								There are 14712 rows of data with 8 columns for the dataset 1, we can see that on the column referral_code_used there are only 5604 rows of non-null data
-								 the next step that we will do is to double check null value in the dataset and if any duplicate user_id since the user_id is our primary key.
+<div class="desc">There are 14712 rows of data with 8 columns for the dataset 1, we can see that on the column referral_code_used there are only 5604 rows of non-null data
+	the next step that we will do is to double check null value in the dataset and if any duplicate user_id since the user_id is our primary key.</div>
 	<pre><code>is_duplicate_data1 = data1.user_id.duplicated().sum()
 total_user = data1.user_id.count()
 print(f'Total Duplicate User_ID : {is_duplicate_data1}')
@@ -340,11 +340,10 @@ data1.isnull().sum()</code></pre>
 	user_income_range                  0
 	referral_code_used              9108
 	user_income_source                 0
-	dtype: int64
-	</pre>
-						From the result above, it's confirmed that we have 9108 rows of null value in column referral_code_used
-						and luckily we don't have any duplicate data for the user_id so we can continue to decide what to do with the null value.
-						We will be checking for the unique value from each column in the dataset.
+	dtype: int64</pre>
+<div class="desc">From the result above, it's confirmed that we have 9108 rows of null value in column referral_code_used
+	and luckily we don't have any duplicate data for the user_id so we can continue to decide what to do with the null value.
+	We will be checking for the unique value from each column in the dataset.</div>
 <pre><code>for x in data1:
 	uniqueValues = data1[x].unique()
 	n_values = len(uniqueValues)
@@ -381,7 +380,7 @@ data1.registration_month.value_counts().sort_index().plot()
 plt.title('User Join Growth by Month')
 plt.show()</code></pre>
 	<img src="/images/bonds/user_growth_linechart.png" alt="" class="vis"> <img src="/images/bonds/user_month.png" alt=""  class="vis">
-	<div>In the daily registration chart, we can see that October is the month with the lowest and highest number of registration,
+	<div class="desc">In the daily registration chart, we can see that October is the month with the lowest and highest number of registration,
 		meanwhile when we try to visualise by monthly basis we can see that September is the month with the highest number of registration, around 5200 users signed up.
 		Next, we want to see the comparison by user's gender.</div>
 	<pre><code>gender = data1[['user_id', 'user_gender']].groupby('user_gender').count()
@@ -389,7 +388,7 @@ plt.pie(gender.user_id, labels=gender.index , startangle=90, shadow=True,explode
 plt.title('Users\' Gender Distribution')
 plt.show()			</code></pre>	
 <div class="center"><img src="/images/bonds/user_gender.png" alt="" class="center"></div>
-<div>The user's gender distribution chart show that around 61.02% of our users are male, meanwhile the rest are female.
+<div class="desc">The user's gender distribution chart show that around 61.02% of our users are male, meanwhile the rest are female.
 	Then we will try to visualise the user's range and source of income to see more details of it.
 </div>
 <pre><code>fig, ax = plt.subplots(figsize=(8, 8), subplot_kw=dict(aspect="equal"))
@@ -408,7 +407,7 @@ plt.setp(autotexts, size=8, weight="bold")
 ax.set_title("User's Income Source"
 plt.show()			</code></pre>	
 <div class="center"><img src="/images/bonds/user_income_source.png" alt=""></div>
-<div>We read the chart counterclockwise start from the exploded pie.
+<div class="desc">We read the chart counterclockwise start from the exploded pie.
 	It shows that the lowest income source is from Bunga Simpanan (Saving's interest) with 0.2%.
 whilst the majority of the income source is from Gaji (Salary) with 62.1% or equal to 9131 users.
 Then we will see for the user's income range.</div>
@@ -421,7 +420,7 @@ for x in ax.containers:
 
 plt.show()			</code></pre>
 <div class="center"><img src="/images/bonds/user_income_range.png" alt="" class="center"></div>
-<div>In the user income range chart, it shows the majority of user's income range is less than 10 Million Rupiah (approx 630USD) with 6275 users.
+<div class="desc">In the user income range chart, it shows the majority of user's income range is less than 10 Million Rupiah (approx 630USD) with 6275 users.
 	Nevertheless, there are 27 users with the highest income range - 1 Billion Rupiah (approx 63000USD) which is our potential big investor.
 	We also, will try to combine between income source and range to see the breakdown of it.
 </div>	
@@ -433,7 +432,7 @@ for x in ax.containers:
 ax.legend(loc='best', fontsize=8)
 plt.show()</code></pre>
 <div class="center"><img src="/images/bonds/income_source_range.png" alt=""></div>
-<div>The income range and source chart, we can see there are 2835 of our users had wages less than 10 Million Rupiah.
+<div class="desc">The income range and source chart, we can see there are 2835 of our users had wages less than 10 Million Rupiah.
 	Moreover, the majority of our user's salary income range is between 10 Million to 50 Million Rupiah with the total of 3483 users.
 	We can also notice that there are 10 of users had salary more than 1 Billion Rupiah. We will try to visualise the distribution of our user's occupation.
 </div>
@@ -444,7 +443,7 @@ for x in ax.containers:
 ax.set_title('User occupation')
 plt.show()</code></pre>
 <div class="center"><img src="/images/bonds/occupation.png" alt=""></div>
-<div>The users' occupation chart shows that the majority of our users are Pelajar (Student) with total of 7887 user.
+<div class="desc">The users' occupation chart shows that the majority of our users are Pelajar (Student) with total of 7887 user.
 	Which is make sense that our majority income range is less than 10 Million.
 	We will try to combine the income range and user occupation to see more details of it.</div>
 <pre><code>fig, ax = plt.subplots(figsize=(12, 8))
@@ -455,11 +454,322 @@ for x in ax.containers:
 ax.legend(loc='right', fontsize=8)
 plt.show()</code></pre>
 <div class="center"><img src="/images/bonds/income_range_occupation.png" alt=""></div>
-<div>When we combined the income range and occupation, we found an interesting information that we have 17 students with income range more than 500 Million Rupiah.
+<div class="desc">When we combined the income range and occupation, we found an interesting information that we have 17 students with income range more than 500 Million Rupiah.
 	So we will investigate a little bit further about the 17 students.
 </div>
 <pre><code>pelajar_age = data1.query('user_occupation == \'Pelajar\' and (user_income_range == \'> Rp 500 Juta - 1 Miliar\' or user_income_range == \'> Rp 1 Miliar\')')</code></pre>
-							</p>
+<table id="pelajar" style="overflow-y: scroll;">
+	<thead>
+		<tr style="text-align: right;">
+		  <th></th>
+		  <th>user_id</th>
+		  <th>registration_import_datetime</th>
+		  <th>user_gender</th>
+		  <th>user_age</th>
+		  <th>user_occupation</th>
+		  <th>user_income_range</th>
+		  <th>referral_code_used</th>
+		  <th>user_income_source</th>
+		  <th>registration_month</th>
+		</tr>
+	  </thead>
+	  <tbody>
+		<tr>
+		  <th>619</th>
+		  <td>4228712</td>
+		  <td>2021-10-05</td>
+		  <td>Male</td>
+		  <td>17</td>
+		  <td>Pelajar</td>
+		  <td>&gt; Rp 1 Miliar</td>
+		  <td>used referral</td>
+		  <td>Keuntungan Bisnis</td>
+		  <td>2021-10-31</td>
+		</tr>
+		<tr>
+		  <th>899</th>
+		  <td>3795261</td>
+		  <td>2021-08-08</td>
+		  <td>Male</td>
+		  <td>18</td>
+		  <td>Pelajar</td>
+		  <td>&gt; Rp 1 Miliar</td>
+		  <td>used referral</td>
+		  <td>Lainnya</td>
+		  <td>2021-08-31</td>
+		</tr>
+		<tr>
+		  <th>1394</th>
+		  <td>4376258</td>
+		  <td>2021-10-19</td>
+		  <td>Male</td>
+		  <td>18</td>
+		  <td>Pelajar</td>
+		  <td>&gt; Rp 500 Juta - 1 Miliar</td>
+		  <td>used referral</td>
+		  <td>Gaji</td>
+		  <td>2021-10-31</td>
+		</tr>
+		<tr>
+		  <th>2282</th>
+		  <td>3818578</td>
+		  <td>2021-08-16</td>
+		  <td>Male</td>
+		  <td>19</td>
+		  <td>Pelajar</td>
+		  <td>&gt; Rp 1 Miliar</td>
+		  <td>None</td>
+		  <td>Keuntungan Bisnis</td>
+		  <td>2021-08-31</td>
+		</tr>
+		<tr>
+		  <th>2609</th>
+		  <td>3742646</td>
+		  <td>2021-08-09</td>
+		  <td>Female</td>
+		  <td>20</td>
+		  <td>Pelajar</td>
+		  <td>&gt; Rp 1 Miliar</td>
+		  <td>None</td>
+		  <td>Keuntungan Bisnis</td>
+		  <td>2021-08-31</td>
+		</tr>
+		<tr>
+		  <th>3999</th>
+		  <td>3749935</td>
+		  <td>2021-08-04</td>
+		  <td>Female</td>
+		  <td>21</td>
+		  <td>Pelajar</td>
+		  <td>&gt; Rp 1 Miliar</td>
+		  <td>None</td>
+		  <td>Keuntungan Bisnis</td>
+		  <td>2021-08-31</td>
+		</tr>
+		<tr>
+		  <th>4076</th>
+		  <td>4245492</td>
+		  <td>2021-10-07</td>
+		  <td>Female</td>
+		  <td>21</td>
+		  <td>Pelajar</td>
+		  <td>&gt; Rp 500 Juta - 1 Miliar</td>
+		  <td>None</td>
+		  <td>Keuntungan Bisnis</td>
+		  <td>2021-10-31</td>
+		</tr>
+		<tr>
+		  <th>4569</th>
+		  <td>4355874</td>
+		  <td>2021-10-17</td>
+		  <td>Male</td>
+		  <td>21</td>
+		  <td>Pelajar</td>
+		  <td>&gt; Rp 1 Miliar</td>
+		  <td>used referral</td>
+		  <td>Keuntungan Bisnis</td>
+		  <td>2021-10-31</td>
+		</tr>
+		<tr>
+		  <th>6135</th>
+		  <td>4239037</td>
+		  <td>2021-10-06</td>
+		  <td>Female</td>
+		  <td>23</td>
+		  <td>Pelajar</td>
+		  <td>&gt; Rp 500 Juta - 1 Miliar</td>
+		  <td>used referral</td>
+		  <td>Gaji</td>
+		  <td>2021-10-31</td>
+		</tr>
+		<tr>
+		  <th>8322</th>
+		  <td>4371352</td>
+		  <td>2021-10-19</td>
+		  <td>Male</td>
+		  <td>25</td>
+		  <td>Pelajar</td>
+		  <td>&gt; Rp 500 Juta - 1 Miliar</td>
+		  <td>used referral</td>
+		  <td>Gaji</td>
+		  <td>2021-10-31</td>
+		</tr>
+		<tr>
+		  <th>8871</th>
+		  <td>3959126</td>
+		  <td>2021-09-02</td>
+		  <td>Female</td>
+		  <td>26</td>
+		  <td>Pelajar</td>
+		  <td>&gt; Rp 500 Juta - 1 Miliar</td>
+		  <td>used referral</td>
+		  <td>Keuntungan Bisnis</td>
+		  <td>2021-09-30</td>
+		</tr>
+		<tr>
+		  <th>9063</th>
+		  <td>4342801</td>
+		  <td>2021-10-17</td>
+		  <td>Male</td>
+		  <td>26</td>
+		  <td>Pelajar</td>
+		  <td>&gt; Rp 500 Juta - 1 Miliar</td>
+		  <td>None</td>
+		  <td>Gaji</td>
+		  <td>2021-10-31</td>
+		</tr>
+		<tr>
+		  <th>9725</th>
+		  <td>4270298</td>
+		  <td>2021-10-09</td>
+		  <td>Female</td>
+		  <td>27</td>
+		  <td>Pelajar</td>
+		  <td>&gt; Rp 500 Juta - 1 Miliar</td>
+		  <td>None</td>
+		  <td>Keuntungan Bisnis</td>
+		  <td>2021-10-31</td>
+		</tr>
+		<tr>
+		  <th>10101</th>
+		  <td>4134537</td>
+		  <td>2021-09-24</td>
+		  <td>Male</td>
+		  <td>28</td>
+		  <td>Pelajar</td>
+		  <td>&gt; Rp 500 Juta - 1 Miliar</td>
+		  <td>None</td>
+		  <td>Keuntungan Bisnis</td>
+		  <td>2021-09-30</td>
+		</tr>
+		<tr>
+		  <th>10925</th>
+		  <td>4338825</td>
+		  <td>2021-10-15</td>
+		  <td>Male</td>
+		  <td>29</td>
+		  <td>Pelajar</td>
+		  <td>&gt; Rp 1 Miliar</td>
+		  <td>used referral</td>
+		  <td>Lainnya</td>
+		  <td>2021-10-31</td>
+		</tr>
+		<tr>
+		  <th>11617</th>
+		  <td>4164878</td>
+		  <td>2021-10-02</td>
+		  <td>Male</td>
+		  <td>31</td>
+		  <td>Pelajar</td>
+		  <td>&gt; Rp 500 Juta - 1 Miliar</td>
+		  <td>used referral</td>
+		  <td>Keuntungan Bisnis</td>
+		  <td>2021-10-31</td>
+		</tr>
+		<tr>
+		  <th>11950</th>
+		  <td>3858112</td>
+		  <td>2021-08-18</td>
+		  <td>Female</td>
+		  <td>32</td>
+		  <td>Pelajar</td>
+		  <td>&gt; Rp 500 Juta - 1 Miliar</td>
+		  <td>None</td>
+		  <td>Gaji</td>
+		  <td>2021-08-31</td>
+		</tr>
+	  </tbody>
+</table>
+<div class="desc">It's interesting that we have few users with age below 20, as a student with income range above 500 Million Rupiah and the income source is from business profit.
+	There is a possibility with the wrong information that the user provided or they might born with a silver spoon.
+	However, we just leave it as is for now and take notes just in case we might need some adjustment prior building the model.
+The next thing we want to check is, how many percent of our user registered using referral code.
+This might also will help to decide what type of campaigne approach to increase the registration number.</div>
+<pre><code>referral_code = data1[['user_id', 'referral_code_used']].groupby('referral_code_used').count()
+plt.pie(referral_code.user_id, labels=referral_code.index, startangle=90, shadow=True,explode=(0.1, 0.1), autopct='%1.2f%%')
+plt.title('Referral Code Comparison')
+plt.show()</code></pre>
+<div class="center"><img src="/images/bonds/referral_code.png" alt=""></div>
+<div class="desc">We can see from the referral code comparison that only 38.09% of our users using referral code during their registration process.
+	We can create an announcement on the company website or application about bonus credit if the user refer some friends to register with us.
+	This will increase the number of new users, transactions, also a cheaper version of advertisement as we announce it using our private platform so third party advertisement cost needed.
+	As well as encourage the current users to make more transaction using the bonus credit and so on.
+	We will check the average age of our users.
+</div>
+<pre><code>data1['user_age'].describe()</code>
+	count    14712.000000
+	mean        27.176591
+	std          8.552585
+	min         17.000000
+	25%         21.000000
+	50%         25.000000
+	75%         31.000000
+	max         83.000000
+	Name: user_age, dtype: float64</pre>
+	<div class="desc">The description show that the average age of our user is 27 years old. With the youngest is 17 and oldest is 83 years old.
+		We will try to visualise the distribution of it by using histogram.
+	</div>
+	<pre><code>data1['user_age'].hist(figsize = (5,5))
+plt.title('User age distribution')</code></pre>
+	<div class="center"><img src="/images/bonds/age_histogram.png" alt=""></div>
+	<div class="desc">The histogram show that most of our users are in age group 20's and 30's.
+		The next step we will do is using zscore to calculate if there's any outliers.</div>
+<pre><code>mean = np.mean(data1.user_age)
+std = np.std(data1.user_age)
+outlier = []
+for i in data1.user_age:
+	z = (i-mean)/std
+	if z > 3:
+		outlier.append(i)
+print('outliers in dataset are', set(outlier))
+sns.boxplot(x=data1.user_age)</code>
+	outliers in dataset are {53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 69, 71, 73, 74, 76, 82, 83}</pre>
+<div class="center"><img src="/images/bonds/outliers.png" alt=""></div>
+<div class="desc">From the z-score calculation, it shows the ourliers from the users age are from 53 years and older.
+	We will visualise the distribution and check how many users are in the outliers then merging the dataset 1 and dataset 2 to see how many percentage of the outlier's user contribute with transaction before we decide to remove the outliers or just leave it as is.</div>
+<pre><code>user_outliers = data1.loc[data1.user_age>=53,:]
+total_out = user_outliers.user_id.count()
+percentage_outliers = (total_out/total_user)
+print(f'Total users in outliers : {total_out} OR {percentage_outliers:.2%} from total user')
+fig, ax = plt.subplots(figsize=(6, 5))
+ax = sns.countplot(y= user_outliers.user_age, data = user_outliers)
+ax.set_title('User distribution above 53 years of age')
+for x in ax.containers:
+	ax.bar_label(x, label_type='edge')
+plt.show()</code>
+	Total users in outliers : 264 OR 1.79% from total user</pre>
+<div class="center"><img src="/images/bonds/outliers_dist.png" alt=""></div>
+<div class="desc">The chart above shows that we have the total of 264 users in the outliers category or equal to 1.79% from the total user.
+	With the highest distribution on 54 years of age and lowest start from 73 years.
+We will explore and clean the dataset 2 before merging and continue handling our outliers.</div>
+<h2 class="major">Dataset 2 Exploration</h2>
+<div class="desc">We want to check how many rows of data that we have on dataset 2 and the total number of users that making transactions.</div>
+<pre><code>print(f'Total rows: {data2.shape[0]} ,columns: {data2.shape[1]}')
+transcation_users = data2['user_id'].nunique()
+print(f'Total users making transaction period August - October 2021 = {transcation_users} users')
+data2.info()</code>
+	Total rows: 158811 ,columns: 14
+	Total users making transaction period August - October 2021 = 8277 users
+	RangeIndex: 158811 entries, 0 to 158810
+	Data columns (total 14 columns):
+	#   Column                               Non-Null Count   Dtype  
+	---  ------                               --------------   -----  
+	0   user_id                              158811 non-null  int64  
+	1   date                                 158811 non-null  object 
+	2   Saham_AUM                            106292 non-null  float64
+	3   Saham_invested_amount                106292 non-null  float64
+	4   Saham_transaction_amount             100839 non-null  float64
+	5   Pasar_Uang_AUM                       131081 non-null  float64
+	6   Pasar_Uang_invested_amount           131081 non-null  float64
+	7   Pasar_Uang_transaction_amount        124273 non-null  float64
+	8   Pendapatan_Tetap_AUM                 105946 non-null  float64
+	9   Pendapatan_Tetap_invested_amount     105946 non-null  float64
+	10  Pendapatan_Tetap_transaction_amount  100497 non-null  float64
+	11  Campuran_AUM                         5352 non-null    float64
+	12  Campuran_invested_amount             5352 non-null    float64
+	13  Campuran_transaction_amount          5117 non-null    float64
+dtypes: float64(12), int64(1), object(1)</pre>
+</p> 
 							</div>
 						</div>
 					</section>
@@ -484,5 +794,4 @@ plt.show()</code></pre>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
 
-	</body>
-</html>
+	</body></html>
