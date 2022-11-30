@@ -58,8 +58,12 @@ img.vis{
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
+	height: 400px;
 }
 
+.desc{
+	text-align: justify;
+}
 body {
 	-webkit-text-size-adjust: none;
 }
