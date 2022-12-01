@@ -63,6 +63,7 @@ table {
 
 .desc{
 	text-align: justify;
+	margin-top: 1em;
 }
 body {
 	-webkit-text-size-adjust: none;

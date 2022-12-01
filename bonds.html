@@ -6,6 +6,7 @@
 -->
 <html>
 	<head>
+		<link rel="icon" type="image/x-icon" href="/assets/css/images/title.png">
 		<title>Bonds</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
@@ -746,10 +747,10 @@ We will explore and clean the dataset 2 before merging and continue handling our
 <div class="desc">We want to check how many rows of data that we have on dataset 2 and the total number of users that making transactions.</div>
 <pre><code>print(f'Total rows: {data2.shape[0]} ,columns: {data2.shape[1]}')
 transcation_users = data2['user_id'].nunique()
-print(f'Total users making transaction period August - October 2021 = {transcation_users} users')
+print(f'Total users making transaction period August - October 2021 = {transcation_users} users or {(transcation_users/total_user):.2%}')
 data2.info()</code>
 	Total rows: 158811 ,columns: 14
-	Total users making transaction period August - October 2021 = 8277 users
+	Total users making transaction period August - October 2021 = 8277 users or 56.26%
 	RangeIndex: 158811 entries, 0 to 158810
 	Data columns (total 14 columns):
 	#   Column                               Non-Null Count   Dtype  
@@ -768,7 +769,457 @@ data2.info()</code>
 	11  Campuran_AUM                         5352 non-null    float64
 	12  Campuran_invested_amount             5352 non-null    float64
 	13  Campuran_transaction_amount          5117 non-null    float64
-dtypes: float64(12), int64(1), object(1)</pre>
+	dtypes: float64(12), int64(1), object(1)</pre>
+	<div class="desc">From the data description above, we can see that there are 158811 rows and 14 column of data in the dataset 2.
+	Also, it's only 8277 users making transaction or equal to 56.26% from the total users.
+	The company can create some campaigne to encourage the new users to make a new transaction.
+	In addition, we can see from the data information we have plenty of column contained null value.
+	We will check to confirmed this information and change the 'date' column name to trans_date to avoid ambiguity with the method.
+	</div>
+	<pre><code>data2.rename(columns={"date": "trans_date"}, inplace=True)
+data2['trans_date'] = pd.to_datetime(data2['trans_date'])
+data2.isnull().sum()</code>
+	user_id                                     0
+	trans_date                                  0
+	Saham_AUM                               52519
+	Saham_invested_amount                   52519
+	Saham_transaction_amount                57972
+	Pasar_Uang_AUM                          27730
+	Pasar_Uang_invested_amount              27730
+	Pasar_Uang_transaction_amount           34538
+	Pendapatan_Tetap_AUM                    52865
+	Pendapatan_Tetap_invested_amount        52865
+	Pendapatan_Tetap_transaction_amount     58314
+	Campuran_AUM                           153459
+	Campuran_invested_amount               153459
+	Campuran_transaction_amount            153694
+	dtype: int64</pre>
+	<div class="desc">The information above confirmed our findings, and refer to the dataset information all of the column with the null value is a transactions column.
+		So, we will be changing the data to 0 instead of null.</div>
+<pre><code>data2.fillna(0, inplace=True)
+data2.isnull().sum()</code>
+	user_id                                0
+	trans_date                             0
+	Saham_AUM                              0
+	Saham_invested_amount                  0
+	Saham_transaction_amount               0
+	Pasar_Uang_AUM                         0
+	Pasar_Uang_invested_amount             0
+	Pasar_Uang_transaction_amount          0
+	Pendapatan_Tetap_AUM                   0
+	Pendapatan_Tetap_invested_amount       0
+	Pendapatan_Tetap_transaction_amount    0
+	Campuran_AUM                           0
+	Campuran_invested_amount               0
+	Campuran_transaction_amount            0
+	dtype: int64</pre>
+	<div class="desc">The null value has been replaced, the next step we will do is to group the dataset 2 by users into a new dataset.
+		As we know, the AUM and invested amount is updated daily, meanwhile transactions column is the accumulation of the transaction. Invested dataframe:</div>
+<pre><code>invested_AUM = data2.sort_values(by='trans_date').drop_duplicates(subset=['user_id'], keep='last').reset_index(drop=True)
+invested_AUM = invested_AUM.drop(['Saham_transaction_amount','Pasar_Uang_transaction_amount',
+	'Pendapatan_Tetap_transaction_amount','Campuran_transaction_amount'], axis=1).copy()
+print(f'Total rows: {invested_AUM.shape[0]}, columns: {invested_AUM.shape[1]}\n Invested:')
+invested_AUM.head()</code>
+	Total rows: 8277, columns: 10
+	Invested:</pre>
+	<div class="table-wrapper">
+		<table>
+			<thead>
+				<tr style="text-align: right;">
+				  <th></th>
+				  <th>user_id</th>
+				  <th>trans_date</th>
+				  <th>Saham_AUM</th>
+				  <th>Saham_invested_amount</th>
+				  <th>Pasar_Uang_AUM</th>
+				  <th>Pasar_Uang_invested_amount</th>
+				  <th>Pendapatan_Tetap_AUM</th>
+				  <th>Pendapatan_Tetap_invested_amount</th>
+				  <th>Campuran_AUM</th>
+				  <th>Campuran_invested_amount</th>
+				</tr>
+			  </thead>
+			  <tbody>
+				<tr>
+				  <th>0</th>
+				  <td>3786300</td>
+				  <td>2021-09-30</td>
+				  <td>0.00</td>
+				  <td>0.00</td>
+				  <td>0.00</td>
+				  <td>0.00</td>
+				  <td>0.00</td>
+				  <td>0.00</td>
+				  <td>0.00</td>
+				  <td>0.00</td>
+				</tr>
+				<tr>
+				  <th>1</th>
+				  <td>3760891</td>
+				  <td>2021-09-30</td>
+				  <td>258975.00</td>
+				  <td>249864.00</td>
+				  <td>0.00</td>
+				  <td>0.00</td>
+				  <td>553302.00</td>
+				  <td>550000.00</td>
+				  <td>0.00</td>
+				  <td>0.00</td>
+				</tr>
+				<tr>
+				  <th>2</th>
+				  <td>4096532</td>
+				  <td>2021-09-30</td>
+				  <td>13803192.00</td>
+				  <td>13352136.00</td>
+				  <td>2390277.00</td>
+				  <td>2387932.00</td>
+				  <td>8134491.00</td>
+				  <td>8149154.00</td>
+				  <td>0.00</td>
+				  <td>0.00</td>
+				</tr>
+				<tr>
+				  <th>3</th>
+				  <td>2836295</td>
+				  <td>2021-09-30</td>
+				  <td>0.00</td>
+				  <td>0.00</td>
+				  <td>0.00</td>
+				  <td>0.00</td>
+				  <td>0.00</td>
+				  <td>0.00</td>
+				  <td>0.00</td>
+				  <td>0.00</td>
+				</tr>
+				<tr>
+				  <th>4</th>
+				  <td>2839273</td>
+				  <td>2021-09-30</td>
+				  <td>0.00</td>
+				  <td>0.00</td>
+				  <td>10028.00</td>
+				  <td>10000.00</td>
+				  <td>0.00</td>
+				  <td>0.00</td>
+				  <td>0.00</td>
+				  <td>0.00</td>
+				</tr>
+			  </tbody>
+		</table>
+	</div>
+<div class="desc">Transactions dataframe:</div>
+<pre><code>sum_trans_total = data2.groupby('user_id')[['Saham_transaction_amount', 'Pasar_Uang_transaction_amount',
+	'Pendapatan_Tetap_transaction_amount', 'Campuran_transaction_amount']].sum()
+print(f'Total rows:{sum_trans_total.shape[0]}, columns: {sum_trans_total.shape[1]}\nTransactions:')
+sum_trans_total.head()</code>
+	Total rows:8277, columns: 4
+	Transactions:</pre>
+<div class="table-wrapper">
+	<table>
+		<thead>
+			<tr style="text-align: right;">
+			  <th></th>
+			  <th>Saham_transaction_amount</th>
+			  <th>Pasar_Uang_transaction_amount</th>
+			  <th>Pendapatan_Tetap_transaction_amount</th>
+			  <th>Campuran_transaction_amount</th>
+			</tr>
+			<tr>
+			  <th>user_id</th>
+			  <th></th>
+			  <th></th>
+			  <th></th>
+			  <th></th>
+			</tr>
+		  </thead>
+		  <tbody>
+			<tr>
+			  <th>50701</th>
+			  <td>0.00</td>
+			  <td>0.00</td>
+			  <td>0.00</td>
+			  <td>0.00</td>
+			</tr>
+			<tr>
+			  <th>50961</th>
+			  <td>1300000.00</td>
+			  <td>600000.00</td>
+			  <td>1200000.00</td>
+			  <td>0.00</td>
+			</tr>
+			<tr>
+			  <th>53759</th>
+			  <td>0.00</td>
+			  <td>0.00</td>
+			  <td>0.00</td>
+			  <td>0.00</td>
+			</tr>
+			<tr>
+			  <th>54759</th>
+			  <td>0.00</td>
+			  <td>2000000.00</td>
+			  <td>0.00</td>
+			  <td>0.00</td>
+			</tr>
+			<tr>
+			  <th>61414</th>
+			  <td>-10000.00</td>
+			  <td>0.00</td>
+			  <td>0.00</td>
+			  <td>0.00</td>
+			</tr>
+		  </tbody>
+	</table>
+</div>
+<div class="desc">After creating the inveted and transactions dataframe, then we will merge both dataset into new_data2 and we will be using this dataset in the future.</div>
+<pre><code>new_data2 = invested_AUM.merge(sum_trans_total, on='user_id')
+print(f'Total rows: {new_data2.shape[0]}, columns:{new_data2.shape[1]}')
+del invested_AUM, sum_trans_total
+new_data2.head()</code>
+	Total rows: 8277, columns:14</pre>
+<div class="table-wrapper">
+	<table>
+		<thead>
+			<tr style="text-align: right;">
+			  <th></th>
+			  <th>user_id</th>
+			  <th>trans_date</th>
+			  <th>Saham_AUM</th>
+			  <th>Saham_invested_amount</th>
+			  <th>Pasar_Uang_AUM</th>
+			  <th>Pasar_Uang_invested_amount</th>
+			  <th>Pendapatan_Tetap_AUM</th>
+			  <th>Pendapatan_Tetap_invested_amount</th>
+			  <th>Campuran_AUM</th>
+			  <th>Campuran_invested_amount</th>
+			  <th>Saham_transaction_amount</th>
+			  <th>Pasar_Uang_transaction_amount</th>
+			  <th>Pendapatan_Tetap_transaction_amount</th>
+			  <th>Campuran_transaction_amount</th>
+			</tr>
+		  </thead>
+		  <tbody>
+			<tr>
+			  <th>0</th>
+			  <td>3786300</td>
+			  <td>2021-09-30</td>
+			  <td>0.00</td>
+			  <td>0.00</td>
+			  <td>0.00</td>
+			  <td>0.00</td>
+			  <td>0.00</td>
+			  <td>0.00</td>
+			  <td>0.00</td>
+			  <td>0.00</td>
+			  <td>-10000.00</td>
+			  <td>-10000.00</td>
+			  <td>0.00</td>
+			  <td>0.00</td>
+			</tr>
+			<tr>
+			  <th>1</th>
+			  <td>3760891</td>
+			  <td>2021-09-30</td>
+			  <td>258975.00</td>
+			  <td>249864.00</td>
+			  <td>0.00</td>
+			  <td>0.00</td>
+			  <td>553302.00</td>
+			  <td>550000.00</td>
+			  <td>0.00</td>
+			  <td>0.00</td>
+			  <td>199864.00</td>
+			  <td>-100000.00</td>
+			  <td>450000.00</td>
+			  <td>0.00</td>
+			</tr>
+			<tr>
+			  <th>2</th>
+			  <td>4096532</td>
+			  <td>2021-09-30</td>
+			  <td>13803192.00</td>
+			  <td>13352136.00</td>
+			  <td>2390277.00</td>
+			  <td>2387932.00</td>
+			  <td>8134491.00</td>
+			  <td>8149154.00</td>
+			  <td>0.00</td>
+			  <td>0.00</td>
+			  <td>10832136.00</td>
+			  <td>1937932.00</td>
+			  <td>6619154.00</td>
+			  <td>0.00</td>
+			</tr>
+			<tr>
+			  <th>3</th>
+			  <td>2836295</td>
+			  <td>2021-09-30</td>
+			  <td>0.00</td>
+			  <td>0.00</td>
+			  <td>0.00</td>
+			  <td>0.00</td>
+			  <td>0.00</td>
+			  <td>0.00</td>
+			  <td>0.00</td>
+			  <td>0.00</td>
+			  <td>-100000.00</td>
+			  <td>-100000.00</td>
+			  <td>0.00</td>
+			  <td>0.00</td>
+			</tr>
+			<tr>
+			  <th>4</th>
+			  <td>2839273</td>
+			  <td>2021-09-30</td>
+			  <td>0.00</td>
+			  <td>0.00</td>
+			  <td>10028.00</td>
+			  <td>10000.00</td>
+			  <td>0.00</td>
+			  <td>0.00</td>
+			  <td>0.00</td>
+			  <td>0.00</td>
+			  <td>-50000.00</td>
+			  <td>0.00</td>
+			  <td>-40000.00</td>
+			  <td>0.00</td>
+			</tr>
+		  </tbody>
+	</table>
+</div>
+<div class="desc">Now, we get a new dataset that has been clean and aggregate by users then we will
+	continue our investigation for our previous outliers with user age older than 53 years old.
+	The first thing we will do is to merge the new dataset with user_outliers to see how many of the outliers contribute with the transaction.</div>
+<pre><code>trans_outliers = user_outliers[['user_id', 'user_age']].merge(new_data2, on='user_id')
+total_out_transaction = trans_outliers.user_id.nunique()
+percentage_out_transaction = (total_out_transaction/transcation_users)
+print(f'Total users in outliers making transaction: {total_out_transaction}
+	OR {percentage_out_transaction:.2%} from the user that making transaction.')
+trans_outliers.head()</code>
+	Total users in outliers making transaction: 145 OR 1.75% from the user that making transactions.</pre>
+	<div class="table-wrapper">
+		<table>
+			<thead>
+				<tr style="text-align: right;">
+				  <th></th>
+				  <th>user_id</th>
+				  <th>user_age</th>
+				  <th>trans_date</th>
+				  <th>Saham_AUM</th>
+				  <th>Saham_invested_amount</th>
+				  <th>Pasar_Uang_AUM</th>
+				  <th>Pasar_Uang_invested_amount</th>
+				  <th>Pendapatan_Tetap_AUM</th>
+				  <th>Pendapatan_Tetap_invested_amount</th>
+				  <th>Campuran_AUM</th>
+				  <th>Campuran_invested_amount</th>
+				  <th>Saham_transaction_amount</th>
+				  <th>Pasar_Uang_transaction_amount</th>
+				  <th>Pendapatan_Tetap_transaction_amount</th>
+				  <th>Campuran_transaction_amount</th>
+				</tr>
+			  </thead>
+			  <tbody>
+				<tr>
+				  <th>0</th>
+				  <td>3816789</td>
+				  <td>53</td>
+				  <td>2021-09-30</td>
+				  <td>297141.00</td>
+				  <td>290000.00</td>
+				  <td>40235.00</td>
+				  <td>40000.00</td>
+				  <td>270673.00</td>
+				  <td>270000.00</td>
+				  <td>0.00</td>
+				  <td>0.00</td>
+				  <td>100000.00</td>
+				  <td>0.00</td>
+				  <td>0.00</td>
+				  <td>0.00</td>
+				</tr>
+				<tr>
+				  <th>1</th>
+				  <td>3049927</td>
+				  <td>53</td>
+				  <td>2021-09-30</td>
+				  <td>41545.00</td>
+				  <td>40000.00</td>
+				  <td>9997.00</td>
+				  <td>10000.00</td>
+				  <td>49925.00</td>
+				  <td>50000.00</td>
+				  <td>910285.00</td>
+				  <td>899000.00</td>
+				  <td>0.00</td>
+				  <td>0.00</td>
+				  <td>0.00</td>
+				  <td>149000.00</td>
+				</tr>
+				<tr>
+				  <th>2</th>
+				  <td>3836491</td>
+				  <td>59</td>
+				  <td>2021-09-30</td>
+				  <td>0.00</td>
+				  <td>0.00</td>
+				  <td>10012.00</td>
+				  <td>10000.00</td>
+				  <td>0.00</td>
+				  <td>0.00</td>
+				  <td>0.00</td>
+				  <td>0.00</td>
+				  <td>0.00</td>
+				  <td>0.00</td>
+				  <td>0.00</td>
+				  <td>0.00</td>
+				</tr>
+				<tr>
+				  <th>3</th>
+				  <td>3783302</td>
+				  <td>57</td>
+				  <td>2021-09-30</td>
+				  <td>0.00</td>
+				  <td>0.00</td>
+				  <td>0.00</td>
+				  <td>0.00</td>
+				  <td>107322.00</td>
+				  <td>110431.00</td>
+				  <td>0.00</td>
+				  <td>0.00</td>
+				  <td>-370000.00</td>
+				  <td>-100000.00</td>
+				  <td>-419569.00</td>
+				  <td>0.00</td>
+				</tr>
+				<tr>
+				  <th>4</th>
+				  <td>3820160</td>
+				  <td>58</td>
+				  <td>2021-09-30</td>
+				  <td>62351.00</td>
+				  <td>60000.00</td>
+				  <td>20032.00</td>
+				  <td>20000.00</td>
+				  <td>145083.00</td>
+				  <td>145000.00</td>
+				  <td>0.00</td>
+				  <td>0.00</td>
+				  <td>30000.00</td>
+				  <td>0.00</td>
+				  <td>75000.00</td>
+				  <td>0.00</td>
+				</tr>
+			  </tbody>
+		</table>
+	</div>
+	<div class="desc">From the total of 264 outliers users, apparently there are only 145 of them making
+		transactions or it equal to 1.75% from the total of new dataset 2.
+		That number is relatively small, which it's okay if we just exclude the outliers from our analysis.
+		However, we will double check if they contribute in a big amount of transaction or
+		not to avoid removing big investor that hide in the outliers. 
+	</div>
 </p> 
 							</div>
 						</div>
