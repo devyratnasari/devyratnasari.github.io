@@ -11,7 +11,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>	
 	</head>
 	<body class="is-preload">
 
@@ -22,8 +22,16 @@
 				</div>
 				<nav>
 					<ul>
+						<li><div class="dropdown">
+							<a href="#eda">EDA</a> 
+							<div class="dropdown-content">
+							<a href="#eda">Dataset 1</a>
+							<a href="#dataset2">Dataset 2</a>
+							<a href="#dataset3">Dataset 3</a>
+							</div>
+						</div>
+						</li>
 						<li><a href="index.html">Back to projects</a></li>
-						<li><a href="#eda">EDA</a></li>
 					</ul>
 				</nav>
 			</header>
@@ -304,8 +312,7 @@
 									</li>
 								</ol>
 							</p>
-							<div id="eda">
-								<h2 class="major">Explanatory Data Analysis</h2>
+								<h2 class="major"id="eda">Explanatory Data Analysis - Dataset 1</h2>
 								<p><div class="desc">After a quick dataset exploration, we can see the structure of the data. The next thing we will do is to dig deeper the dataset to see the user behaviour and a better understanding about the data.
 									We will see how much the total of data that we have, the datatype, if there are any duplicate in our data, null value or any other problem that we need to taking care of.</div>
 									<pre><code>print(f'Total Row: {data1.shape[0]} , Column: {data1.shape[1]}')
@@ -405,7 +412,7 @@ ax.legend(wedges, income_source.index,
 	loc="upper left",
 	bbox_to_anchor=(1, 0, 0.5, 1))
 plt.setp(autotexts, size=8, weight="bold")
-ax.set_title("User's Income Source"
+ax.set_title("User's Income Source")
 plt.show()			</code></pre>	
 <div class="center"><img src="/images/bonds/user_income_source.png" alt=""></div>
 <div class="desc">We read the chart counterclockwise start from the exploded pie.
@@ -458,7 +465,8 @@ plt.show()</code></pre>
 <div class="desc">When we combined the income range and occupation, we found an interesting information that we have 17 students with income range more than 500 Million Rupiah.
 	So we will investigate a little bit further about the 17 students.
 </div>
-<pre><code>pelajar_age = data1.query('user_occupation == \'Pelajar\' and (user_income_range == \'> Rp 500 Juta - 1 Miliar\' or user_income_range == \'> Rp 1 Miliar\')')</code></pre>
+<pre><code>pelajar_age = data1.query('user_occupation == \'Pelajar\' and (user_income_range == \'> Rp 500 Juta - 1 Miliar\'
+	sor user_income_range == \'> Rp 1 Miliar\')')</code></pre>
 <table id="pelajar" style="overflow-y: scroll;">
 	<thead>
 		<tr style="text-align: right;">
@@ -743,11 +751,12 @@ plt.show()</code>
 <div class="desc">The chart above shows that we have the total of 264 users in the outliers category or equal to 1.79% from the total user.
 	With the highest distribution on 54 years of age and lowest start from 73 years.
 We will explore and clean the dataset 2 before merging and continue handling our outliers.</div>
-<h2 class="major">Dataset 2 Exploration</h2>
+<h2 class="major" id="dataset2">Dataset 2 Exploration</h2>
 <div class="desc">We want to check how many rows of data that we have on dataset 2 and the total number of users that making transactions.</div>
 <pre><code>print(f'Total rows: {data2.shape[0]} ,columns: {data2.shape[1]}')
 transcation_users = data2['user_id'].nunique()
-print(f'Total users making transaction period August - October 2021 = {transcation_users} users or {(transcation_users/total_user):.2%}')
+print(f'Total users making transaction period August - October 2021 = {transcation_users} users
+	or {(transcation_users/total_user):.2%}')
 data2.info()</code>
 	Total rows: 158811 ,columns: 14
 	Total users making transaction period August - October 2021 = 8277 users or 56.26%
@@ -771,7 +780,7 @@ data2.info()</code>
 	13  Campuran_transaction_amount          5117 non-null    float64
 	dtypes: float64(12), int64(1), object(1)</pre>
 	<div class="desc">From the data description above, we can see that there are 158811 rows and 14 column of data in the dataset 2.
-	Also, it's only 8277 users making transaction or equal to 56.26% from the total users.
+	Furthermore, it's only 8277 users making transaction or equal to 56.26% from the total users.
 	The company can create some campaigne to encourage the new users to make a new transaction.
 	In addition, we can see from the data information we have plenty of column contained null value.
 	We will check to confirmed this information and change the 'date' column name to trans_date to avoid ambiguity with the method.
@@ -1220,8 +1229,116 @@ trans_outliers.head()</code>
 		However, we will double check if they contribute in a big amount of transaction or
 		not to avoid removing big investor that hide in the outliers. 
 	</div>
+<pre><code>idx= ['saham', 'campuran', 'pasar uang', 'pendapatan tetap']
+sum_outliers = [trans_outliers.Saham_transaction_amount.max(), trans_outliers.Campuran_transaction_amount.max(),
+	trans_outliers.Pasar_Uang_transaction_amount.max(),	trans_outliers.Pendapatan_Tetap_transaction_amount.max()]
+sum_full = [new_data2.Saham_transaction_amount.max(), new_data2.Campuran_transaction_amount.max(),
+	new_data2.Pasar_Uang_transaction_amount.max(), new_data2.Pendapatan_Tetap_transaction_amount.max()]
+
+X = np.arange(4)
+plt.bar(X + 0.00, sum_outliers, width = 0.25, label='max outlier')
+plt.bar(X + 0.25, sum_full, width = 0.25, label='max total')
+plt.ticklabel_format(useOffset=False, style='plain')
+plt.xticks(X, idx)
+plt.legend()
+plt.title('Comparison max transactions outliers and whole')</code></pre>
+<div class="center"><img src="/images/bonds/compare_out.png" alt=""></div>
+<div class="desc">Since the percentage of the outliers relatively small, it would not be a fair if we compare the summary of the transactions.
+	So we will be comparing by their maximum transactions instead.
+	We can see in Saham (stocks) and Campuran (mixed), our outliers made a higest amount of contribution.
+	For now, we will keep our outliers.
+	The next thing we will do is to do a quick exploration for our dataset 3 before combining with dataset 1 and 2. 
+</div>
+<h2 class="major" id="dataset3">Dataset 3 Exploration</h2>
+<pre><code>print(f'Total rows: {data3.shape[0]}, columns:{data3.shape[1]}')
+print(f'Total User: {data3.user_id.nunique()}')
+data3.info()</code>
+	Total rows: 8484, columns:3
+	Total User: 8484
+	RangeIndex: 8484 entries, 0 to 8483
+	Data columns (total 3 columns):
+	#   Column              Non-Null Count  Dtype
+	---  ------              --------------  -----
+	0   user_id             8484 non-null   int64
+	1   flag_order_bond     8484 non-null   int64
+	2   bond_units_ordered  8484 non-null   int64
+	dtypes: int64(3)</pre>
+	<div class="desc">In our dataset 3, we have 8484 rows data and the same number for our users.
+		However, in our dataset 2 we only have 8277 total users that making transactions.
+	We will combine dataset 2 and 3 to see the details of it.</div>
+	<pre><code>data2_3 = data3.merge(new_data2, how='left')
+print(f'Total combined rows: {data2_3.shape[0]}, columns:{data2_3.shape[1]}')
+print(f'Difference total users:{data2_3.user_id.nunique()-transaction_users}')
+data2_3.isnull().sum()</code>	Total combined rows: 8484, columns:16
+	Difference total users:207
+
+	user_id                                  0
+	flag_order_bond                          0
+	bond_units_ordered                       0
+	trans_date                             207
+	Saham_AUM                              207
+	Saham_invested_amount                  207
+	Pasar_Uang_AUM                         207
+	Pasar_Uang_invested_amount             207
+	Pendapatan_Tetap_AUM                   207
+	Pendapatan_Tetap_invested_amount       207
+	Campuran_AUM                           207
+	Campuran_invested_amount               207
+	Saham_transaction_amount               207
+	Pasar_Uang_transaction_amount          207
+	Pendapatan_Tetap_transaction_amount    207
+	Campuran_transaction_amount            207
+	dtype: int64</pre>
+	<div class="desc">We left joined our dataset since our dataset 3 has more rows of data for a better understanding what is the difference.
+		There is 8484 rows of data and 16 columns after the merging. We also check how much the difference between both dataset and the null value.
+		Our difference number of user between dataset 2 and 3 is 207 user, it also same with the number of our null values.
+		We will try to visualise the user with null values if they ordered bonds or not before we decide to exclude those user.
+		</div>
+		<pre><code>v = data2_3[data2_3.isnull().any(axis=1)]
+v_null = v[['user_id', 'flag_order_bond']].groupby('flag_order_bond').count()
+fig, ax = plt.subplots(figsize=(5, 5), subplot_kw=dict(aspect="equal"))
+wedges, texts, autotexts = ax.pie(v_null.user_id, autopct=lambda pct: func(pct, v_null.user_id),
+	textprops=dict(color="black"), explode=(0,1))
+ax.legend(wedges, v_null.index, title='Null flag order bond', loc='upper right')
+plt.show()</code></pre>
+<div class="center"><img src="/images/bonds/bond_null.png" alt=""></div>
+<div class="desc">From the pie chart, we can see only 1 of 207 user ended up order bond from the company.
+	Since we don't have any transactional record for the 207 users, it safe to exclude them from our analysis.
+Now, we will merging all of our dataset into 1 before the final data exploration.
+</div>
+<pre><code>df1 = new_data2.merge(data1, how='inner', on='user_id')
+full_data = df1.merge(data3, how='inner', on='user_id')
+print(f'Total full rows: {full_data.shape[0]}, columns:{full_data.shape[1]}')
+print('Null Values:')
+full_data.isnull().sum()</code>	Total full rows: 8277, columns:24
+
+	Null Values:
+	user_id                                0
+	trans_date                             0
+	Saham_AUM                              0
+	Saham_invested_amount                  0
+	Pasar_Uang_AUM                         0
+	Pasar_Uang_invested_amount             0
+	Pendapatan_Tetap_AUM                   0
+	Pendapatan_Tetap_invested_amount       0
+	Campuran_AUM                           0
+	Campuran_invested_amount               0
+	Saham_transaction_amount               0
+	Pasar_Uang_transaction_amount          0
+	Pendapatan_Tetap_transaction_amount    0
+	Campuran_transaction_amount            0
+	registration_import_datetime           0
+	user_gender                            0
+	user_age                               0
+	user_occupation                        0
+	user_income_range                      0
+	referral_code_used                     0
+	user_income_source                     0
+	registration_month                     0
+	flag_order_bond                        0
+	bond_units_ordered                     0
+	dtype: int64</pre>
 </p> 
-							</div>
 						</div>
 					</section>
 			</div>

@@ -55,6 +55,31 @@ img.vis{
 	height: 499px;
 }
 
+.dropdown {
+	position: relative;
+	display: inline-block;
+  }
+  
+  .dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: #312450;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	z-index: 1;
+  }
+  
+  .dropdown-content a {
+	color: black;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+  }
+  
+  .dropdown-content a:hover {background-color: #b74e91;}
+  
+  .dropdown:hover .dropdown-content {display: block;}
+
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
@@ -3388,7 +3413,7 @@ input, select, textarea {
 		display: flex;
 		background-color: #5e42a6;
 		cursor: default;
-		padding: 1.75em 2em;
+		padding: 1em 3em;
 	}
 
 		#header > .title {
