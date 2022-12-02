@@ -16,25 +16,26 @@
 	<body class="is-preload">
 
 		<!-- Header -->
-			<header id="header">
-				<div class="inner" style="padding-left: 5em;">
-					<a href="index.html" class="title" style="font-size: x-large;"><h2>DR</h2></a>
-				</div>
-				<nav>
-					<ul>
-						<li><div class="dropdown">
-							<a href="#eda">EDA</a> 
-							<div class="dropdown-content">
+		<section id="header">
+			<div class="inner" style="padding-left: 5em;">
+				<a href="index.html" class="title" style="font-size: x-large;"><h2>DR</h2></a>
+			</div>
+			<nav>
+				<ul>
+					<li><div class="dropdown">
+						<a href="#eda">EDA</a> 
+						<div class="dropdown-content">
 							<a href="#eda">Dataset 1</a>
 							<a href="#dataset2">Dataset 2</a>
 							<a href="#dataset3">Dataset 3</a>
-							</div>
 						</div>
-						</li>
-						<li><a href="index.html">Back to projects</a></li>
-					</ul>
-				</nav>
-			</header>
+					</div>
+					</li>
+					<li><a href="index.html">Back to projects</a></li>
+				</ul>
+			</nav>
+		</section>
+
 
 		<!-- Wrapper -->
 			<div id="wrapper">
@@ -312,7 +313,7 @@
 									</li>
 								</ol>
 							</p>
-								<h2 class="major"id="eda">Explanatory Data Analysis - Dataset 1</h2>
+								<section><h2 class="major"id="eda">Explanatory Data Analysis - Dataset 1</h2>
 								<p><div class="desc">After a quick dataset exploration, we can see the structure of the data. The next thing we will do is to dig deeper the dataset to see the user behaviour and a better understanding about the data.
 									We will see how much the total of data that we have, the datatype, if there are any duplicate in our data, null value or any other problem that we need to taking care of.</div>
 									<pre><code>print(f'Total Row: {data1.shape[0]} , Column: {data1.shape[1]}')
@@ -750,7 +751,7 @@ plt.show()</code>
 <div class="center"><img src="/images/bonds/outliers_dist.png" alt=""></div>
 <div class="desc">The chart above shows that we have the total of 264 users in the outliers category or equal to 1.79% from the total user.
 	With the highest distribution on 54 years of age and lowest start from 73 years.
-We will explore and clean the dataset 2 before merging and continue handling our outliers.</div>
+We will explore and clean the dataset 2 before merging and continue handling our outliers.</div></section>
 <h2 class="major" id="dataset2">Dataset 2 Exploration</h2>
 <div class="desc">We want to check how many rows of data that we have on dataset 2 and the total number of users that making transactions.</div>
 <pre><code>print(f'Total rows: {data2.shape[0]} ,columns: {data2.shape[1]}')

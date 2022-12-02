@@ -3414,6 +3414,12 @@ input, select, textarea {
 		background-color: #5e42a6;
 		cursor: default;
 		padding: 1em 3em;
+		left: 0;
+		position: fixed;
+		text-align: right;
+		top: 0;
+		width: 100%;
+		z-index: 10000;
 	}
 
 		#header > .title {
@@ -3527,7 +3533,7 @@ input, select, textarea {
 		}
 
 	#header + #wrapper > .wrapper > .inner {
-		margin: 0 auto;
+		margin: 5em auto;
 	}
 
 /* Footer */
