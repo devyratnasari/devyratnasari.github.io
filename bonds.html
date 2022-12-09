@@ -352,7 +352,7 @@ data1.isnull().sum()</code></pre>
 	dtype: int64</pre>
 <div class="desc">From the result above, it's confirmed that we have 9108 rows of null value in column referral_code_used
 	and luckily we don't have any duplicate data for the user_id so we can continue to decide what to do with the null value.
-	We will be checking for the unique value from each column in the dataset.</div>
+	We will be checking for the unique value from each column in the dataset to help us deciding what to replace the null value with.</div>
 <pre><code>for x in data1:
 	uniqueValues = data1[x].unique()
 	n_values = len(uniqueValues)
