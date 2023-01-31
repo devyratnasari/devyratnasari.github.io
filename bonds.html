@@ -25,12 +25,19 @@
 					<li><div class="dropdown">
 						<a href="#eda">EDA</a> 
 						<div class="dropdown-content">
-							<a href="#eda">Dataset 1</a>
-							<a href="#dataset2">Dataset 2</a>
-							<a href="#dataset3">Dataset 3</a>
+							<a href="#eda">User</a>
+							<a href="#dataset2">Transaction</a>
+							<a href="#dataset3">Bonds Order</a>
 						</div>
 					</div>
 					</li>
+					<li><a href="#preprocessing">Preprocessing</a></li>
+					<li><div class="dropdown">
+						<a href="#eda">Models</a> 
+						<div class="dropdown-content">
+							<a href="#logreg1">Logistic Regression</a>
+						</div>
+					</div>
 					<li><a href="index.html">Back to projects</a></li>
 				</ul>
 			</nav>
@@ -313,11 +320,10 @@
 									</li>
 								</ol>
 							</p>
-								<section><h2 class="major"id="eda">Explanatory Data Analysis - Dataset 1</h2>
-								<p><div class="desc">After a quick dataset exploration, we can see the structure of the data. The next thing we will do is to dig deeper the dataset to see the user behaviour and a better understanding about the data.
-									We will see how much the total of data that we have, the datatype, if there are any duplicate in our data, null value or any other problem that we need to taking care of.</div>
-									<pre><code>print(f'Total Row: {data1.shape[0]} , Column: {data1.shape[1]}')
-data1.info()</code></pre>
+								<section><h2 class="major"id="eda">Users</h2>
+								<p><div class="desc">We want to see how much the total of data that we have and the datatype, if there are any duplicate in our data, null value or any other problem that we need to taking care of.</div>
+									<pre><code>print(f'Total Row: {user.shape[0]} , Column: {user.shape[1]}')
+user.info()</code></pre>
 	<pre>	Total Row: 14712 , Column: 8
 	RangeIndex: 14712 entries, 0 to 14711
 	Data columns (total 8 columns):
@@ -334,11 +340,11 @@ data1.info()</code></pre>
 	dtypes: int64(2), object(5), period[D](1)</pre>
 <div class="desc">There are 14712 rows of data with 8 columns for the dataset 1, we can see that on the column referral_code_used there are only 5604 rows of non-null data
 	the next step that we will do is to double check null value in the dataset and if any duplicate user_id since the user_id is our primary key.</div>
-	<pre><code>is_duplicate_data1 = data1.user_id.duplicated().sum()
-total_user = data1.user_id.count()
-print(f'Total Duplicate User_ID : {is_duplicate_data1}')
+	<pre><code>is_duplicate_user = user.user_id.duplicated().sum()
+total_user = user.user_id.count()
+print(f'Total Duplicate User_ID : {is_duplicate_user}')
 print(f'Total User : {total_user}')
-data1.isnull().sum()</code></pre>
+user.isnull().sum()</code></pre>
 	<pre>	Total Duplicate User_ID : 0
 	Total User : 14712
 	user_id                            0
@@ -353,8 +359,8 @@ data1.isnull().sum()</code></pre>
 <div class="desc">From the result above, it's confirmed that we have 9108 rows of null value in column referral_code_used
 	and luckily we don't have any duplicate data for the user_id so we can continue to decide what to do with the null value.
 	We will be checking for the unique value from each column in the dataset to help us deciding what to replace the null value with.</div>
-<pre><code>for x in data1:
-	uniqueValues = data1[x].unique()
+<pre><code>for x in user:
+	uniqueValues = user[x].unique()
 	n_values = len(uniqueValues)
 	if n_values <=50:
 	print(f'Column: {x} -- total unique value: ({n_values}) {uniqueValues}')</code></pre>
@@ -366,9 +372,9 @@ data1.isnull().sum()</code></pre>
 	</pre>
 	By checking the unique value, we can see the categorical data of each column. We notice that there are only 2 category from referral_code_used, which is nan or 'used referral'.
 	We will be converting the null value to none instead of nan or deleting the data.
-	<pre><code>data1.referral_code_used.fillna('None', inplace = True)
-data1.referral_code_used.unique()
-data1.isnull().sum()</code></pre>
+	<pre><code>user.referral_code_used.fillna('None', inplace = True)
+user.referral_code_used.unique()
+user.isnull().sum()</code></pre>
 	<pre style="overflow-x: auto;">	array(['None', 'used referral'], dtype=object)
 	user_id                         0
 	registration_import_datetime    0
@@ -382,17 +388,17 @@ data1.isnull().sum()</code></pre>
 	</pre>
 	We succesfully convert the null value to none. Then we will start our analysis by checking the user registration growth between August and October 2021.
 	We will visualise the chart by daily and monthly registration.
-	<pre><code>data1['registration_import_datetime'].value_counts().sort_index().plot()
+	<pre><code>user['registration_import_datetime'].value_counts().sort_index().plot()
 plt.title('User Join Growth by Day')
-data1['registration_month'] = data1.registration_import_datetime.dt.to_timestamp('m').copy()
-data1.registration_month.value_counts().sort_index().plot()
+user['registration_month'] = user.registration_import_datetime.dt.to_timestamp('m').copy()
+user.registration_month.value_counts().sort_index().plot()
 plt.title('User Join Growth by Month')
 plt.show()</code></pre>
 	<img src="/images/bonds/user_growth_linechart.png" alt="" class="vis"> <img src="/images/bonds/user_month.png" alt=""  class="vis">
 	<div class="desc">In the daily registration chart, we can see that October is the month with the lowest and highest number of registration,
 		meanwhile when we try to visualise by monthly basis we can see that September is the month with the highest number of registration, around 5200 users signed up.
 		Next, we want to see the comparison by user's gender.</div>
-	<pre><code>gender = data1[['user_id', 'user_gender']].groupby('user_gender').count()
+	<pre><code>gender = user[['user_id', 'user_gender']].groupby('user_gender').count()
 plt.pie(gender.user_id, labels=gender.index , startangle=90, shadow=True,explode=(0.1, 0.1), autopct='%1.2f%%')
 plt.title('Users\' Gender Distribution')
 plt.show()			</code></pre>	
@@ -401,7 +407,7 @@ plt.show()			</code></pre>
 	Then we will try to visualise the user's range and source of income to see more details of it.
 </div>
 <pre><code>fig, ax = plt.subplots(figsize=(8, 8), subplot_kw=dict(aspect="equal"))
-income_source = data1[['user_id', 'user_income_source']].groupby('user_income_source').count
+income_source = user[['user_id', 'user_income_source']].groupby('user_income_source').count
 def func(pct, allvals):
 	absolute = int(np.round(pct/100.*np.sum(allvals)))
 	return "{:.1f}%\n({:d} users)".format(pct, absolute)
@@ -421,7 +427,7 @@ plt.show()			</code></pre>
 whilst the majority of the income source is from Gaji (Salary) with 62.1% or equal to 9131 users.
 Then we will see for the user's income range.</div>
 <pre><code>fig, ax = plt.subplots(figsize=(6, 5))
-ax = sns.countplot(y= data1.user_income_range, data = data1)
+ax = sns.countplot(y= user.user_income_range, data = user)
 
 ax.set_title('User Income Range')
 for x in ax.containers:
@@ -434,7 +440,7 @@ plt.show()			</code></pre>
 	We also, will try to combine between income source and range to see the breakdown of it.
 </div>	
 <pre><code>fig, ax = plt.subplots(figsize=(12, 8))
-ax = sns.countplot(y= data1.user_income_source, hue=data1.user_income_range, data = data1)
+ax = sns.countplot(y= user.user_income_source, hue=user.user_income_range, data = user)
 ax.set_title('Income source and range')
 for x in ax.containers:
 	ax.bar_label(x, label_type='edge')
@@ -446,7 +452,7 @@ plt.show()</code></pre>
 	We can also notice that there are 10 of users had salary more than 1 Billion Rupiah. We will try to visualise the distribution of our user's occupation.
 </div>
 <pre><code>fig, ax = plt.subplots(figsize=(10, 5))
-ax =sns.countplot(x=data1.user_occupation)
+ax =sns.countplot(x=user.user_occupation)
 for x in ax.containers:
 	ax.bar_label(x, label_type='edge')
 ax.set_title('User occupation')
@@ -456,7 +462,7 @@ plt.show()</code></pre>
 	Which is make sense that our majority income range is less than 10 Million.
 	We will try to combine the income range and user occupation to see more details of it.</div>
 <pre><code>fig, ax = plt.subplots(figsize=(12, 8))
-ax = sns.countplot(y= data1.user_occupation, hue=data1.user_income_range, data = data1)
+ax = sns.countplot(y= user.user_occupation, hue=user.user_income_range, data = user)
 ax.set_title('Income range and occupation')
 for x in ax.containers:
 	ax.bar_label(x, label_type='edge')
@@ -466,7 +472,7 @@ plt.show()</code></pre>
 <div class="desc">When we combined the income range and occupation, we found an interesting information that we have 17 students with income range more than 500 Million Rupiah.
 	So we will investigate a little bit further about the 17 students.
 </div>
-<pre><code>pelajar_age = data1.query('user_occupation == \'Pelajar\' and (user_income_range == \'> Rp 500 Juta - 1 Miliar\'
+<pre><code>pelajar_age = user.query('user_occupation == \'Pelajar\' and (user_income_range == \'> Rp 500 Juta - 1 Miliar\'
 	sor user_income_range == \'> Rp 1 Miliar\')')</code></pre>
 <table id="pelajar" style="overflow-y: scroll;">
 	<thead>
@@ -695,7 +701,7 @@ plt.show()</code></pre>
 	However, we just leave it as is for now and take notes just in case we might need some adjustment prior building the model.
 The next thing we want to check is, how many percent of our user registered using referral code.
 This might also will help to decide what type of campaigne approach to increase the registration number.</div>
-<pre><code>referral_code = data1[['user_id', 'referral_code_used']].groupby('referral_code_used').count()
+<pre><code>referral_code = user[['user_id', 'referral_code_used']].groupby('referral_code_used').count()
 plt.pie(referral_code.user_id, labels=referral_code.index, startangle=90, shadow=True,explode=(0.1, 0.1), autopct='%1.2f%%')
 plt.title('Referral Code Comparison')
 plt.show()</code></pre>
@@ -706,7 +712,7 @@ plt.show()</code></pre>
 	As well as encourage the current users to make more transaction using the bonus credit and so on.
 	We will check the average age of our users.
 </div>
-<pre><code>data1['user_age'].describe()</code>
+<pre><code>user['user_age'].describe()</code>
 	count    14712.000000
 	mean        27.176591
 	std          8.552585
@@ -719,25 +725,25 @@ plt.show()</code></pre>
 	<div class="desc">The description show that the average age of our user is 27 years old. With the youngest is 17 and oldest is 83 years old.
 		We will try to visualise the distribution of it by using histogram.
 	</div>
-	<pre><code>data1['user_age'].hist(figsize = (5,5))
+	<pre><code>user['user_age'].hist(figsize = (5,5))
 plt.title('User age distribution')</code></pre>
 	<div class="center"><img src="/images/bonds/age_histogram.png" alt=""></div>
 	<div class="desc">The histogram show that most of our users are in age group 20's and 30's.
 		The next step we will do is using zscore to calculate if there's any outliers.</div>
-<pre><code>mean = np.mean(data1.user_age)
-std = np.std(data1.user_age)
+<pre><code>mean = np.mean(user.user_age)
+std = np.std(user.user_age)
 outlier = []
-for i in data1.user_age:
+for i in user.user_age:
 	z = (i-mean)/std
 	if z > 3:
 		outlier.append(i)
 print('outliers in dataset are', set(outlier))
-sns.boxplot(x=data1.user_age)</code>
+sns.boxplot(x=user.user_age)</code>
 	outliers in dataset are {53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 69, 71, 73, 74, 76, 82, 83}</pre>
 <div class="center"><img src="/images/bonds/outliers.png" alt=""></div>
 <div class="desc">From the z-score calculation, it shows the ourliers from the users age are from 53 years and older.
-	We will visualise the distribution and check how many users are in the outliers then merging the dataset 1 and dataset 2 to see how many percentage of the outlier's user contribute with transaction before we decide to remove the outliers or just leave it as is.</div>
-<pre><code>user_outliers = data1.loc[data1.user_age>=53,:]
+	We will visualise the distribution and check how many users are in the outliers then merging the dataset 1 and transactions' dataset to see how many percentage of the outlier's user contribute with transaction before we decide to remove the outliers or just leave it as is.</div>
+<pre><code>user_outliers = user.loc[user.user_age>=53,:]
 total_out = user_outliers.user_id.count()
 percentage_outliers = (total_out/total_user)
 print(f'Total users in outliers : {total_out} OR {percentage_outliers:.2%} from total user')
@@ -750,15 +756,15 @@ plt.show()</code>
 	Total users in outliers : 264 OR 1.79% from total user</pre>
 <div class="center"><img src="/images/bonds/outliers_dist.png" alt=""></div>
 <div class="desc">The chart above shows that we have the total of 264 users in the outliers category or equal to 1.79% from the total user.
-	With the highest distribution on 54 years of age and lowest start from 73 years.
-We will explore and clean the dataset 2 before merging and continue handling our outliers.</div></section>
-<h2 class="major" id="dataset2">Dataset 2 Exploration</h2>
-<div class="desc">We want to check how many rows of data that we have on dataset 2 and the total number of users that making transactions.</div>
-<pre><code>print(f'Total rows: {data2.shape[0]} ,columns: {data2.shape[1]}')
-transcation_users = data2['user_id'].nunique()
+	With the highest distribution on 54 years of age and lowest start from 73 years. Since the age outliers still in the normal scope, we will keep the users from 54 years of age and older included with our analysis.
+</div></section>
+<h2 class="major" id="dataset2">Transactions</h2>
+<div class="desc">We want to check how many rows of data that we have on transactions' dataset and the total number of users that making transactions.</div>
+<pre><code>print(f'Total rows: {trans.shape[0]} ,columns: {trans.shape[1]}')
+transcation_users = trans['user_id'].nunique()
 print(f'Total users making transaction period August - October 2021 = {transcation_users} users
 	or {(transcation_users/total_user):.2%}')
-data2.info()</code>
+trans.info()</code>
 	Total rows: 158811 ,columns: 14
 	Total users making transaction period August - October 2021 = 8277 users or 56.26%
 	RangeIndex: 158811 entries, 0 to 158810
@@ -780,15 +786,15 @@ data2.info()</code>
 	12  Campuran_invested_amount             5352 non-null    float64
 	13  Campuran_transaction_amount          5117 non-null    float64
 	dtypes: float64(12), int64(1), object(1)</pre>
-	<div class="desc">From the data description above, we can see that there are 158811 rows and 14 column of data in the dataset 2.
+	<div class="desc">From the data description above, we can see that there are 158811 rows and 14 column of data in the transactions' dataset.
 	Furthermore, it's only 8277 users making transaction or equal to 56.26% from the total users.
 	The company can create some campaigne to encourage the new users to make a new transaction.
 	In addition, we can see from the data information we have plenty of column contained null value.
 	We will check to confirmed this information and change the 'date' column name to trans_date to avoid ambiguity with the method.
 	</div>
-	<pre><code>data2.rename(columns={"date": "trans_date"}, inplace=True)
-data2['trans_date'] = pd.to_datetime(data2['trans_date'])
-data2.isnull().sum()</code>
+	<pre><code>trans.rename(columns={"date": "trans_date"}, inplace=True)
+trans['trans_date'] = pd.to_datetime(trans['trans_date'])
+trans.isnull().sum()</code>
 	user_id                                     0
 	trans_date                                  0
 	Saham_AUM                               52519
@@ -806,8 +812,8 @@ data2.isnull().sum()</code>
 	dtype: int64</pre>
 	<div class="desc">The information above confirmed our findings, and refer to the dataset information all of the column with the null value is a transactions column.
 		So, we will be changing the data to 0 instead of null.</div>
-<pre><code>data2.fillna(0, inplace=True)
-data2.isnull().sum()</code>
+<pre><code>trans.fillna(0, inplace=True)
+trans.isnull().sum()</code>
 	user_id                                0
 	trans_date                             0
 	Saham_AUM                              0
@@ -823,12 +829,376 @@ data2.isnull().sum()</code>
 	Campuran_invested_amount               0
 	Campuran_transaction_amount            0
 	dtype: int64</pre>
-	<div class="desc">The null value has been replaced, the next step we will do is to group the dataset 2 by users into a new dataset.
-		As we know, the AUM and invested amount is updated daily, meanwhile transactions column is the accumulation of the transaction. Invested dataframe:</div>
-<pre><code>invested_AUM = data2.sort_values(by='trans_date').drop_duplicates(subset=['user_id'], keep='last').reset_index(drop=True)
-invested_AUM = invested_AUM.drop(['Saham_transaction_amount','Pasar_Uang_transaction_amount',
-	'Pendapatan_Tetap_transaction_amount','Campuran_transaction_amount'], axis=1).copy()
-print(f'Total rows: {invested_AUM.shape[0]}, columns: {invested_AUM.shape[1]}\n Invested:')
+	<div class="desc">The null value has been replaced, the next step we will do find how many times transaction has been made by the user.
+		We will create some boolean flag column 1 if the user making transaction on certain dates, and 0 if not. Later we will visualise this columns to see the daily growth.
+		</div>
+<pre><code>trans['count_saham'] = np.where(trans['Saham_transaction_amount']!=0.00,1,0)
+trans['count_uang'] = np.where(trans['Pasar_Uang_transaction_amount']!=0.00,1,0)
+trans['count_fixed'] = np.where(trans['Pendapatan_Tetap_transaction_amount']!=0.00,1,0)
+trans['count_mixed'] = np.where(trans['Campuran_transaction_amount']!=0.00,1,0)
+
+trans_count = trans[['count_saham', 'count_uang', 'count_fixed', 'count_mixed', 'trans_date']].groupby('trans_date').sum()
+t_series = trans_count.index.to_pydatetime()
+
+fig, ax = plt.subplots(figsize=(8, 6))
+
+ax.plot(t_series, trans_count)
+plt.title('Total transaction growth per day')
+plt.legend(['Saham', 'Pasar Uang', 'Pendapatan Tetap', 'Campuran'])
+plt.setp(ax.xaxis.get_ticklabels(), rotation=90)
+
+plt.show()</code></pre>
+<div class="center"><img src="/images/bonds/transaction_growth.png" alt=""></div>
+<div class="desc">From the number of transactions chart, the higher type of transaction is Pasar Uang (Money Market) follow by Pendapatan Tetap (fixed income) and Saham (stocks) respectively.
+	As we can see from the dataset, the AUM and invested amount is updated daily, meanwhile transactions is filled when the users make any buy or sell transactions and it will fill with 0 if no transactions has been made.
+	Furthermore, we will be separating buy and sell transactions into new columns, to avoid biased data when summarise the transactions.</div>
+
+<pre><code>trans_buysell = ['Saham_transaction_amount','Pasar_Uang_transaction_amount', 'Pendapatan_Tetap_transaction_amount',
+	'Campuran_transaction_amount']
+
+for x in trans_buysell:
+	mask = trans[x] < 0
+	trans[x+'_buy'] = trans[x].mask(mask).abs()
+	trans[x+'_sell'] = trans[x].mask(~mask).abs()
+
+trans.loc[trans.Saham_transaction_amount !=0.00,:].head()</code></pre>
+<div class="table-wrapper">
+	<table>
+		<thead>
+			<tr style="text-align: right;">
+			  <th></th>
+			  <th>user_id</th>
+			  <th>trans_date</th>
+			  <th>Saham_AUM</th>
+			  <th>Saham_invested_amount</th>
+			  <th>Saham_transaction_amount</th>
+			  <th>Pasar_Uang_AUM</th>
+			  <th>Pasar_Uang_invested_amount</th>
+			  <th>Pasar_Uang_transaction_amount</th>
+			  <th>Pendapatan_Tetap_AUM</th>
+			  <th>Pendapatan_Tetap_invested_amount</th>
+			  <th>...</th>
+			  <th>count_fixed</th>
+			  <th>count_mixed</th>
+			  <th>Saham_transaction_amount_buy</th>
+			  <th>Saham_transaction_amount_sell</th>
+			  <th>Pasar_Uang_transaction_amount_buy</th>
+			  <th>Pasar_Uang_transaction_amount_sell</th>
+			  <th>Pendapatan_Tetap_transaction_amount_buy</th>
+			  <th>Pendapatan_Tetap_transaction_amount_sell</th>
+			  <th>Campuran_transaction_amount_buy</th>
+			  <th>Campuran_transaction_amount_sell</th>
+			</tr>
+		  </thead>
+		  <tbody>
+			<tr>
+			  <th>25</th>
+			  <td>50961</td>
+			  <td>2021-09-01</td>
+			  <td>1705566.0</td>
+			  <td>1700000.0</td>
+			  <td>1000000.0</td>
+			  <td>100065.0</td>
+			  <td>100000.0</td>
+			  <td>0.0</td>
+			  <td>200124.0</td>
+			  <td>200000.0</td>
+			  <td>...</td>
+			  <td>0</td>
+			  <td>0</td>
+			  <td>1000000.0</td>
+			  <td>NaN</td>
+			  <td>0.0</td>
+			  <td>NaN</td>
+			  <td>0.0</td>
+			  <td>NaN</td>
+			  <td>0.0</td>
+			  <td>NaN</td>
+			</tr>
+			<tr>
+			  <th>46</th>
+			  <td>50961</td>
+			  <td>2021-09-30</td>
+			  <td>2063909.0</td>
+			  <td>2000000.0</td>
+			  <td>300000.0</td>
+			  <td>700603.0</td>
+			  <td>700000.0</td>
+			  <td>600000.0</td>
+			  <td>1398998.0</td>
+			  <td>1400000.0</td>
+			  <td>...</td>
+			  <td>1</td>
+			  <td>0</td>
+			  <td>300000.0</td>
+			  <td>NaN</td>
+			  <td>600000.0</td>
+			  <td>NaN</td>
+			  <td>1200000.0</td>
+			  <td>NaN</td>
+			  <td>0.0</td>
+			  <td>NaN</td>
+			</tr>
+			<tr>
+			  <th>102</th>
+			  <td>61414</td>
+			  <td>2021-08-13</td>
+			  <td>0.0</td>
+			  <td>0.0</td>
+			  <td>-10000.0</td>
+			  <td>0.0</td>
+			  <td>0.0</td>
+			  <td>0.0</td>
+			  <td>0.0</td>
+			  <td>0.0</td>
+			  <td>...</td>
+			  <td>0</td>
+			  <td>0</td>
+			  <td>NaN</td>
+			  <td>10000.0</td>
+			  <td>0.0</td>
+			  <td>NaN</td>
+			  <td>0.0</td>
+			  <td>NaN</td>
+			  <td>0.0</td>
+			  <td>NaN</td>
+			</tr>
+			<tr>
+			  <th>154</th>
+			  <td>66145</td>
+			  <td>2021-09-29</td>
+			  <td>248015.0</td>
+			  <td>240000.0</td>
+			  <td>140000.0</td>
+			  <td>29992.0</td>
+			  <td>30000.0</td>
+			  <td>0.0</td>
+			  <td>129929.0</td>
+			  <td>130000.0</td>
+			  <td>...</td>
+			  <td>0</td>
+			  <td>0</td>
+			  <td>140000.0</td>
+			  <td>NaN</td>
+			  <td>0.0</td>
+			  <td>NaN</td>
+			  <td>0.0</td>
+			  <td>NaN</td>
+			  <td>0.0</td>
+			  <td>NaN</td>
+			</tr>
+			<tr>
+			  <th>166</th>
+			  <td>67251</td>
+			  <td>2021-09-20</td>
+			  <td>562777.0</td>
+			  <td>570000.0</td>
+			  <td>530000.0</td>
+			  <td>110065.0</td>
+			  <td>110000.0</td>
+			  <td>100000.0</td>
+			  <td>420268.0</td>
+			  <td>420000.0</td>
+			  <td>...</td>
+			  <td>1</td>
+			  <td>0</td>
+			  <td>530000.0</td>
+			  <td>NaN</td>
+			  <td>100000.0</td>
+			  <td>NaN</td>
+			  <td>370000.0</td>
+			  <td>NaN</td>
+			  <td>0.0</td>
+			  <td>NaN</td>
+			</tr>
+		  </tbody>
+	</table>
+<pre>5 rows × 26 columns</pre>
+</div>
+<div class="desc">Since we split the transactions into buy and sell, we will drop the original transaction column.</div>
+<pre><code>trans.drop(trans_buysell, axis=1, inplace=True)
+trans.head()</code></pre>
+<div class="table-wrapper">
+	<table>
+		<thead>
+			<tr style="text-align: right;">
+			  <th></th>
+			  <th>user_id</th>
+			  <th>trans_date</th>
+			  <th>Saham_AUM</th>
+			  <th>Saham_invested_amount</th>
+			  <th>Pasar_Uang_AUM</th>
+			  <th>Pasar_Uang_invested_amount</th>
+			  <th>Pendapatan_Tetap_AUM</th>
+			  <th>Pendapatan_Tetap_invested_amount</th>
+			  <th>Campuran_AUM</th>
+			  <th>Campuran_invested_amount</th>
+			  <th>...</th>
+			  <th>count_fixed</th>
+			  <th>count_mixed</th>
+			  <th>Saham_transaction_amount_buy</th>
+			  <th>Saham_transaction_amount_sell</th>
+			  <th>Pasar_Uang_transaction_amount_buy</th>
+			  <th>Pasar_Uang_transaction_amount_sell</th>
+			  <th>Pendapatan_Tetap_transaction_amount_buy</th>
+			  <th>Pendapatan_Tetap_transaction_amount_sell</th>
+			  <th>Campuran_transaction_amount_buy</th>
+			  <th>Campuran_transaction_amount_sell</th>
+			</tr>
+		  </thead>
+		  <tbody>
+			<tr>
+			  <th>0</th>
+			  <td>50701</td>
+			  <td>2021-08-30</td>
+			  <td>0.0</td>
+			  <td>0.0</td>
+			  <td>0.0</td>
+			  <td>0.0</td>
+			  <td>0.0</td>
+			  <td>0.0</td>
+			  <td>10132277.0</td>
+			  <td>10000000.0</td>
+			  <td>...</td>
+			  <td>0</td>
+			  <td>0</td>
+			  <td>0.0</td>
+			  <td>NaN</td>
+			  <td>0.0</td>
+			  <td>NaN</td>
+			  <td>0.0</td>
+			  <td>NaN</td>
+			  <td>0.0</td>
+			  <td>NaN</td>
+			</tr>
+			<tr>
+			  <th>1</th>
+			  <td>50701</td>
+			  <td>2021-08-31</td>
+			  <td>0.0</td>
+			  <td>0.0</td>
+			  <td>0.0</td>
+			  <td>0.0</td>
+			  <td>0.0</td>
+			  <td>0.0</td>
+			  <td>10206945.0</td>
+			  <td>10000000.0</td>
+			  <td>...</td>
+			  <td>0</td>
+			  <td>0</td>
+			  <td>0.0</td>
+			  <td>NaN</td>
+			  <td>0.0</td>
+			  <td>NaN</td>
+			  <td>0.0</td>
+			  <td>NaN</td>
+			  <td>0.0</td>
+			  <td>NaN</td>
+			</tr>
+			<tr>
+			  <th>2</th>
+			  <td>50701</td>
+			  <td>2021-09-01</td>
+			  <td>0.0</td>
+			  <td>0.0</td>
+			  <td>0.0</td>
+			  <td>0.0</td>
+			  <td>0.0</td>
+			  <td>0.0</td>
+			  <td>9956556.0</td>
+			  <td>10000000.0</td>
+			  <td>...</td>
+			  <td>0</td>
+			  <td>0</td>
+			  <td>0.0</td>
+			  <td>NaN</td>
+			  <td>0.0</td>
+			  <td>NaN</td>
+			  <td>0.0</td>
+			  <td>NaN</td>
+			  <td>0.0</td>
+			  <td>NaN</td>
+			</tr>
+			<tr>
+			  <th>3</th>
+			  <td>50701</td>
+			  <td>2021-09-02</td>
+			  <td>0.0</td>
+			  <td>0.0</td>
+			  <td>0.0</td>
+			  <td>0.0</td>
+			  <td>0.0</td>
+			  <td>0.0</td>
+			  <td>9914858.0</td>
+			  <td>10000000.0</td>
+			  <td>...</td>
+			  <td>0</td>
+			  <td>0</td>
+			  <td>0.0</td>
+			  <td>NaN</td>
+			  <td>0.0</td>
+			  <td>NaN</td>
+			  <td>0.0</td>
+			  <td>NaN</td>
+			  <td>0.0</td>
+			  <td>NaN</td>
+			</tr>
+			<tr>
+			  <th>4</th>
+			  <td>50701</td>
+			  <td>2021-09-03</td>
+			  <td>0.0</td>
+			  <td>0.0</td>
+			  <td>0.0</td>
+			  <td>0.0</td>
+			  <td>0.0</td>
+			  <td>0.0</td>
+			  <td>10016360.0</td>
+			  <td>10000000.0</td>
+			  <td>...</td>
+			  <td>0</td>
+			  <td>0</td>
+			  <td>0.0</td>
+			  <td>NaN</td>
+			  <td>0.0</td>
+			  <td>NaN</td>
+			  <td>0.0</td>
+			  <td>NaN</td>
+			  <td>0.0</td>
+			  <td>NaN</td>
+			</tr>
+		  </tbody>
+	</table>
+	<pre>5 rows × 22 columns</pre>
+</div>
+<div class="desc">The next thing is we will visualise the buy sell transactions to see the total amount of transactions growth.</div>
+<pre><code>buysell = trans[['Saham_transaction_amount_buy', 'Saham_transaction_amount_sell', 'Pasar_Uang_transaction_amount_buy', 'Pasar_Uang_transaction_amount_sell',
+	'Pendapatan_Tetap_transaction_amount_buy', 'Pendapatan_Tetap_transaction_amount_sell','Campuran_transaction_amount_buy', 'Campuran_transaction_amount_sell',
+	'trans_date']].groupby('trans_date').sum()
+t_series = buysell.index.to_pydatetime()
+
+fig, ax = plt.subplots(figsize=(8, 6))
+
+ax.plot(t_series, buysell)
+plt.title('Summaries buying and selling growth per day')
+ax.legend(['Saham_transaction_amount_buy', 'Saham_transaction_amount_sell', 'Pasar_Uang_transaction_amount_buy', 'Pasar_Uang_transaction_amount_sell',
+'Pendapatan_Tetap_transaction_amount_buy', 'Pendapatan_Tetap_transaction_amount_sell','Campuran_transaction_amount_buy', 'Campuran_transaction_amount_sell'],
+bbox_to_anchor=(1,1.05))
+plt.setp(ax.xaxis.get_ticklabels(), rotation=90)
+plt.ticklabel_format(style='plain', axis='y')
+
+plt.show()</code></pre>
+<div class="center"><img src="/images/bonds/buysell_sum.png" alt=""></div>
+<div class="desc">The summaries buying and selling chart shows that the total amount of Pendapatan Tetap (Buying) and Pasar Uang (Buying) are leading than other transactions.
+	We are also can see that the majority of the transactions are buying, this could meanings that our users more interested into investing their money. <br>
+	Since invested columns are updated daily with the last balanced of the users, we will drop the duplicate data and take the latest date.
+</div>
+<pre><code>invested_col = ['user_id', 'trans_date', 'Saham_AUM', 'Saham_invested_amount', 'Pasar_Uang_AUM',
+	'Pasar_Uang_invested_amount', 'Pendapatan_Tetap_AUM', 'Pendapatan_Tetap_invested_amount', 'Campuran_AUM',
+	'Campuran_invested_amount']
+invested_AUM = trans.sort_values(by='trans_date').drop_duplicates(subset=['user_id'], keep='last').reset_index(drop=True)
+invested_AUM = invested_AUM[invested_col].copy()
+print(f'Total rows: {invested_AUM.shape[0]}, columns: {invested_AUM.shape[1]}\nInvested:')
 invested_AUM.head()</code>
 	Total rows: 8277, columns: 10
 	Invested:</pre>
@@ -919,24 +1289,45 @@ invested_AUM.head()</code>
 		</table>
 	</div>
 <div class="desc">Transactions dataframe:</div>
-<pre><code>sum_trans_total = data2.groupby('user_id')[['Saham_transaction_amount', 'Pasar_Uang_transaction_amount',
-	'Pendapatan_Tetap_transaction_amount', 'Campuran_transaction_amount']].sum()
+<pre><code>sum_trans_total = trans.groupby('user_id')[['Saham_transaction_amount_buy',
+	'Saham_transaction_amount_sell', 'Pasar_Uang_transaction_amount_buy',
+	'Pasar_Uang_transaction_amount_sell',
+	'Pendapatan_Tetap_transaction_amount_buy',
+	'Pendapatan_Tetap_transaction_amount_sell',
+	'Campuran_transaction_amount_buy', 'Campuran_transaction_amount_sell',
+'count_saham', 'count_uang', 'count_fixed', 'count_mixed']].sum()
 print(f'Total rows:{sum_trans_total.shape[0]}, columns: {sum_trans_total.shape[1]}\nTransactions:')
 sum_trans_total.head()</code>
-	Total rows:8277, columns: 4
+	Total rows:8277, columns: 12
 	Transactions:</pre>
 <div class="table-wrapper">
 	<table>
 		<thead>
 			<tr style="text-align: right;">
 			  <th></th>
-			  <th>Saham_transaction_amount</th>
-			  <th>Pasar_Uang_transaction_amount</th>
-			  <th>Pendapatan_Tetap_transaction_amount</th>
-			  <th>Campuran_transaction_amount</th>
+			  <th>Saham_transaction_amount_buy</th>
+			  <th>Saham_transaction_amount_sell</th>
+			  <th>Pasar_Uang_transaction_amount_buy</th>
+			  <th>Pasar_Uang_transaction_amount_sell</th>
+			  <th>Pendapatan_Tetap_transaction_amount_buy</th>
+			  <th>Pendapatan_Tetap_transaction_amount_sell</th>
+			  <th>Campuran_transaction_amount_buy</th>
+			  <th>Campuran_transaction_amount_sell</th>
+			  <th>count_saham</th>
+			  <th>count_uang</th>
+			  <th>count_fixed</th>
+			  <th>count_mixed</th>
 			</tr>
 			<tr>
 			  <th>user_id</th>
+			  <th></th>
+			  <th></th>
+			  <th></th>
+			  <th></th>
+			  <th></th>
+			  <th></th>
+			  <th></th>
+			  <th></th>
 			  <th></th>
 			  <th></th>
 			  <th></th>
@@ -950,13 +1341,29 @@ sum_trans_total.head()</code>
 			  <td>0.00</td>
 			  <td>0.00</td>
 			  <td>0.00</td>
+			  <td>0.00</td>
+			  <td>0.00</td>
+			  <td>0.00</td>
+			  <td>0.00</td>
+			  <td>0</td>
+			  <td>0</td>
+			  <td>0</td>
+			  <td>0</td>
 			</tr>
 			<tr>
 			  <th>50961</th>
 			  <td>1300000.00</td>
+			  <td>0.00</td>
 			  <td>600000.00</td>
+			  <td>0.00</td>
 			  <td>1200000.00</td>
 			  <td>0.00</td>
+			  <td>0.00</td>
+			  <td>0.00</td>
+			  <td>2</td>
+			  <td>1</td>
+			  <td>1</td>
+			  <td>0</td>
 			</tr>
 			<tr>
 			  <th>53759</th>
@@ -964,30 +1371,54 @@ sum_trans_total.head()</code>
 			  <td>0.00</td>
 			  <td>0.00</td>
 			  <td>0.00</td>
+			  <td>0.00</td>
+			  <td>0.00</td>
+			  <td>0.00</td>
+			  <td>0.00</td>
+			  <td>0</td>
+			  <td>0</td>
+			  <td>0</td>
+			  <td>0</td>
 			</tr>
 			<tr>
 			  <th>54759</th>
 			  <td>0.00</td>
+			  <td>0.00</td>
 			  <td>2000000.00</td>
 			  <td>0.00</td>
 			  <td>0.00</td>
+			  <td>0.00</td>
+			  <td>0.00</td>
+			  <td>0.00</td>
+			  <td>0</td>
+			  <td>1</td>
+			  <td>0</td>
+			  <td>0</td>
 			</tr>
 			<tr>
 			  <th>61414</th>
-			  <td>-10000.00</td>
+			  <td>0.00</td>
+			  <td>10000.00</td>
 			  <td>0.00</td>
 			  <td>0.00</td>
 			  <td>0.00</td>
+			  <td>0.00</td>
+			  <td>0.00</td>
+			  <td>0.00</td>
+			  <td>1</td>
+			  <td>0</td>
+			  <td>0</td>
+			  <td>0</td>
 			</tr>
 		  </tbody>
 	</table>
 </div>
-<div class="desc">After creating the inveted and transactions dataframe, then we will merge both dataset into new_data2 and we will be using this dataset in the future.</div>
-<pre><code>new_data2 = invested_AUM.merge(sum_trans_total, on='user_id')
-print(f'Total rows: {new_data2.shape[0]}, columns:{new_data2.shape[1]}')
+<div class="desc">After creating the invested and transactions dataframe, then we will merge both dataframe into new_trans and we will be using this dataset in the future.</div>
+<pre><code>new_trans = invested_AUM.merge(sum_trans_total, on='user_id')
+print(f'Total rows: {new_trans.shape[0]}, columns:{new_trans.shape[1]}')
 del invested_AUM, sum_trans_total
-new_data2.head()</code>
-	Total rows: 8277, columns:14</pre>
+new_trans.head()</code>
+	Total rows: 8277, columns:22</pre>
 <div class="table-wrapper">
 	<table>
 		<thead>
@@ -1003,10 +1434,17 @@ new_data2.head()</code>
 			  <th>Pendapatan_Tetap_invested_amount</th>
 			  <th>Campuran_AUM</th>
 			  <th>Campuran_invested_amount</th>
-			  <th>Saham_transaction_amount</th>
-			  <th>Pasar_Uang_transaction_amount</th>
-			  <th>Pendapatan_Tetap_transaction_amount</th>
-			  <th>Campuran_transaction_amount</th>
+			  <th>...</th>
+			  <th>Pasar_Uang_transaction_amount_buy</th>
+			  <th>Pasar_Uang_transaction_amount_sell</th>
+			  <th>Pendapatan_Tetap_transaction_amount_buy</th>
+			  <th>Pendapatan_Tetap_transaction_amount_sell</th>
+			  <th>Campuran_transaction_amount_buy</th>
+			  <th>Campuran_transaction_amount_sell</th>
+			  <th>count_saham</th>
+			  <th>count_uang</th>
+			  <th>count_fixed</th>
+			  <th>count_mixed</th>
 			</tr>
 		  </thead>
 		  <tbody>
@@ -1022,10 +1460,17 @@ new_data2.head()</code>
 			  <td>0.00</td>
 			  <td>0.00</td>
 			  <td>0.00</td>
-			  <td>-10000.00</td>
-			  <td>-10000.00</td>
+			  <td>...</td>
+			  <td>0.00</td>
+			  <td>10000.00</td>
 			  <td>0.00</td>
 			  <td>0.00</td>
+			  <td>0.00</td>
+			  <td>0.00</td>
+			  <td>1</td>
+			  <td>1</td>
+			  <td>0</td>
+			  <td>0</td>
 			</tr>
 			<tr>
 			  <th>1</th>
@@ -1039,10 +1484,17 @@ new_data2.head()</code>
 			  <td>550000.00</td>
 			  <td>0.00</td>
 			  <td>0.00</td>
-			  <td>199864.00</td>
-			  <td>-100000.00</td>
-			  <td>450000.00</td>
+			  <td>...</td>
+			  <td>310000.00</td>
+			  <td>410000.00</td>
+			  <td>499783.00</td>
+			  <td>49783.00</td>
 			  <td>0.00</td>
+			  <td>0.00</td>
+			  <td>5</td>
+			  <td>7</td>
+			  <td>7</td>
+			  <td>0</td>
 			</tr>
 			<tr>
 			  <th>2</th>
@@ -1056,10 +1508,17 @@ new_data2.head()</code>
 			  <td>8149154.00</td>
 			  <td>0.00</td>
 			  <td>0.00</td>
-			  <td>10832136.00</td>
+			  <td>...</td>
 			  <td>1937932.00</td>
+			  <td>0.00</td>
 			  <td>6619154.00</td>
 			  <td>0.00</td>
+			  <td>0.00</td>
+			  <td>0.00</td>
+			  <td>2</td>
+			  <td>1</td>
+			  <td>2</td>
+			  <td>0</td>
 			</tr>
 			<tr>
 			  <th>3</th>
@@ -1073,10 +1532,17 @@ new_data2.head()</code>
 			  <td>0.00</td>
 			  <td>0.00</td>
 			  <td>0.00</td>
-			  <td>-100000.00</td>
-			  <td>-100000.00</td>
+			  <td>...</td>
+			  <td>0.00</td>
+			  <td>100000.00</td>
 			  <td>0.00</td>
 			  <td>0.00</td>
+			  <td>0.00</td>
+			  <td>0.00</td>
+			  <td>1</td>
+			  <td>1</td>
+			  <td>0</td>
+			  <td>0</td>
 			</tr>
 			<tr>
 			  <th>4</th>
@@ -1090,18 +1556,25 @@ new_data2.head()</code>
 			  <td>0.00</td>
 			  <td>0.00</td>
 			  <td>0.00</td>
-			  <td>-50000.00</td>
+			  <td>...</td>
 			  <td>0.00</td>
-			  <td>-40000.00</td>
 			  <td>0.00</td>
+			  <td>0.00</td>
+			  <td>40000.00</td>
+			  <td>0.00</td>
+			  <td>0.00</td>
+			  <td>1</td>
+			  <td>0</td>
+			  <td>1</td>
+			  <td>0</td>
 			</tr>
 		  </tbody>
 	</table>
 </div>
-<div class="desc">Now, we get a new dataset that has been clean and aggregate by users then we will
+<!--<div class="desc">Now, we get a new dataset that has been clean and aggregate by users then we will
 	continue our investigation for our previous outliers with user age older than 53 years old.
 	The first thing we will do is to merge the new dataset with user_outliers to see how many of the outliers contribute with the transaction.</div>
-<pre><code>trans_outliers = user_outliers[['user_id', 'user_age']].merge(new_data2, on='user_id')
+<pre><code>trans_outliers = user_outliers[['user_id', 'user_age']].merge(new_trans, on='user_id')
 total_out_transaction = trans_outliers.user_id.nunique()
 percentage_out_transaction = (total_out_transaction/transcation_users)
 print(f'Total users in outliers making transaction: {total_out_transaction}
@@ -1225,7 +1698,7 @@ trans_outliers.head()</code>
 		</table>
 	</div>
 	<div class="desc">From the total of 264 outliers users, apparently there are only 145 of them making
-		transactions or it equal to 1.75% from the total of new dataset 2.
+		transactions or it equal to 1.75% from the total of new transactions' dataset.
 		That number is relatively small, which it's okay if we just exclude the outliers from our analysis.
 		However, we will double check if they contribute in a big amount of transaction or
 		not to avoid removing big investor that hide in the outliers. 
@@ -1233,8 +1706,8 @@ trans_outliers.head()</code>
 <pre><code>idx= ['saham', 'campuran', 'pasar uang', 'pendapatan tetap']
 sum_outliers = [trans_outliers.Saham_transaction_amount.max(), trans_outliers.Campuran_transaction_amount.max(),
 	trans_outliers.Pasar_Uang_transaction_amount.max(),	trans_outliers.Pendapatan_Tetap_transaction_amount.max()]
-sum_full = [new_data2.Saham_transaction_amount.max(), new_data2.Campuran_transaction_amount.max(),
-	new_data2.Pasar_Uang_transaction_amount.max(), new_data2.Pendapatan_Tetap_transaction_amount.max()]
+sum_full = [new_trans.Saham_transaction_amount.max(), new_trans.Campuran_transaction_amount.max(),
+	new_trans.Pasar_Uang_transaction_amount.max(), new_trans.Pendapatan_Tetap_transaction_amount.max()]
 
 X = np.arange(4)
 plt.bar(X + 0.00, sum_outliers, width = 0.25, label='max outlier')
@@ -1243,17 +1716,14 @@ plt.ticklabel_format(useOffset=False, style='plain')
 plt.xticks(X, idx)
 plt.legend()
 plt.title('Comparison max transactions outliers and whole')</code></pre>
-<div class="center"><img src="/images/bonds/compare_out.png" alt=""></div>
-<div class="desc">Since the percentage of the outliers relatively small, it would not be a fair if we compare the summary of the transactions.
-	So we will be comparing by their maximum transactions instead.
-	We can see in Saham (stocks) and Campuran (mixed), our outliers made a higest amount of contribution.
-	For now, we will keep our outliers.
-	The next thing we will do is to do a quick exploration for our dataset 3 before combining with dataset 1 and 2. 
+<div class="center"><img src="/images/bonds/compare_out.png" alt=""></div>-->
+<div class="desc">So we cleaned our transactions' dataset and aggregate the transactions column.
+	The next thing we will do is to do a quick exploration for our bonds order dataset before combining with dataset 1 and 2. 
 </div>
-<h2 class="major" id="dataset3">Dataset 3 Exploration</h2>
-<pre><code>print(f'Total rows: {data3.shape[0]}, columns:{data3.shape[1]}')
-print(f'Total User: {data3.user_id.nunique()}')
-data3.info()</code>
+<h2 class="major" id="dataset3">Bonds Order</h2>
+<pre><code>print(f'Total rows: {result.shape[0]}, columns:{result.shape[1]}')
+print(f'Total User: {result.user_id.nunique()}')
+result.info()</code>
 	Total rows: 8484, columns:3
 	Total User: 8484
 	RangeIndex: 8484 entries, 0 to 8483
@@ -1264,13 +1734,25 @@ data3.info()</code>
 	1   flag_order_bond     8484 non-null   int64
 	2   bond_units_ordered  8484 non-null   int64
 	dtypes: int64(3)</pre>
-	<div class="desc">In our dataset 3, we have 8484 rows data and the same number for our users.
-		However, in our dataset 2 we only have 8277 total users that making transactions.
-	We will combine dataset 2 and 3 to see the details of it.</div>
-	<pre><code>data2_3 = data3.merge(new_data2, how='left')
-print(f'Total combined rows: {data2_3.shape[0]}, columns:{data2_3.shape[1]}')
-print(f'Difference total users:{data2_3.user_id.nunique()-transaction_users}')
-data2_3.isnull().sum()</code>	Total combined rows: 8484, columns:16
+<div class="desc">Since our problem statement is to find the prediction whether the user will order bonds based on their behaviour.
+	We want to see the percentage that users order bonds from the bonds order dataset to see the comparison between each class.</div>
+<pre><code>bond_order = result[['user_id', 'flag_order_bond']].groupby('flag_order_bond').count()
+fig, ax = plt.subplots(figsize=(5, 5), subplot_kw=dict(aspect="equal"))
+wedges, texts, autotexts = ax.pie(bond_order.user_id, autopct=lambda pct: func(pct, bond_order.user_id),
+									textprops=dict(color="black"), explode=(0,0.1))
+ax.legend(wedges, bond_order.index, title='Flag order bond', loc='upper right')
+plt.show()
+
+bond_chart=sns.countplot(x=result["flag_order_bond"])
+plt.tight_layout()
+plt.show()</code></pre>
+<div class="center"><img src="/images/bonds/bonds_pie.png" alt=""></div>
+	<div class="desc">It shows that only 40.9% of our users order the Government Bonds. However, we found a difference on our number of users from transactions' dataset and 3. We have 8277 total users in transactions' dataset that making transactions, meanwhile 8484 users in bonds order dataset.
+	We will combine transactions' dataset and bonds order to see the details of it.</div>
+	<pre><code>trans_3 = result.merge(new_trans, how='left')
+print(f'Total combined rows: {trans_3.shape[0]}, columns:{trans_3.shape[1]}')
+print(f'Difference total users:{trans_3.user_id.nunique()-transaction_users}')
+trans_3.isnull().sum()</code>	Total combined rows: 8484, columns:24
 	Difference total users:207
 
 	user_id                                  0
@@ -1290,12 +1772,12 @@ data2_3.isnull().sum()</code>	Total combined rows: 8484, columns:16
 	Pendapatan_Tetap_transaction_amount    207
 	Campuran_transaction_amount            207
 	dtype: int64</pre>
-	<div class="desc">We left joined our dataset since our dataset 3 has more rows of data for a better understanding what is the difference.
+	<div class="desc">We left joined our dataset since our bonds order dataset has more rows of data for a better understanding what is the difference.
 		There is 8484 rows of data and 16 columns after the merging. We also check how much the difference between both dataset and the null value.
-		Our difference number of user between dataset 2 and 3 is 207 user, it also same with the number of our null values.
+		Our difference number of user between transactions' dataset and 3 is 207 user, it also same with the number of our null values.
 		We will try to visualise the user with null values if they ordered bonds or not before we decide to exclude those user.
 		</div>
-		<pre><code>v = data2_3[data2_3.isnull().any(axis=1)]
+		<pre><code>v = trans_3[trans_3.isnull().any(axis=1)]
 v_null = v[['user_id', 'flag_order_bond']].groupby('flag_order_bond').count()
 fig, ax = plt.subplots(figsize=(5, 5), subplot_kw=dict(aspect="equal"))
 wedges, texts, autotexts = ax.pie(v_null.user_id, autopct=lambda pct: func(pct, v_null.user_id),
@@ -1305,42 +1787,213 @@ plt.show()</code></pre>
 <div class="center"><img src="/images/bonds/bond_null.png" alt=""></div>
 <div class="desc">From the pie chart, we can see only 1 of 207 user ended up order bond from the company.
 	Since we don't have any transactional record for the 207 users, it safe to exclude them from our analysis.
-Now, we will merging all of our dataset into 1 before the final data exploration.
+Now, we will merging all of our dataset into 1 before we preprocess our data for modelling.
 </div>
-<pre><code>df1 = new_data2.merge(data1, how='inner', on='user_id')
-full_data = df1.merge(data3, how='inner', on='user_id')
+<pre><code>df1 = new_trans.merge(user, how='inner', on='user_id')
+full_data = df1.merge(result, how='inner', on='user_id')
 print(f'Total full rows: {full_data.shape[0]}, columns:{full_data.shape[1]}')
 print('Null Values:')
-full_data.isnull().sum()</code>	Total full rows: 8277, columns:24
+full_data.isnull().sum()</code>	Total full rows: 8277, columns:32
 
 	Null Values:
-	user_id                                0
-	trans_date                             0
-	Saham_AUM                              0
-	Saham_invested_amount                  0
-	Pasar_Uang_AUM                         0
-	Pasar_Uang_invested_amount             0
-	Pendapatan_Tetap_AUM                   0
-	Pendapatan_Tetap_invested_amount       0
-	Campuran_AUM                           0
-	Campuran_invested_amount               0
-	Saham_transaction_amount               0
-	Pasar_Uang_transaction_amount          0
-	Pendapatan_Tetap_transaction_amount    0
-	Campuran_transaction_amount            0
-	registration_import_datetime           0
-	user_gender                            0
-	user_age                               0
-	user_occupation                        0
-	user_income_range                      0
-	referral_code_used                     0
-	user_income_source                     0
-	registration_month                     0
-	flag_order_bond                        0
-	bond_units_ordered                     0
+	user_id                                     0
+	trans_date                                  0
+	Saham_AUM                                   0
+	Saham_invested_amount                       0
+	Pasar_Uang_AUM                              0
+	Pasar_Uang_invested_amount                  0
+	Pendapatan_Tetap_AUM                        0
+	Pendapatan_Tetap_invested_amount            0
+	Campuran_AUM                                0
+	Campuran_invested_amount                    0
+	Saham_transaction_amount_buy                0
+	Saham_transaction_amount_sell               0
+	Pasar_Uang_transaction_amount_buy           0
+	Pasar_Uang_transaction_amount_sell          0
+	Pendapatan_Tetap_transaction_amount_buy     0
+	Pendapatan_Tetap_transaction_amount_sell    0
+	Campuran_transaction_amount_buy             0
+	Campuran_transaction_amount_sell            0
+	count_saham                                 0
+	count_uang                                  0
+	count_fixed                                 0
+	count_mixed                                 0
+	registration_import_datetime                0
+	user_gender                                 0
+	user_age                                    0
+	user_occupation                             0
+	user_income_range                           0
+	referral_code_used                          0
+	user_income_source                          0
+	registration_month                          0
+	flag_order_bond                             0
+	bond_units_ordered                          0
 	dtype: int64</pre>
 </p> 
-						</div>
+<div class="desc">After we combined the 3 dataset, we have the total of 8277 rows of data and 32 columns. 
+	We will create an age group bin into 17-19,20-29,30-39 and so on instead of user_age.</div>
+<pre><code>bins = [17, 20, 30, 40, 50, 60, 70, 80, 100]
+labels = ['17-19','20-29','30-39', '40-49', '50-59', '60-69', '70-79', '80+']
+full_data['age_group'] = pd.cut(full_data['user_age'], bins, labels = labels,include_lowest = True)
+full_data.drop(['user_age'], axis=1, inplace=True)
+full_data.age_group.unique()
+</code>
+	['20-29', '40-49', '30-39', '50-59', '17-19', '60-69', '70-79', '80+']
+	Categories (8, object): ['17-19' < '20-29' < '30-39' < '40-49' < '50-59' < '60-69' < '70-79' < '80+']</pre>
+<pre><code>trans_group = full_data[['age_group', 'Saham_transaction_amount_buy',
+	'Saham_transaction_amount_sell', 'Pasar_Uang_transaction_amount_buy',
+	'Pasar_Uang_transaction_amount_sell',
+	'Pendapatan_Tetap_transaction_amount_buy',
+	'Pendapatan_Tetap_transaction_amount_sell',
+	'Campuran_transaction_amount_buy', 'Campuran_transaction_amount_sell']].groupby('age_group').sum()
+
+trans_group.plot(title='Summary transaction by age group', figsize=(8,5))
+plt.ticklabel_format(axis='y', style='plain')
+plt.show()</code></pre>
+<div class="center"><img src="/images/bonds/trans_age.png" alt=""></div>
+<div class="desc">When we visualise the amount of transaction mapped with the age group, we can see that the age group 20-29 years old contribute the most transactions,
+	and it started to slow down until as the user aged. <br>
+Then we will check the correlation from each of our features by ploting correlation matrix.</div>
+<pre><code>fig, ax = plt.subplots(figsize=(25,10))  
+sns.heatmap(full_data.corr(), annot = True, ax=ax, cmap = 'Blues')
+plt.title("DataCorrelation")
+plt.show()</code></pre>
+<div class="center"><img src="/images/bonds/correlation_matrix.png" alt=""style='width: 100%;'></div>
+<div class="desc">The correlation matrix show that AUM and Invested column has a perfect positive correlation between each other as well as buying transactions.
+	Furthermore, bond_units_ordered also has a positif correlation with flag_order_bond. So, we will be dropping one of the features to avoid multicollinearity in the model performance.
+</div>
+<pre><code>pos_corr = ['Saham_AUM', 'Pasar_Uang_AUM', 'Pendapatan_Tetap_AUM', 'Campuran_AUM', 'Saham_transaction_amount_buy',
+	'Pasar_Uang_transaction_amount_buy', 'Pendapatan_Tetap_transaction_amount_buy', 'Campuran_transaction_amount_buy',
+	'bond_units_ordered']
+full_data.drop(pos_corr, axis=1, inplace=True)</code></pre>
+<h2 class="major" id="preprocessing">Preprocessing</h2>
+<div class="desc">So, we will convert our categorical data into numerical. We will print out the unique value from non numerical data.
+	Moreover, we will remove column transaction date, registration month, and user id.
+</div>
+<pre><code>for x in full_data:
+	uniqueValues = full_data[x].unique()
+	n_values = len(uniqueValues)
+	if full_data[x].dtypes == object:
+		print(f'Column: {x} -- total unique value: ({n_values}) {uniqueValues}')</code>
+	Column: user_gender -- total unique value: (2) ['Male' 'Female']
+	Column: user_occupation -- total unique value: (9) ['Pelajar' 'Swasta' 'Others' 'Pengusaha' 'IRT' 'Guru' 'Pensiunan' 'PNS'
+	'TNI/Polisi']
+	Column: user_income_range -- total unique value: (6) ['< 10 Juta' 'Rp 10 Juta - 50 Juta' '> Rp 100 Juta - 500 Juta'
+	'> Rp 500 Juta - 1 Miliar' '> Rp 50 Juta - 100 Juta' '> Rp 1 Miliar']
+	Column: referral_code_used -- total unique value: (2) ['used referral' 'None']
+	Column: user_income_source -- total unique value: (10) ['Keuntungan Bisnis' 'Gaji' 'Lainnya' 'Warisan' 'Undian'
+	'Dari Orang Tua / Anak' 'Tabungan' 'Hasil Investasi' 'Dari Suami / istri'
+	'Bunga Simpanan']</pre>
+	<div class="desc">From the unique value details, it clearly shows that user_income_range is ordinal category. So we will be using label encoder to convert them into numerical data, meanwhile one hot encoding for the rest.</div>
+<pre><code>full_data.drop(['trans_date', 'registration_month', 'user_id'], axis=1, inplace=True)
+one_hot_var = ['user_gender','user_occupation', 'referral_code_used', 'user_income_source']
+one_hot = pd.get_dummies(full_data, columns = one_hot_var)
+
+from sklearn.preprocessing import LabelEncoder
+
+labelencoder = LabelEncoder()
+
+one_hot['registration_import_datetime'] = labelencoder.fit_transform(one_hot['registration_import_datetime'])
+one_hot['age_group'] = labelencoder.fit_transform(one_hot['age_group'])
+one_hot['user_income_range'] = labelencoder.fit_transform(one_hot['user_income_range'])
+one_hot.info()</code>
+	Int64Index: 8277 entries, 0 to 8276
+	Data columns (total 39 columns):
+	 #   Column                                    Non-Null Count  Dtype  
+	---  ------                                    --------------  -----  
+	 0   Saham_invested_amount                     8277 non-null   float64
+	 1   Pasar_Uang_invested_amount                8277 non-null   float64
+	 2   Pendapatan_Tetap_invested_amount          8277 non-null   float64
+	 3   Campuran_invested_amount                  8277 non-null   float64
+	 4   Saham_transaction_amount_sell             8277 non-null   float64
+	 5   Pasar_Uang_transaction_amount_sell        8277 non-null   float64
+	 6   Pendapatan_Tetap_transaction_amount_sell  8277 non-null   float64
+	 7   Campuran_transaction_amount_sell          8277 non-null   float64
+	 8   count_saham                               8277 non-null   int32  
+	 9   count_uang                                8277 non-null   int32  
+	 10  count_fixed                               8277 non-null   int32  
+	 11  count_mixed                               8277 non-null   int32  
+	 12  registration_import_datetime              8277 non-null   int32  
+	 13  user_income_range                         8277 non-null   int32  
+	 14  flag_order_bond                           8277 non-null   int64  
+	 15  age_group                                 8277 non-null   int32  
+	 16  user_gender_Female                        8277 non-null   uint8  
+	 17  user_gender_Male                          8277 non-null   uint8  
+	 18  user_occupation_Guru                      8277 non-null   uint8  
+	 19  user_occupation_IRT                       8277 non-null   uint8  
+	 20  user_occupation_Others                    8277 non-null   uint8  
+	 21  user_occupation_PNS                       8277 non-null   uint8  
+	 22  user_occupation_Pelajar                   8277 non-null   uint8  
+	 23  user_occupation_Pengusaha                 8277 non-null   uint8  
+	 24  user_occupation_Pensiunan                 8277 non-null   uint8  
+	 25  user_occupation_Swasta                    8277 non-null   uint8  
+	 26  user_occupation_TNI/Polisi                8277 non-null   uint8  
+	 27  referral_code_used_None                   8277 non-null   uint8  
+	 28  referral_code_used_used referral          8277 non-null   uint8  
+	 29  user_income_source_Bunga Simpanan         8277 non-null   uint8  
+	 30  user_income_source_Dari Orang Tua / Anak  8277 non-null   uint8  
+	 31  user_income_source_Dari Suami / istri     8277 non-null   uint8  
+	 32  user_income_source_Gaji                   8277 non-null   uint8  
+	 33  user_income_source_Hasil Investasi        8277 non-null   uint8  
+	 34  user_income_source_Keuntungan Bisnis      8277 non-null   uint8  
+	 35  user_income_source_Lainnya                8277 non-null   uint8  
+	 36  user_income_source_Tabungan               8277 non-null   uint8  
+	 37  user_income_source_Undian                 8277 non-null   uint8  
+	 38  user_income_source_Warisan                8277 non-null   uint8  </pre>
+<div class="desc">After we convert our non numerical data into numeric, we can see our dataset shape is changed to 8277 rows and 39 columns.
+	We will use the current feature to create our model using multiple classification algorithm and evaluate which one give the best performance.
+	So, we will take out the target variable which is flag_order_bond from our dataset and divided them into training (60% of total data) 40% for validation and testing.
+	Also, we will scale our data between 0 and 1 using minmaxscaler from scikit-learn.
+</div>
+<pre><code>x_v1 = one_hot.drop(['flag_order_bond'], axis=1)
+y_v1 = one_hot['flag_order_bond'].copy()
+</code></pre>
+<pre>Function to split data into train, val and test also scaling<code>from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import MinMaxScaler
+
+def split_scaled(x,y):
+	xtrain, xtemp, ytrain, ytemp = train_test_split(x, y, train_size=0.6, random_state=3)
+	xvalid, xtest, yvalid, ytest = train_test_split(xtemp, ytemp, test_size=0.5, random_state=3)
+	scale = MinMaxScaler()
+
+	xtrain_scaled = scale.fit_transform(xtrain)
+	xvalid_scaled = scale.fit_transform(xvalid)
+	xtest_scaled = scale.fit_transform(xtest)
+	return xtrain_scaled, ytrain, xvalid_scaled, yvalid, xtest_scaled, ytest</code></pre>
+
+<pre>Function to evaluate models<code>from sklearn.metrics import ConfusionMatrixDisplay, accuracy_score, confusion_matrix, mean_squared_error, r2_score
+score_comp = []
+def eval(model, name, x1, y1, x2, y2, x3,y3):
+	predtrain = model.predict(x1)
+	predvalid = model.predict(x2)
+	predtest = model.predict(x3)
+	acctest = (accuracy_score(y3, predtest))*100
+	accvalid = (accuracy_score(y2, predvalid))*100
+	acctrain = (accuracy_score(y1, predtrain))*100
+	overfit = acctrain - acctest
+	
+	rmse= (mean_squared_error(ytest,predtest))**(1/2)
+	r2 = r2_score(ytest, predtest)
+	print(f'Training accuracy: {acctrain} \nValidation accuracy: {accvalid} \nTesting accuracy: {acctest} \nOverfitting: {overfit}')
+	print('RMSE test: %.3f' % rmse)
+	print('R^2 test: %.3f' % r2)
+	score_comp.append([name, acctrain, accvalid, acctest, rmse, r2])</code></pre>
+<h2 class="major" id="logreg1">Model 1 - Logistic Regression</h2>
+<div class="desc">The first model that we will implement is using Logistic Regression with our original dataset. Furthermore, a function to evaluate our model will be created for easy comparisson.</div>
+<pre><code>xtrain, ytrain, xvalid, yvalid, xtest, ytest = split_scaled(x_v1, y_v1)
+
+from sklearn.linear_model import LogisticRegression
+
+logreg = LogisticRegression()
+logreg.fit(xtrain, ytrain)
+eval(logreg, 'logreg1', xtrain, ytrain, xvalid, yvalid, xtest, ytest)</code>
+	Training accuracy: 63.25010068465566 
+	Validation accuracy: 61.51057401812688 
+	Testing accuracy: 62.01690821256038 
+	Overfitting: 1.2331924720952827
+	RMSE test: 0.616
+	R^2 test: -0.589</pre>
+		</div>
 					</section>
 			</div>
 
