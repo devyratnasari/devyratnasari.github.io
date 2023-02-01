@@ -33,9 +33,10 @@
 					</li>
 					<li><a href="#preprocessing">Preprocessing</a></li>
 					<li><div class="dropdown">
-						<a href="#eda">Models</a> 
+						<a href="#logreg1">Models</a> 
 						<div class="dropdown-content">
 							<a href="#logreg1">Logistic Regression</a>
+							<a href="#svm">Support Vector Machine</a>
 						</div>
 					</div>
 					<li><a href="index.html">Back to projects</a></li>
@@ -1979,7 +1980,7 @@ def eval(model, name, x1, y1, x2, y2, x3,y3):
 	print('R^2 test: %.3f' % r2)
 	score_comp.append([name, acctrain, accvalid, acctest, rmse, r2])</code></pre>
 <h2 class="major" id="logreg1">Model 1 - Logistic Regression</h2>
-<div class="desc">The first model that we will implement is using Logistic Regression with our original dataset. Furthermore, a function to evaluate our model will be created for easy comparisson.</div>
+<div class="desc">The first model that we will implement is using Logistic Regression with our original dataset.</div>
 <pre><code>xtrain, ytrain, xvalid, yvalid, xtest, ytest = split_scaled(x_v1, y_v1)
 
 from sklearn.linear_model import LogisticRegression
@@ -1987,23 +1988,157 @@ from sklearn.linear_model import LogisticRegression
 logreg = LogisticRegression()
 logreg.fit(xtrain, ytrain)
 eval(logreg, 'logreg1', xtrain, ytrain, xvalid, yvalid, xtest, ytest)</code>
-	Training accuracy: 63.25010068465566 
-	Validation accuracy: 61.51057401812688 
-	Testing accuracy: 62.01690821256038 
-	Overfitting: 1.2331924720952827
-	RMSE test: 0.616
-	R^2 test: -0.589</pre>
-		</div>
-					</section>
-			</div>
+	Training accuracy: 63.25% 
+	Validation accuracy: 61.51%
+	Testing accuracy: 62.02% 
+	Overfitting: 1.23%
+	Log Loss Training: 13.246006330072253, Log Loss Testing: 13.690493950334956
+	Precision class 1: 52.56% 
+	Precision class 0: 66.20%
+	Recall class 1: 40.76% 
+	Recall class 0: 75.92%
+	F1: 45.92%
+	ROC AUC Training: 66.75% Testing: 64.66%</pre>
+<div class="center"><img src="/images/bonds/cm-lr1.png" alt=""> <img src="/images/bonds/roc_logreg.png" alt=""></div>
+<div class="desc">So, we can see that our model does not give a good accuracy score.
+	]We will try to tune the model using GridSearch Cross Validation to improve the performance.</div>
+<pre><code>from sklearn.model_selection import GridSearchCV
+log_param = [
+	{
+		'C': [0.01, 0.1, 1.0, 10, 100], 
+        'penalty': ['l1','l2'],
+        'solver': ['newton-cg','saga'],
+        'max_iter': [200,400,600,800]
+	},
+]
 
-		<!-- Footer -->
-		<footer id="footer" class="wrapper style1-alt">
-			<div class="inner">
-				<ul class="menu">
-					<li>&copy; Devy Ratnasari</li>
-					<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-				</ul>
+#tuned the model using gridsearch and kfold
+opt_log = GridSearchCV(LogisticRegression(), param_grid = log_param, scoring='accuracy', cv=10, verbose = 2)
+#fit the tuned model with training dataset
+opt_log.fit(xtrain, ytrain) 
+print(opt_log.best_params_) </code>
+	{'C': 100, 'max_iter': 800, 'penalty': 'l1', 'solver': 'saga'}</pre>
+<div class="desc">We will fit our dataset to a new model with the parameters result from the Grid Search.</div>
+<pre><code>lr = LogisticRegression(C= 100, penalty= 'l1', solver= 'saga', max_iter=800)
+lr.fit(xtrain, ytrain)
+eval(lr,'logreg_tuned', xtrain, ytrain, xvalid, yvalid, xtest, ytest)</code>
+	Training accuracy: 65.40% 
+	Validation accuracy: 63.63%
+	Testing accuracy: 65.40% 
+	Overfitting: 0.01%
+	Log Loss Training: 12.4693911644187, Log Loss Testing: 12.471626444422782
+	Precision class 1: 58.01% 
+	Precision class 0: 68.71%
+	Recall class 1: 45.34% 
+	Recall class 0: 78.52%
+	F1: 50.90%
+	ROC AUC Training: 70.22% Testing: 69.73%</pre>
+<div class="center"><img src="/images/bonds/cm-lr1-tuned.png" alt=""><img src="/images/bonds/roc_logreg_tuned.png" alt=""></div>
+<div class="desc">It seems the hypertuned increase the performance of the model. The next thing we will try to check the features coefficient and try to modify our features.</div>
+<pre><code>coefs_df = pd.DataFrame()
+coefs_df['features'] = x_v1.columns
+coefs_df['coefs'] = logreg.coef_[0]
+print(coefs_df.sort_values('coefs', ascending=False).head(20))
+plt.bar([x for x in range(len(coefs_df['coefs']))], coefs_df['coefs'])
+plt.show()</code>
+						features  coefs
+	0                      Saham_invested_amount   4.31
+	1                 Pasar_Uang_invested_amount   2.63
+	14                                 age_group   1.95
+	10                               count_fixed   1.94
+	2           Pendapatan_Tetap_invested_amount   1.58
+	3                   Campuran_invested_amount   1.42
+	30     user_income_source_Dari Suami / istri   0.59
+	9                                 count_uang   0.57
+	23                 user_occupation_Pensiunan   0.42
+	36                 user_income_source_Undian   0.34
+	12              registration_import_datetime   0.33
+	20                       user_occupation_PNS   0.32
+	26                   referral_code_used_None   0.26
+	15                        user_gender_Female   0.23
+	13                         user_income_range   0.20
+	31                   user_income_source_Gaji   0.14
+	29  user_income_source_Dari Orang Tua / Anak   0.12
+	5         Pasar_Uang_transaction_amount_sell   0.09
+	22                 user_occupation_Pengusaha   0.08
+	25                user_occupation_TNI/Polisi   0.04</pre>
+	<div class="center"><img src="/images/bonds/coefs.png" alt=""></div>
+	<div class="desc">We will remove the low coefficient features that less than 0.2.</div>
+
+<pre><code>dropslv2 = coefs_df.loc[coefs_df['coefs']<0.2].features
+dropslv2 = dropslv2.to_list()
+encoded2 = one_hot.drop(dropslv2, axis=1)
+x_v2 = encoded2.drop(['flag_order_bond'], axis=1)
+y_v2 = encoded2['flag_order_bond'].copy()
+</code>Fit new dataset to the model
+<code>xtrain2, ytrain2, xvalid2, yvalid2, xtest2, ytest2 = split_scaled(x_v2, y_v2)
+
+lr2 = LogisticRegression()
+lr2.fit(xtrain2, ytrain2)
+eval(lr2, 'logreg_coef', xtrain2, ytrain2, xvalid2, yvalid2, xtest2, ytest2)</code>
+	Training accuracy: 62.18% 
+	Validation accuracy: 61.27%
+	Testing accuracy: 61.35% 
+	Overfitting: 0.83%
+	Log Loss Training: 13.630684870068873, Log Loss Testing: 13.92991435328199
+	Precision class 1: 51.52% 
+	Precision class 0: 65.52%
+	Recall class 1: 38.78% 
+	Recall class 0: 76.12%
+	F1: 44.25%
+	ROC AUC Training: 65.84% Testing: 64.27%</pre>
+	<div class="center"><img src="/images/bonds/cm-lr-coef.png" alt=""><img src="/images/bonds/roc-coef.png" alt=""></div>
+<div class="desc">It seems that our previous model before removing the low coefficient features has a better performance.
+	We will try to tune the model and see if the accuracy will improve.
+</div>
+<pre><code>from sklearn.model_selection import GridSearchCV
+log_param = [
+	{
+		'C': [0.01, 0.1, 1.0, 10, 100], 
+		'penalty': ['l2', 'l1'],
+		'solver': ['newton-cg', 'saga'],
+		'max_iter': [200,400,600] 
+	},
+]
+
+#tuned the model using gridsearch and kfold
+opt_log = GridSearchCV(LogisticRegression(), param_grid = log_param, scoring='accuracy', cv=10, verbose = 2)
+#fit the tuned model with training dataset
+opt_log.fit(xtrain2, ytrain2) 
+print(opt_log.best_params_) #best parameter tuning result</code>
+	{'C': 100, 'max_iter': 600, 'penalty': 'l1', 'solver': 'saga'}</pre>
+
+<pre>Fit the model with new parameter from hypertuning.
+<code>lr3 = LogisticRegression(C=100, penalty='l1', solver='saga', max_iter=600)
+lr3.fit(xtrain2, ytrain2)
+eval(lr3, 'logreg_coef_tuned', xtrain2, ytrain2, xvalid2, yvalid2, xtest2, ytest2)</code>
+	Training accuracy: 64.44% 
+	Validation accuracy: 63.32%
+	Testing accuracy: 64.92% 
+	Overfitting: -0.48%
+	Log Loss Training: 12.81777927611375, Log Loss Testing: 12.645750373838808
+	Precision class 1: 57.09% 
+	Precision class 0: 68.52%
+	Recall class 1: 45.50% 
+	Recall class 0: 77.62%
+	F1: 50.64%
+	ROC AUC Training: 69.33% Testing: 68.66%</pre>
+
+	<div class="center"><img src="/images/bonds/cm-lr-coef-tuned.png" alt=""><img src="/images/bonds/roc-coef-lr-tuned.png" alt=""></div>
+<div class="desc">Unfortunately, when we reduce the low coefficient features it doesn't perform better than our previous dataset.
+	We will try to create a new model using different algorithms.</div>
+<h2 class="major" id="svm">Model 2 - Support Vector Machine</h2>
+</div>
+				</section>
+		</div>
+
+	<!-- Footer -->
+	<footer id="footer" class="wrapper style1-alt">
+		<div class="inner">
+			<ul class="menu">
+				<li>&copy; Devy Ratnasari</li>
+				<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+			</ul>
 			</div>
 		</footer>
 
