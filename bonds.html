@@ -5,327 +5,354 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
 <html>
-	<head>
-		<link rel="icon" type="image/x-icon" href="/assets/css/images/title.png">
-		<title>Bonds</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>	
-	</head>
-	<body class="is-preload">
 
-		<!-- Header -->
-		<section id="header">
-			<div class="inner" style="padding-left: 5em;">
-				<a href="index.html" class="title" style="font-size: x-large;"><h2>DR</h2></a>
-			</div>
-			<nav>
-				<ul>
-					<li><div class="dropdown">
-						<a href="#eda">EDA</a> 
+<head>
+	<link rel="icon" type="image/x-icon" href="/assets/css/images/title.png">
+	<title>Bonds</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<noscript>
+		<link rel="stylesheet" href="assets/css/noscript.css" />
+	</noscript>
+</head>
+
+<body class="is-preload">
+
+	<!-- Header -->
+	<section id="header">
+		<div class="inner" style="padding-left: 5em;">
+			<a href="index.html" class="title" style="font-size: x-large;">
+				<h2>DR</h2>
+			</a>
+		</div>
+		<nav style="font-size: larger;">
+			<ul>
+				<li>
+					<div class="dropdown">
+						<a href="#eda">EDA</a>
 						<div class="dropdown-content">
 							<a href="#eda">User</a>
 							<a href="#dataset2">Transaction</a>
 							<a href="#dataset3">Bonds Order</a>
 						</div>
 					</div>
-					</li>
-					<li><a href="#preprocessing">Preprocessing</a></li>
-					<li><div class="dropdown">
-						<a href="#logreg1">Models</a> 
+				</li>
+				<li><a href="#preprocessing">Preprocessing</a></li>
+				<li>
+					<div class="dropdown">
+						<a href="#logreg1">Models</a>
 						<div class="dropdown-content">
 							<a href="#logreg1">Logistic Regression</a>
 							<a href="#svm">Support Vector Machine</a>
+							<a href="#randomforest">Random Forest</a>
+							<a href="#knn">K-Nearest Neighbor</a>
+							<a href="#dtree">Decision Tree</a>
+							<a href="#naive">Gaussian Naive Bayes</a>
 						</div>
 					</div>
-					<li><a href="index.html">Back to projects</a></li>
-				</ul>
-			</nav>
-		</section>
+				<li><a href="#conclusion">Conclusion</a></li>
+				<li><a href="index.html">Back to projects</a></li>
+			</ul>
+		</nav>
+	</section>
 
 
-		<!-- Wrapper -->
-			<div id="wrapper">
+	<!-- Wrapper -->
+	<div id="wrapper">
 
-				<!-- Main -->
-					<section id="dataset" class="wrapper">
-						<div class="inner" style="font-size: large;">
-							<h1 class="major">Government bonds buyer predictions</h1>
-							<p style="font-size: large;">The analysis is conducted to predict how much government bonds the company has to order based on the users behaviour.
-								The dataset is sourced from Indonesia Fintech StartUp between August and October 2021.
-								There are 3 datasets that the company provided:
-								<ol style="font-size: large;">
-									<li><b>Users information</b>  <br>
-										This dataset contains:
-										<ul style="list-style-type: circle;">
-											<li>user_id - User's identity</li>
-											<li>registration_import_datetime - Date of user registered</li>
-											<li>user_gender - Gender of the user</li>
-											<li>user_age - Age of the user</li>
-											<li>user_occupation - Occupation of the user</li>
-											<li>user_income_range - Range income of the user</li>
-											<li>referral_code_used - If the user using referral code during registration or not</li>
-											<li>user_income_source - The source of income from the user</li>
-										</ul>
-										<table>
-											<thead>
-												<tr style="text-align: right;">
-												  <th></th>
-												  <th>user_id</th>
-												  <th>registration_import_datetime</th>
-												  <th>user_gender</th>
-												  <th>user_age</th>
-												  <th>user_occupation</th>
-												  <th>user_income_range</th>
-												  <th>referral_code_used</th>
-												  <th>user_income_source</th>
-												</tr>
-											  </thead>
-											  <tbody>
-												<tr>
-												  <th>0</th>
-												  <td>162882</td>
-												  <td>2021-09-17</td>
-												  <td>Female</td>
-												  <td>51</td>
-												  <td>Swasta</td>
-												  <td>&gt; Rp 500 Juta - 1 Miliar</td>
-												  <td>NaN</td>
-												  <td>Gaji</td>
-												</tr>
-												<tr>
-												  <th>1</th>
-												  <td>3485491</td>
-												  <td>2021-10-09</td>
-												  <td>Female</td>
-												  <td>55</td>
-												  <td>Others</td>
-												  <td>&gt; Rp 50 Juta - 100 Juta</td>
-												  <td>NaN</td>
-												  <td>Gaji</td>
-												</tr>
-												<tr>
-												  <th>2</th>
-												  <td>1071649</td>
-												  <td>2021-10-08</td>
-												  <td>Male</td>
-												  <td>50</td>
-												  <td>Swasta</td>
-												  <td>Rp 10 Juta - 50 Juta</td>
-												  <td>NaN</td>
-												  <td>Gaji</td>
-												</tr>
-												<tr>
-												  <th>3</th>
-												  <td>3816789</td>
-												  <td>2021-08-12</td>
-												  <td>Female</td>
-												  <td>53</td>
-												  <td>IRT</td>
-												  <td>&gt; Rp 50 Juta - 100 Juta</td>
-												  <td>NaN</td>
-												  <td>Gaji</td>
-												</tr>
-												<tr>
-												  <th>4</th>
-												  <td>3802293</td>
-												  <td>2021-08-15</td>
-												  <td>Female</td>
-												  <td>47</td>
-												  <td>PNS</td>
-												  <td>&gt; Rp 500 Juta - 1 Miliar</td>
-												  <td>used referral</td>
-												  <td>Gaji</td>
-												</tr>
-											  </tbody>
-										</table>
-									</li>
-									<li><b>Users's daily transaction</b><br>
-										This dataset contains:
-										<ul style="list-style-type: circle;">
-											<li>user_id - Id of user, it's same with the user_id from dataset 1</li>
-											<li>date - Transaction date</li>
-											<li>Saham_AUM - AUM (Assets Under Management) of equity mutual fund held by client to date</li>
-											<li>Saham_invested_amount - The total price paid by client to buy equity mutual fund to date.</li>
-											<li>Saham_transaction_amount - Total value of transaction to buy (if positive) or sell (if negative) equity mutual fund on the date.</li>
-											<li>Pasar_Uang_AUM - AUM of money market mutual fund held by client to date</li>
-											<li>Pasar_Uang_invested_amount - The total price paid by client to buy money market mutual fund to date</li>
-											<li>Pasar_Uang_transaction_amount - Total value of transaction to buy (if positive) or sell (if negative) money market mutual fund on the date. </li>
-											<li>Pendapatan_Tetap_AUM - AUM of fixed income mutual fund held by client to date</li>
-											<li>Pendapatan_Tetap_invested_amount - The total price paid by client to buy fixed income mutual fund to date</li>
-											<li>Pendapatan_Tetap_transaction_amount - Total value of transaction to buy (if positive) or sell (if negative) fixed income mutual fund on the date.</li>
-											<li>Campuran_AUM - AUM of mixed mutual fund held by client to date</li>
-											<li>Campuran_invested_amount - The total price paid by client to buy mixed mutual fund to date</li>
-											<li>Campuran_transaction_amount - Total value of transaction to buy (if positive) or sell (if negative) mixed mutual fund on the date.</li>
-										<div style="overflow-x: auto; margin-top: 1em;">
-											<table>
-												<thead>
-													<tr style="text-align: right;">
-													  <th></th>
-													  <th>user_id</th>
-													  <th>trans_date</th>
-													  <th>Saham_AUM</th>
-													  <th>Saham_invested_amount</th>
-													  <th>Saham_transaction_amount</th>
-													  <th>Pasar_Uang_AUM</th>
-													  <th>Pasar_Uang_invested_amount</th>
-													  <th>Pasar_Uang_transaction_amount</th>
-													  <th>Pendapatan_Tetap_AUM</th>
-													  <th>Pendapatan_Tetap_invested_amount</th>
-													  <th>Pendapatan_Tetap_transaction_amount</th>
-													  <th>Campuran_AUM</th>
-													  <th>Campuran_invested_amount</th>
-													  <th>Campuran_transaction_amount</th>
-													</tr>
-												  </thead>
-												  <tbody>
-													<tr>
-													  <th>0</th>
-													  <td>50701</td>
-													  <td>2021-08-30</td>
-													  <td>0.0</td>
-													  <td>0.0</td>
-													  <td>0.0</td>
-													  <td>0.0</td>
-													  <td>0.0</td>
-													  <td>0.0</td>
-													  <td>0.0</td>
-													  <td>0.0</td>
-													  <td>0.0</td>
-													  <td>10132277.0</td>
-													  <td>10000000.0</td>
-													  <td>0.0</td>
-													</tr>
-													<tr>
-													  <th>1</th>
-													  <td>50701</td>
-													  <td>2021-08-31</td>
-													  <td>0.0</td>
-													  <td>0.0</td>
-													  <td>0.0</td>
-													  <td>0.0</td>
-													  <td>0.0</td>
-													  <td>0.0</td>
-													  <td>0.0</td>
-													  <td>0.0</td>
-													  <td>0.0</td>
-													  <td>10206945.0</td>
-													  <td>10000000.0</td>
-													  <td>0.0</td>
-													</tr>
-													<tr>
-													  <th>2</th>
-													  <td>50701</td>
-													  <td>2021-09-01</td>
-													  <td>0.0</td>
-													  <td>0.0</td>
-													  <td>0.0</td>
-													  <td>0.0</td>
-													  <td>0.0</td>
-													  <td>0.0</td>
-													  <td>0.0</td>
-													  <td>0.0</td>
-													  <td>0.0</td>
-													  <td>9956556.0</td>
-													  <td>10000000.0</td>
-													  <td>0.0</td>
-													</tr>
-													<tr>
-													  <th>3</th>
-													  <td>50701</td>
-													  <td>2021-09-02</td>
-													  <td>0.0</td>
-													  <td>0.0</td>
-													  <td>0.0</td>
-													  <td>0.0</td>
-													  <td>0.0</td>
-													  <td>0.0</td>
-													  <td>0.0</td>
-													  <td>0.0</td>
-													  <td>0.0</td>
-													  <td>9914858.0</td>
-													  <td>10000000.0</td>
-													  <td>0.0</td>
-													</tr>
-													<tr>
-													  <th>4</th>
-													  <td>50701</td>
-													  <td>2021-09-03</td>
-													  <td>0.0</td>
-													  <td>0.0</td>
-													  <td>0.0</td>
-													  <td>0.0</td>
-													  <td>0.0</td>
-													  <td>0.0</td>
-													  <td>0.0</td>
-													  <td>0.0</td>
-													  <td>0.0</td>
-													  <td>10016360.0</td>
-													  <td>10000000.0</td>
-													  <td>0.0</td>
-													</tr>
-												  </tbody>
-											</table>
-										</div>
-										</ul>
-									</li>
-									<li><b>Bonds history purchase</b><br>This dataset contains:
-										<ul style="list-style: circle;">
-											<li>user_id - ID of the user, same as dataset 1 and 2</li>
-											<li>flag_order_bond - 1 if the user ordered bonds, 0 for the opposite</li>
-											<li>bond_units_ordered - The total of bond that user ordered</li>
-										</ul>
-										<table>
-											<thead>
-												<tr style="text-align: right;">
-												  <th></th>
-												  <th>user_id</th>
-												  <th>flag_order_bond</th>
-												  <th>bond_units_ordered</th>
-												</tr>
-											  </thead>
-											  <tbody>
-												<tr>
-												  <th>0</th>
-												  <td>50701</td>
-												  <td>1</td>
-												  <td>34</td>
-												</tr>
-												<tr>
-												  <th>1</th>
-												  <td>50961</td>
-												  <td>1</td>
-												  <td>99</td>
-												</tr>
-												<tr>
-												  <th>2</th>
-												  <td>51883</td>
-												  <td>0</td>
-												  <td>0</td>
-												</tr>
-												<tr>
-												  <th>3</th>
-												  <td>53759</td>
-												  <td>0</td>
-												  <td>0</td>
-												</tr>
-												<tr>
-												  <th>4</th>
-												  <td>54759</td>
-												  <td>1</td>
-												  <td>92</td>
-												</tr>
-											  </tbody>
-										</table>
-									</li>
-								</ol>
-							</p>
-								<section><h2 class="major"id="eda">Users</h2>
-								<p><div class="desc">We want to see how much the total of data that we have and the datatype, if there are any duplicate in our data, null value or any other problem that we need to taking care of.</div>
-									<pre><code>print(f'Total Row: {user.shape[0]} , Column: {user.shape[1]}')
+		<!-- Main -->
+		<section id="dataset" class="wrapper">
+			<div class="inner" style="font-size: large;">
+				<h1 class="major">Government bonds buyer predictions</h1>
+				<p style="font-size: large;">The analysis is conducted to predict how much government bonds the company
+					has to order based on the users behaviour.
+					The dataset is sourced from Indonesia Fintech StartUp between August and October 2021.
+					There are 3 datasets that the company provided:
+				<ol style="font-size: large;">
+					<li><b>Users information</b> <br>
+						This dataset contains:
+						<ul style="list-style-type: circle;">
+							<li>user_id - User's identity</li>
+							<li>registration_import_datetime - Date of user registered</li>
+							<li>user_gender - Gender of the user</li>
+							<li>user_age - Age of the user</li>
+							<li>user_occupation - Occupation of the user</li>
+							<li>user_income_range - Range income of the user</li>
+							<li>referral_code_used - If the user using referral code during registration or not</li>
+							<li>user_income_source - The source of income from the user</li>
+						</ul>
+						<table>
+							<thead>
+								<tr style="text-align: right;">
+									<th></th>
+									<th>user_id</th>
+									<th>registration_import_datetime</th>
+									<th>user_gender</th>
+									<th>user_age</th>
+									<th>user_occupation</th>
+									<th>user_income_range</th>
+									<th>referral_code_used</th>
+									<th>user_income_source</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<th>0</th>
+									<td>162882</td>
+									<td>2021-09-17</td>
+									<td>Female</td>
+									<td>51</td>
+									<td>Swasta</td>
+									<td>&gt; Rp 500 Juta - 1 Miliar</td>
+									<td>NaN</td>
+									<td>Gaji</td>
+								</tr>
+								<tr>
+									<th>1</th>
+									<td>3485491</td>
+									<td>2021-10-09</td>
+									<td>Female</td>
+									<td>55</td>
+									<td>Others</td>
+									<td>&gt; Rp 50 Juta - 100 Juta</td>
+									<td>NaN</td>
+									<td>Gaji</td>
+								</tr>
+								<tr>
+									<th>2</th>
+									<td>1071649</td>
+									<td>2021-10-08</td>
+									<td>Male</td>
+									<td>50</td>
+									<td>Swasta</td>
+									<td>Rp 10 Juta - 50 Juta</td>
+									<td>NaN</td>
+									<td>Gaji</td>
+								</tr>
+								<tr>
+									<th>3</th>
+									<td>3816789</td>
+									<td>2021-08-12</td>
+									<td>Female</td>
+									<td>53</td>
+									<td>IRT</td>
+									<td>&gt; Rp 50 Juta - 100 Juta</td>
+									<td>NaN</td>
+									<td>Gaji</td>
+								</tr>
+								<tr>
+									<th>4</th>
+									<td>3802293</td>
+									<td>2021-08-15</td>
+									<td>Female</td>
+									<td>47</td>
+									<td>PNS</td>
+									<td>&gt; Rp 500 Juta - 1 Miliar</td>
+									<td>used referral</td>
+									<td>Gaji</td>
+								</tr>
+							</tbody>
+						</table>
+					</li>
+					<li><b>Users's daily transaction</b><br>
+						This dataset contains:
+						<ul style="list-style-type: circle;">
+							<li>user_id - Id of user, it's same with the user_id from dataset 1</li>
+							<li>date - Transaction date</li>
+							<li>Saham_AUM - AUM (Assets Under Management) of equity mutual fund held by client to date
+							</li>
+							<li>Saham_invested_amount - The total price paid by client to buy equity mutual fund to
+								date.</li>
+							<li>Saham_transaction_amount - Total value of transaction to buy (if positive) or sell (if
+								negative) equity mutual fund on the date.</li>
+							<li>Pasar_Uang_AUM - AUM of money market mutual fund held by client to date</li>
+							<li>Pasar_Uang_invested_amount - The total price paid by client to buy money market mutual
+								fund to date</li>
+							<li>Pasar_Uang_transaction_amount - Total value of transaction to buy (if positive) or sell
+								(if negative) money market mutual fund on the date. </li>
+							<li>Pendapatan_Tetap_AUM - AUM of fixed income mutual fund held by client to date</li>
+							<li>Pendapatan_Tetap_invested_amount - The total price paid by client to buy fixed income
+								mutual fund to date</li>
+							<li>Pendapatan_Tetap_transaction_amount - Total value of transaction to buy (if positive) or
+								sell (if negative) fixed income mutual fund on the date.</li>
+							<li>Campuran_AUM - AUM of mixed mutual fund held by client to date</li>
+							<li>Campuran_invested_amount - The total price paid by client to buy mixed mutual fund to
+								date</li>
+							<li>Campuran_transaction_amount - Total value of the transaction to buy (if positive) or
+								sell (if negative) mixed mutual fund on the date.</li>
+							<div style="overflow-x: auto; margin-top: 1em;">
+								<table>
+									<thead>
+										<tr style="text-align: right;">
+											<th></th>
+											<th>user_id</th>
+											<th>trans_date</th>
+											<th>Saham_AUM</th>
+											<th>Saham_invested_amount</th>
+											<th>Saham_transaction_amount</th>
+											<th>Pasar_Uang_AUM</th>
+											<th>Pasar_Uang_invested_amount</th>
+											<th>Pasar_Uang_transaction_amount</th>
+											<th>Pendapatan_Tetap_AUM</th>
+											<th>Pendapatan_Tetap_invested_amount</th>
+											<th>Pendapatan_Tetap_transaction_amount</th>
+											<th>Campuran_AUM</th>
+											<th>Campuran_invested_amount</th>
+											<th>Campuran_transaction_amount</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<th>0</th>
+											<td>50701</td>
+											<td>2021-08-30</td>
+											<td>0.0</td>
+											<td>0.0</td>
+											<td>0.0</td>
+											<td>0.0</td>
+											<td>0.0</td>
+											<td>0.0</td>
+											<td>0.0</td>
+											<td>0.0</td>
+											<td>0.0</td>
+											<td>10132277.0</td>
+											<td>10000000.0</td>
+											<td>0.0</td>
+										</tr>
+										<tr>
+											<th>1</th>
+											<td>50701</td>
+											<td>2021-08-31</td>
+											<td>0.0</td>
+											<td>0.0</td>
+											<td>0.0</td>
+											<td>0.0</td>
+											<td>0.0</td>
+											<td>0.0</td>
+											<td>0.0</td>
+											<td>0.0</td>
+											<td>0.0</td>
+											<td>10206945.0</td>
+											<td>10000000.0</td>
+											<td>0.0</td>
+										</tr>
+										<tr>
+											<th>2</th>
+											<td>50701</td>
+											<td>2021-09-01</td>
+											<td>0.0</td>
+											<td>0.0</td>
+											<td>0.0</td>
+											<td>0.0</td>
+											<td>0.0</td>
+											<td>0.0</td>
+											<td>0.0</td>
+											<td>0.0</td>
+											<td>0.0</td>
+											<td>9956556.0</td>
+											<td>10000000.0</td>
+											<td>0.0</td>
+										</tr>
+										<tr>
+											<th>3</th>
+											<td>50701</td>
+											<td>2021-09-02</td>
+											<td>0.0</td>
+											<td>0.0</td>
+											<td>0.0</td>
+											<td>0.0</td>
+											<td>0.0</td>
+											<td>0.0</td>
+											<td>0.0</td>
+											<td>0.0</td>
+											<td>0.0</td>
+											<td>9914858.0</td>
+											<td>10000000.0</td>
+											<td>0.0</td>
+										</tr>
+										<tr>
+											<th>4</th>
+											<td>50701</td>
+											<td>2021-09-03</td>
+											<td>0.0</td>
+											<td>0.0</td>
+											<td>0.0</td>
+											<td>0.0</td>
+											<td>0.0</td>
+											<td>0.0</td>
+											<td>0.0</td>
+											<td>0.0</td>
+											<td>0.0</td>
+											<td>10016360.0</td>
+											<td>10000000.0</td>
+											<td>0.0</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</ul>
+					</li>
+					<li><b>Bonds history purchase</b><br>This dataset contains:
+						<ul style="list-style: circle;">
+							<li>user_id - ID of the user, same as dataset 1 and 2</li>
+							<li>flag_order_bond - 1 if the user ordered bonds, 0 for the opposite</li>
+							<li>bond_units_ordered - The total of bond that user ordered</li>
+						</ul>
+						<table>
+							<thead>
+								<tr style="text-align: right;">
+									<th></th>
+									<th>user_id</th>
+									<th>flag_order_bond</th>
+									<th>bond_units_ordered</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<th>0</th>
+									<td>50701</td>
+									<td>1</td>
+									<td>34</td>
+								</tr>
+								<tr>
+									<th>1</th>
+									<td>50961</td>
+									<td>1</td>
+									<td>99</td>
+								</tr>
+								<tr>
+									<th>2</th>
+									<td>51883</td>
+									<td>0</td>
+									<td>0</td>
+								</tr>
+								<tr>
+									<th>3</th>
+									<td>53759</td>
+									<td>0</td>
+									<td>0</td>
+								</tr>
+								<tr>
+									<th>4</th>
+									<td>54759</td>
+									<td>1</td>
+									<td>92</td>
+								</tr>
+							</tbody>
+						</table>
+					</li>
+				</ol>
+				</p>
+				<section>
+					<h2 class="major" id="eda">Users</h2>
+					<p>
+					<div class="desc">We want to see how much the total of data that we have and the datatype, if there
+						are any duplicate in our data, null value or any other problem that we need to taking care of.
+					</div>
+					<pre><code>print(f'Total Row: {user.shape[0]} , Column: {user.shape[1]}')
 user.info()</code></pre>
-	<pre>	Total Row: 14712 , Column: 8
+					<pre>	Total Row: 14712 , Column: 8
 	RangeIndex: 14712 entries, 0 to 14711
 	Data columns (total 8 columns):
 	#   Column                        Non-Null Count  Dtype    
@@ -339,14 +366,16 @@ user.info()</code></pre>
 	6   referral_code_used            5604 non-null   object   
 	7   user_income_source            14712 non-null  object   
 	dtypes: int64(2), object(5), period[D](1)</pre>
-<div class="desc">There are 14712 rows of data with 8 columns for the dataset 1, we can see that on the column referral_code_used there are only 5604 rows of non-null data
-	the next step that we will do is to double check null value in the dataset and if any duplicate user_id since the user_id is our primary key.</div>
-	<pre><code>is_duplicate_user = user.user_id.duplicated().sum()
+					<div class="desc">There are 14712 rows of data with 8 columns for the dataset 1, we can see that on
+						the column referral_code_used there are only 5604 rows of non-null data
+						the next step that we will do is to double check null value in the dataset and if any duplicate
+						user_id since the user_id is our primary key.</div>
+					<pre><code>is_duplicate_user = user.user_id.duplicated().sum()
 total_user = user.user_id.count()
 print(f'Total Duplicate User_ID : {is_duplicate_user}')
 print(f'Total User : {total_user}')
 user.isnull().sum()</code></pre>
-	<pre>	Total Duplicate User_ID : 0
+					<pre>	Total Duplicate User_ID : 0
 	Total User : 14712
 	user_id                            0
 	registration_import_datetime       0
@@ -357,26 +386,30 @@ user.isnull().sum()</code></pre>
 	referral_code_used              9108
 	user_income_source                 0
 	dtype: int64</pre>
-<div class="desc">From the result above, it's confirmed that we have 9108 rows of null value in column referral_code_used
-	and luckily we don't have any duplicate data for the user_id so we can continue to decide what to do with the null value.
-	We will be checking for the unique value from each column in the dataset to help us deciding what to replace the null value with.</div>
-<pre><code>for x in user:
+					<div class="desc">From the result above, it's confirmed that we have 9108 rows of null value in
+						column referral_code_used
+						and luckily, we don't have any duplicate data for the user_id so we can continue to decide what
+						to do with the null value.
+						We will be checking for the unique value from each column in the dataset to help us deciding
+						what to replace the null value with.</div>
+					<pre><code>for x in user:
 	uniqueValues = user[x].unique()
 	n_values = len(uniqueValues)
 	if n_values <=50:
 	print(f'Column: {x} -- total unique value: ({n_values}) {uniqueValues}')</code></pre>
-<pre style="overflow-x: auto;">	Column: user_gender -- total unique value: (2) ['Female' 'Male']
+					<pre style="overflow-x: auto;">	Column: user_gender -- total unique value: (2) ['Female' 'Male']
 	Column: user_occupation -- total unique value: (9) ['Swasta' 'Others' 'IRT' 'PNS' 'Pengusaha' 'Pensiunan' 'TNI/Polisi' 'Guru''Pelajar']
 	Column: user_income_range -- total unique value: (6) ['> Rp 500 Juta - 1 Miliar' '> Rp 50 Juta - 100 Juta' 'Rp 10 Juta - 50 Juta' '< 10 Juta' '> Rp 100 Juta - 500 Juta' '> Rp 1 Miliar']
 	Column: referral_code_used -- total unique value: (2) [nan 'used referral']
 	Column: user_income_source -- total unique value: (10) ['Gaji' 'Keuntungan Bisnis' 'Lainnya' 'Dari Orang Tua / Anak' 'Undian' 'Tabungan' 'Warisan' 'Hasil Investasi' 'Dari Suami / istri' 'Bunga Simpanan']
 	</pre>
-	By checking the unique value, we can see the categorical data of each column. We notice that there are only 2 category from referral_code_used, which is nan or 'used referral'.
-	We will be converting the null value to none instead of nan or deleting the data.
-	<pre><code>user.referral_code_used.fillna('None', inplace = True)
+					By checking the unique value, we can see the categorical data of each column. We notice that there
+					are only 2 categories from referral_code_used, which is nan or 'used referral'.
+					We will be converting the null value to none instead of nan or deleting the data.
+					<pre><code>user.referral_code_used.fillna('None', inplace = True)
 user.referral_code_used.unique()
 user.isnull().sum()</code></pre>
-	<pre style="overflow-x: auto;">	array(['None', 'used referral'], dtype=object)
+					<pre style="overflow-x: auto;">	array(['None', 'used referral'], dtype=object)
 	user_id                         0
 	registration_import_datetime    0
 	user_gender                     0
@@ -387,27 +420,32 @@ user.isnull().sum()</code></pre>
 	user_income_source              0
 	dtype: int64
 	</pre>
-	We succesfully convert the null value to none. Then we will start our analysis by checking the user registration growth between August and October 2021.
-	We will visualise the chart by daily and monthly registration.
-	<pre><code>user['registration_import_datetime'].value_counts().sort_index().plot()
+					We successfully convert the null value to none. Then we will start our analysis by checking the user
+					registration growth between August and October 2021.
+					We will visualise the chart by daily and monthly registration.
+					<pre><code>user['registration_import_datetime'].value_counts().sort_index().plot()
 plt.title('User Join Growth by Day')
 user['registration_month'] = user.registration_import_datetime.dt.to_timestamp('m').copy()
 user.registration_month.value_counts().sort_index().plot()
 plt.title('User Join Growth by Month')
 plt.show()</code></pre>
-	<img src="/images/bonds/user_growth_linechart.png" alt="" class="vis"> <img src="/images/bonds/user_month.png" alt=""  class="vis">
-	<div class="desc">In the daily registration chart, we can see that October is the month with the lowest and highest number of registration,
-		meanwhile when we try to visualise by monthly basis we can see that September is the month with the highest number of registration, around 5200 users signed up.
-		Next, we want to see the comparison by user's gender.</div>
-	<pre><code>gender = user[['user_id', 'user_gender']].groupby('user_gender').count()
+					<img src="/images/bonds/user_growth_linechart.png" alt="" class="vis"> <img
+						src="/images/bonds/user_month.png" alt="" class="vis">
+					<div class="desc">In the daily registration chart, we can see that October is the month with the
+						lowest and highest number of registrations,
+						meanwhile when we try to visualise it on monthly basis we can see that September is the month
+						with the highest number of registration, around 5200 users signed up.
+						Next, we want to see the comparison by user's gender.</div>
+					<pre><code>gender = user[['user_id', 'user_gender']].groupby('user_gender').count()
 plt.pie(gender.user_id, labels=gender.index , startangle=90, shadow=True,explode=(0.1, 0.1), autopct='%1.2f%%')
 plt.title('Users\' Gender Distribution')
-plt.show()			</code></pre>	
-<div class="center"><img src="/images/bonds/user_gender.png" alt="" class="center"></div>
-<div class="desc">The user's gender distribution chart show that around 61.02% of our users are male, meanwhile the rest are female.
-	Then we will try to visualise the user's range and source of income to see more details of it.
-</div>
-<pre><code>fig, ax = plt.subplots(figsize=(8, 8), subplot_kw=dict(aspect="equal"))
+plt.show()			</code></pre>
+					<div class="center"><img src="/images/bonds/user_gender.png" alt="" class="center"></div>
+					<div class="desc">The user's gender distribution chart show that around 61.02% of our users are
+						male, meanwhile the rest are female.
+						Then we will try to visualise the user's range and source of income to see more details of it.
+					</div>
+					<pre><code>fig, ax = plt.subplots(figsize=(8, 8), subplot_kw=dict(aspect="equal"))
 income_source = user[['user_id', 'user_income_source']].groupby('user_income_source').count
 def func(pct, allvals):
 	absolute = int(np.round(pct/100.*np.sum(allvals)))
@@ -421,13 +459,14 @@ ax.legend(wedges, income_source.index,
 	bbox_to_anchor=(1, 0, 0.5, 1))
 plt.setp(autotexts, size=8, weight="bold")
 ax.set_title("User's Income Source")
-plt.show()			</code></pre>	
-<div class="center"><img src="/images/bonds/user_income_source.png" alt=""></div>
-<div class="desc">We read the chart counterclockwise start from the exploded pie.
-	It shows that the lowest income source is from Bunga Simpanan (Saving's interest) with 0.2%.
-whilst the majority of the income source is from Gaji (Salary) with 62.1% or equal to 9131 users.
-Then we will see for the user's income range.</div>
-<pre><code>fig, ax = plt.subplots(figsize=(6, 5))
+plt.show()			</code></pre>
+					<div class="center"><img src="/images/bonds/user_income_source.png" alt=""></div>
+					<div class="desc">We read the chart counterclockwise starting from the exploded pie.
+						It shows that the lowest income source is from Bunga Simpanan (Saving's interest) with 0.2%.
+						whilst the majority of the income source is from Gaji (Salary) with 62.1% or equal to 9131
+						users.
+						Then we will see for the user's income range.</div>
+					<pre><code>fig, ax = plt.subplots(figsize=(6, 5))
 ax = sns.countplot(y= user.user_income_range, data = user)
 
 ax.set_title('User Income Range')
@@ -435,285 +474,291 @@ for x in ax.containers:
 	ax.bar_label(x, label_type='edge')
 
 plt.show()			</code></pre>
-<div class="center"><img src="/images/bonds/user_income_range.png" alt="" class="center"></div>
-<div class="desc">In the user income range chart, it shows the majority of user's income range is less than 10 Million Rupiah (approx 630USD) with 6275 users.
-	Nevertheless, there are 27 users with the highest income range - 1 Billion Rupiah (approx 63000USD) which is our potential big investor.
-	We also, will try to combine between income source and range to see the breakdown of it.
-</div>	
-<pre><code>fig, ax = plt.subplots(figsize=(12, 8))
+					<div class="center"><img src="/images/bonds/user_income_range.png" alt="" class="center"></div>
+					<div class="desc">The user income range chart shows that the majority of users' income range is less than 10 Million Rupiah (approx 630 USD) with 6275 users.
+						Nevertheless, there are 27 users with the highest income range - 1 Billion Rupiah (approx 63000 USD) which is our potential big investor.
+						We also will try to combine income sources and range to see the breakdown of it. 
+					</div>
+					<pre><code>fig, ax = plt.subplots(figsize=(12, 8))
 ax = sns.countplot(y= user.user_income_source, hue=user.user_income_range, data = user)
 ax.set_title('Income source and range')
 for x in ax.containers:
 	ax.bar_label(x, label_type='edge')
 ax.legend(loc='best', fontsize=8)
 plt.show()</code></pre>
-<div class="center"><img src="/images/bonds/income_source_range.png" alt=""></div>
-<div class="desc">The income range and source chart, we can see there are 2835 of our users had wages less than 10 Million Rupiah.
-	Moreover, the majority of our user's salary income range is between 10 Million to 50 Million Rupiah with the total of 3483 users.
-	We can also notice that there are 10 of users had salary more than 1 Billion Rupiah. We will try to visualise the distribution of our user's occupation.
-</div>
-<pre><code>fig, ax = plt.subplots(figsize=(10, 5))
+					<div class="center"><img src="/images/bonds/income_source_range.png" alt=""></div>
+					<div class="desc">From the income range and source chart, we can see that 2835 of our users had wages of less than 10 Million Rupiah. 
+                        Moreover, the majority of our user's salary income range is between 10 Million to 50 Million Rupiah with a total of 3483 users. 
+                        It is noticeable that there are 10 users had a salary of more than 1 Billion Rupiah. 
+                        We will try to visualise the distribution of our user's occupations.
+					</div>
+					<pre><code>fig, ax = plt.subplots(figsize=(10, 5))
 ax =sns.countplot(x=user.user_occupation)
 for x in ax.containers:
 	ax.bar_label(x, label_type='edge')
 ax.set_title('User occupation')
 plt.show()</code></pre>
-<div class="center"><img src="/images/bonds/occupation.png" alt=""></div>
-<div class="desc">The users' occupation chart shows that the majority of our users are Pelajar (Student) with total of 7887 user.
-	Which is make sense that our majority income range is less than 10 Million.
-	We will try to combine the income range and user occupation to see more details of it.</div>
-<pre><code>fig, ax = plt.subplots(figsize=(12, 8))
+					<div class="center"><img src="/images/bonds/occupation.png" alt=""></div>
+					<div class="desc">The users' occupation chart shows that the majority of our users are Pelajar
+                        (Student) with a total of 7887 users.
+                        Which is make sense that our majority income range is less than 10 Million.
+                        We will try to combine the income range and user occupation to see more details about it.</div>
+					<pre><code>fig, ax = plt.subplots(figsize=(12, 8))
 ax = sns.countplot(y= user.user_occupation, hue=user.user_income_range, data = user)
 ax.set_title('Income range and occupation')
 for x in ax.containers:
 	ax.bar_label(x, label_type='edge')
 ax.legend(loc='right', fontsize=8)
 plt.show()</code></pre>
-<div class="center"><img src="/images/bonds/income_range_occupation.png" alt=""></div>
-<div class="desc">When we combined the income range and occupation, we found an interesting information that we have 17 students with income range more than 500 Million Rupiah.
-	So we will investigate a little bit further about the 17 students.
-</div>
-<pre><code>pelajar_age = user.query('user_occupation == \'Pelajar\' and (user_income_range == \'> Rp 500 Juta - 1 Miliar\'
+					<div class="center"><img src="/images/bonds/income_range_occupation.png" alt=""></div>
+					<div class="desc">When we combined the income range and occupation, we found interesting
+                        information that we have 17 students with an income range of more than 500 Million Rupiah.
+                        So we will investigate a little bit further about the 17 students.
+					</div>
+					<pre><code>pelajar_age = user.query('user_occupation == \'Pelajar\' and (user_income_range == \'> Rp 500 Juta - 1 Miliar\'
 	sor user_income_range == \'> Rp 1 Miliar\')')</code></pre>
-<table id="pelajar" style="overflow-y: scroll;">
-	<thead>
-		<tr style="text-align: right;">
-		  <th></th>
-		  <th>user_id</th>
-		  <th>registration_import_datetime</th>
-		  <th>user_gender</th>
-		  <th>user_age</th>
-		  <th>user_occupation</th>
-		  <th>user_income_range</th>
-		  <th>referral_code_used</th>
-		  <th>user_income_source</th>
-		  <th>registration_month</th>
-		</tr>
-	  </thead>
-	  <tbody>
-		<tr>
-		  <th>619</th>
-		  <td>4228712</td>
-		  <td>2021-10-05</td>
-		  <td>Male</td>
-		  <td>17</td>
-		  <td>Pelajar</td>
-		  <td>&gt; Rp 1 Miliar</td>
-		  <td>used referral</td>
-		  <td>Keuntungan Bisnis</td>
-		  <td>2021-10-31</td>
-		</tr>
-		<tr>
-		  <th>899</th>
-		  <td>3795261</td>
-		  <td>2021-08-08</td>
-		  <td>Male</td>
-		  <td>18</td>
-		  <td>Pelajar</td>
-		  <td>&gt; Rp 1 Miliar</td>
-		  <td>used referral</td>
-		  <td>Lainnya</td>
-		  <td>2021-08-31</td>
-		</tr>
-		<tr>
-		  <th>1394</th>
-		  <td>4376258</td>
-		  <td>2021-10-19</td>
-		  <td>Male</td>
-		  <td>18</td>
-		  <td>Pelajar</td>
-		  <td>&gt; Rp 500 Juta - 1 Miliar</td>
-		  <td>used referral</td>
-		  <td>Gaji</td>
-		  <td>2021-10-31</td>
-		</tr>
-		<tr>
-		  <th>2282</th>
-		  <td>3818578</td>
-		  <td>2021-08-16</td>
-		  <td>Male</td>
-		  <td>19</td>
-		  <td>Pelajar</td>
-		  <td>&gt; Rp 1 Miliar</td>
-		  <td>None</td>
-		  <td>Keuntungan Bisnis</td>
-		  <td>2021-08-31</td>
-		</tr>
-		<tr>
-		  <th>2609</th>
-		  <td>3742646</td>
-		  <td>2021-08-09</td>
-		  <td>Female</td>
-		  <td>20</td>
-		  <td>Pelajar</td>
-		  <td>&gt; Rp 1 Miliar</td>
-		  <td>None</td>
-		  <td>Keuntungan Bisnis</td>
-		  <td>2021-08-31</td>
-		</tr>
-		<tr>
-		  <th>3999</th>
-		  <td>3749935</td>
-		  <td>2021-08-04</td>
-		  <td>Female</td>
-		  <td>21</td>
-		  <td>Pelajar</td>
-		  <td>&gt; Rp 1 Miliar</td>
-		  <td>None</td>
-		  <td>Keuntungan Bisnis</td>
-		  <td>2021-08-31</td>
-		</tr>
-		<tr>
-		  <th>4076</th>
-		  <td>4245492</td>
-		  <td>2021-10-07</td>
-		  <td>Female</td>
-		  <td>21</td>
-		  <td>Pelajar</td>
-		  <td>&gt; Rp 500 Juta - 1 Miliar</td>
-		  <td>None</td>
-		  <td>Keuntungan Bisnis</td>
-		  <td>2021-10-31</td>
-		</tr>
-		<tr>
-		  <th>4569</th>
-		  <td>4355874</td>
-		  <td>2021-10-17</td>
-		  <td>Male</td>
-		  <td>21</td>
-		  <td>Pelajar</td>
-		  <td>&gt; Rp 1 Miliar</td>
-		  <td>used referral</td>
-		  <td>Keuntungan Bisnis</td>
-		  <td>2021-10-31</td>
-		</tr>
-		<tr>
-		  <th>6135</th>
-		  <td>4239037</td>
-		  <td>2021-10-06</td>
-		  <td>Female</td>
-		  <td>23</td>
-		  <td>Pelajar</td>
-		  <td>&gt; Rp 500 Juta - 1 Miliar</td>
-		  <td>used referral</td>
-		  <td>Gaji</td>
-		  <td>2021-10-31</td>
-		</tr>
-		<tr>
-		  <th>8322</th>
-		  <td>4371352</td>
-		  <td>2021-10-19</td>
-		  <td>Male</td>
-		  <td>25</td>
-		  <td>Pelajar</td>
-		  <td>&gt; Rp 500 Juta - 1 Miliar</td>
-		  <td>used referral</td>
-		  <td>Gaji</td>
-		  <td>2021-10-31</td>
-		</tr>
-		<tr>
-		  <th>8871</th>
-		  <td>3959126</td>
-		  <td>2021-09-02</td>
-		  <td>Female</td>
-		  <td>26</td>
-		  <td>Pelajar</td>
-		  <td>&gt; Rp 500 Juta - 1 Miliar</td>
-		  <td>used referral</td>
-		  <td>Keuntungan Bisnis</td>
-		  <td>2021-09-30</td>
-		</tr>
-		<tr>
-		  <th>9063</th>
-		  <td>4342801</td>
-		  <td>2021-10-17</td>
-		  <td>Male</td>
-		  <td>26</td>
-		  <td>Pelajar</td>
-		  <td>&gt; Rp 500 Juta - 1 Miliar</td>
-		  <td>None</td>
-		  <td>Gaji</td>
-		  <td>2021-10-31</td>
-		</tr>
-		<tr>
-		  <th>9725</th>
-		  <td>4270298</td>
-		  <td>2021-10-09</td>
-		  <td>Female</td>
-		  <td>27</td>
-		  <td>Pelajar</td>
-		  <td>&gt; Rp 500 Juta - 1 Miliar</td>
-		  <td>None</td>
-		  <td>Keuntungan Bisnis</td>
-		  <td>2021-10-31</td>
-		</tr>
-		<tr>
-		  <th>10101</th>
-		  <td>4134537</td>
-		  <td>2021-09-24</td>
-		  <td>Male</td>
-		  <td>28</td>
-		  <td>Pelajar</td>
-		  <td>&gt; Rp 500 Juta - 1 Miliar</td>
-		  <td>None</td>
-		  <td>Keuntungan Bisnis</td>
-		  <td>2021-09-30</td>
-		</tr>
-		<tr>
-		  <th>10925</th>
-		  <td>4338825</td>
-		  <td>2021-10-15</td>
-		  <td>Male</td>
-		  <td>29</td>
-		  <td>Pelajar</td>
-		  <td>&gt; Rp 1 Miliar</td>
-		  <td>used referral</td>
-		  <td>Lainnya</td>
-		  <td>2021-10-31</td>
-		</tr>
-		<tr>
-		  <th>11617</th>
-		  <td>4164878</td>
-		  <td>2021-10-02</td>
-		  <td>Male</td>
-		  <td>31</td>
-		  <td>Pelajar</td>
-		  <td>&gt; Rp 500 Juta - 1 Miliar</td>
-		  <td>used referral</td>
-		  <td>Keuntungan Bisnis</td>
-		  <td>2021-10-31</td>
-		</tr>
-		<tr>
-		  <th>11950</th>
-		  <td>3858112</td>
-		  <td>2021-08-18</td>
-		  <td>Female</td>
-		  <td>32</td>
-		  <td>Pelajar</td>
-		  <td>&gt; Rp 500 Juta - 1 Miliar</td>
-		  <td>None</td>
-		  <td>Gaji</td>
-		  <td>2021-08-31</td>
-		</tr>
-	  </tbody>
-</table>
-<div class="desc">It's interesting that we have few users with age below 20, as a student with income range above 500 Million Rupiah and the income source is from business profit.
-	There is a possibility with the wrong information that the user provided or they might born with a silver spoon.
-	However, we just leave it as is for now and take notes just in case we might need some adjustment prior building the model.
-The next thing we want to check is, how many percent of our user registered using referral code.
-This might also will help to decide what type of campaigne approach to increase the registration number.</div>
-<pre><code>referral_code = user[['user_id', 'referral_code_used']].groupby('referral_code_used').count()
+					<table id="pelajar" style="overflow-y: scroll;">
+						<thead>
+							<tr style="text-align: right;">
+								<th></th>
+								<th>user_id</th>
+								<th>registration_import_datetime</th>
+								<th>user_gender</th>
+								<th>user_age</th>
+								<th>user_occupation</th>
+								<th>user_income_range</th>
+								<th>referral_code_used</th>
+								<th>user_income_source</th>
+								<th>registration_month</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th>619</th>
+								<td>4228712</td>
+								<td>2021-10-05</td>
+								<td>Male</td>
+								<td>17</td>
+								<td>Pelajar</td>
+								<td>&gt; Rp 1 Miliar</td>
+								<td>used referral</td>
+								<td>Keuntungan Bisnis</td>
+								<td>2021-10-31</td>
+							</tr>
+							<tr>
+								<th>899</th>
+								<td>3795261</td>
+								<td>2021-08-08</td>
+								<td>Male</td>
+								<td>18</td>
+								<td>Pelajar</td>
+								<td>&gt; Rp 1 Miliar</td>
+								<td>used referral</td>
+								<td>Lainnya</td>
+								<td>2021-08-31</td>
+							</tr>
+							<tr>
+								<th>1394</th>
+								<td>4376258</td>
+								<td>2021-10-19</td>
+								<td>Male</td>
+								<td>18</td>
+								<td>Pelajar</td>
+								<td>&gt; Rp 500 Juta - 1 Miliar</td>
+								<td>used referral</td>
+								<td>Gaji</td>
+								<td>2021-10-31</td>
+							</tr>
+							<tr>
+								<th>2282</th>
+								<td>3818578</td>
+								<td>2021-08-16</td>
+								<td>Male</td>
+								<td>19</td>
+								<td>Pelajar</td>
+								<td>&gt; Rp 1 Miliar</td>
+								<td>None</td>
+								<td>Keuntungan Bisnis</td>
+								<td>2021-08-31</td>
+							</tr>
+							<tr>
+								<th>2609</th>
+								<td>3742646</td>
+								<td>2021-08-09</td>
+								<td>Female</td>
+								<td>20</td>
+								<td>Pelajar</td>
+								<td>&gt; Rp 1 Miliar</td>
+								<td>None</td>
+								<td>Keuntungan Bisnis</td>
+								<td>2021-08-31</td>
+							</tr>
+							<tr>
+								<th>3999</th>
+								<td>3749935</td>
+								<td>2021-08-04</td>
+								<td>Female</td>
+								<td>21</td>
+								<td>Pelajar</td>
+								<td>&gt; Rp 1 Miliar</td>
+								<td>None</td>
+								<td>Keuntungan Bisnis</td>
+								<td>2021-08-31</td>
+							</tr>
+							<tr>
+								<th>4076</th>
+								<td>4245492</td>
+								<td>2021-10-07</td>
+								<td>Female</td>
+								<td>21</td>
+								<td>Pelajar</td>
+								<td>&gt; Rp 500 Juta - 1 Miliar</td>
+								<td>None</td>
+								<td>Keuntungan Bisnis</td>
+								<td>2021-10-31</td>
+							</tr>
+							<tr>
+								<th>4569</th>
+								<td>4355874</td>
+								<td>2021-10-17</td>
+								<td>Male</td>
+								<td>21</td>
+								<td>Pelajar</td>
+								<td>&gt; Rp 1 Miliar</td>
+								<td>used referral</td>
+								<td>Keuntungan Bisnis</td>
+								<td>2021-10-31</td>
+							</tr>
+							<tr>
+								<th>6135</th>
+								<td>4239037</td>
+								<td>2021-10-06</td>
+								<td>Female</td>
+								<td>23</td>
+								<td>Pelajar</td>
+								<td>&gt; Rp 500 Juta - 1 Miliar</td>
+								<td>used referral</td>
+								<td>Gaji</td>
+								<td>2021-10-31</td>
+							</tr>
+							<tr>
+								<th>8322</th>
+								<td>4371352</td>
+								<td>2021-10-19</td>
+								<td>Male</td>
+								<td>25</td>
+								<td>Pelajar</td>
+								<td>&gt; Rp 500 Juta - 1 Miliar</td>
+								<td>used referral</td>
+								<td>Gaji</td>
+								<td>2021-10-31</td>
+							</tr>
+							<tr>
+								<th>8871</th>
+								<td>3959126</td>
+								<td>2021-09-02</td>
+								<td>Female</td>
+								<td>26</td>
+								<td>Pelajar</td>
+								<td>&gt; Rp 500 Juta - 1 Miliar</td>
+								<td>used referral</td>
+								<td>Keuntungan Bisnis</td>
+								<td>2021-09-30</td>
+							</tr>
+							<tr>
+								<th>9063</th>
+								<td>4342801</td>
+								<td>2021-10-17</td>
+								<td>Male</td>
+								<td>26</td>
+								<td>Pelajar</td>
+								<td>&gt; Rp 500 Juta - 1 Miliar</td>
+								<td>None</td>
+								<td>Gaji</td>
+								<td>2021-10-31</td>
+							</tr>
+							<tr>
+								<th>9725</th>
+								<td>4270298</td>
+								<td>2021-10-09</td>
+								<td>Female</td>
+								<td>27</td>
+								<td>Pelajar</td>
+								<td>&gt; Rp 500 Juta - 1 Miliar</td>
+								<td>None</td>
+								<td>Keuntungan Bisnis</td>
+								<td>2021-10-31</td>
+							</tr>
+							<tr>
+								<th>10101</th>
+								<td>4134537</td>
+								<td>2021-09-24</td>
+								<td>Male</td>
+								<td>28</td>
+								<td>Pelajar</td>
+								<td>&gt; Rp 500 Juta - 1 Miliar</td>
+								<td>None</td>
+								<td>Keuntungan Bisnis</td>
+								<td>2021-09-30</td>
+							</tr>
+							<tr>
+								<th>10925</th>
+								<td>4338825</td>
+								<td>2021-10-15</td>
+								<td>Male</td>
+								<td>29</td>
+								<td>Pelajar</td>
+								<td>&gt; Rp 1 Miliar</td>
+								<td>used referral</td>
+								<td>Lainnya</td>
+								<td>2021-10-31</td>
+							</tr>
+							<tr>
+								<th>11617</th>
+								<td>4164878</td>
+								<td>2021-10-02</td>
+								<td>Male</td>
+								<td>31</td>
+								<td>Pelajar</td>
+								<td>&gt; Rp 500 Juta - 1 Miliar</td>
+								<td>used referral</td>
+								<td>Keuntungan Bisnis</td>
+								<td>2021-10-31</td>
+							</tr>
+							<tr>
+								<th>11950</th>
+								<td>3858112</td>
+								<td>2021-08-18</td>
+								<td>Female</td>
+								<td>32</td>
+								<td>Pelajar</td>
+								<td>&gt; Rp 500 Juta - 1 Miliar</td>
+								<td>None</td>
+								<td>Gaji</td>
+								<td>2021-08-31</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="desc">It's interesting that we have a few users aged below 20, as a student with
+                        an income range above 500 Million Rupiah and the income source is from business profit.
+                        There is a possibility with the wrong information the user provided.
+                        However, we just leave it as is for now and take notes just in case we might need some
+                        adjustments prior to building the model.
+                        The next thing we want to check is how many per cent of our users registered using referral codes.
+                        This might also will help to decide what type of campaign approach to increase the registration
+                        number.</div>
+					<pre><code>referral_code = user[['user_id', 'referral_code_used']].groupby('referral_code_used').count()
 plt.pie(referral_code.user_id, labels=referral_code.index, startangle=90, shadow=True,explode=(0.1, 0.1), autopct='%1.2f%%')
 plt.title('Referral Code Comparison')
 plt.show()</code></pre>
-<div class="center"><img src="/images/bonds/referral_code.png" alt=""></div>
-<div class="desc">We can see from the referral code comparison that only 38.09% of our users using referral code during their registration process.
-	We can create an announcement on the company website or application about bonus credit if the user refer some friends to register with us.
-	This will increase the number of new users, transactions, also a cheaper version of advertisement as we announce it using our private platform so third party advertisement cost needed.
-	As well as encourage the current users to make more transaction using the bonus credit and so on.
-	We will check the average age of our users.
-</div>
-<pre><code>user['user_age'].describe()</code>
+					<div class="center"><img src="/images/bonds/referral_code.png" alt=""></div>
+					<div class="desc">We can see from the referral code comparison that only 38.09% of our users use referral codes during their registration process.
+                        We can create an announcement on the company website or application about bonus credit if the users refer some friends to register with us.
+                        This will increase the number of new users, and transactions, and also a cheaper version of the advertisement as we announce it using our private platform so third-party advertisement costs are needed.
+                        As well as encourage the current users to make more transactions using the bonus credit and so on.
+                        We will check the average age of our users.
+					</div>
+					<pre><code>user['user_age'].describe()</code>
 	count    14712.000000
 	mean        27.176591
 	std          8.552585
@@ -723,15 +768,14 @@ plt.show()</code></pre>
 	75%         31.000000
 	max         83.000000
 	Name: user_age, dtype: float64</pre>
-	<div class="desc">The description show that the average age of our user is 27 years old. With the youngest is 17 and oldest is 83 years old.
-		We will try to visualise the distribution of it by using histogram.
-	</div>
-	<pre><code>user['user_age'].hist(figsize = (5,5))
+					<div class="desc">The description shows that the average age of our users is 27 years old. The youngest is 17 and the oldest is 83 years old.
+                        We will try to visualise its distribution of it by using the histogram.					</div>
+					<pre><code>user['user_age'].hist(figsize = (5,5))
 plt.title('User age distribution')</code></pre>
-	<div class="center"><img src="/images/bonds/age_histogram.png" alt=""></div>
-	<div class="desc">The histogram show that most of our users are in age group 20's and 30's.
-		The next step we will do is using zscore to calculate if there's any outliers.</div>
-<pre><code>mean = np.mean(user.user_age)
+					<div class="center"><img src="/images/bonds/age_histogram.png" alt=""></div>
+					<div class="desc">The histogram shows that most of our users are in the age group 20's and 30's.
+                        The next step we will do is to use zscore to calculate if there are any outliers.</div>
+					<pre><code>mean = np.mean(user.user_age)
 std = np.std(user.user_age)
 outlier = []
 for i in user.user_age:
@@ -741,10 +785,10 @@ for i in user.user_age:
 print('outliers in dataset are', set(outlier))
 sns.boxplot(x=user.user_age)</code>
 	outliers in dataset are {53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 69, 71, 73, 74, 76, 82, 83}</pre>
-<div class="center"><img src="/images/bonds/outliers.png" alt=""></div>
-<div class="desc">From the z-score calculation, it shows the ourliers from the users age are from 53 years and older.
-	We will visualise the distribution and check how many users are in the outliers then merging the dataset 1 and transactions' dataset to see how many percentage of the outlier's user contribute with transaction before we decide to remove the outliers or just leave it as is.</div>
-<pre><code>user_outliers = user.loc[user.user_age>=53,:]
+					<div class="center"><img src="/images/bonds/outliers.png" alt=""></div>
+					<div class="desc">The z-score calculation, shows the outliers from the user's age are 53 years and older.
+                        We will visualise the distribution and check how many users are in the outliers then merge dataset 1 and the transactions' dataset to see how many percentages of the outlier's users contribute to the transaction before we decide to remove the outliers or just leave it as is.</div>
+					<pre><code>user_outliers = user.loc[user.user_age>=53,:]
 total_out = user_outliers.user_id.count()
 percentage_outliers = (total_out/total_user)
 print(f'Total users in outliers : {total_out} OR {percentage_outliers:.2%} from total user')
@@ -755,13 +799,14 @@ for x in ax.containers:
 	ax.bar_label(x, label_type='edge')
 plt.show()</code>
 	Total users in outliers : 264 OR 1.79% from total user</pre>
-<div class="center"><img src="/images/bonds/outliers_dist.png" alt=""></div>
-<div class="desc">The chart above shows that we have the total of 264 users in the outliers category or equal to 1.79% from the total user.
-	With the highest distribution on 54 years of age and lowest start from 73 years. Since the age outliers still in the normal scope, we will keep the users from 54 years of age and older included with our analysis.
-</div></section>
-<h2 class="major" id="dataset2">Transactions</h2>
-<div class="desc">We want to check how many rows of data that we have on transactions' dataset and the total number of users that making transactions.</div>
-<pre><code>print(f'Total rows: {trans.shape[0]} ,columns: {trans.shape[1]}')
+					<div class="center"><img src="/images/bonds/outliers_dist.png" alt=""></div>
+					<div class="desc">The chart above shows that we have a total of 264 users in the outliers category or equal to 1.79% of the total user.
+                        With the highest distribution at 54 years of age and the lowest starting from 73 years. Since the age outliers are still in the normal scope, we will keep the users 54 years of age and older included in our analysis.
+					</div>
+				</section>
+				<h2 class="major" id="dataset2">Transactions</h2>
+				<div class="desc">We want to check how many rows of data we have on the transactions' dataset and the total number of users that making transactions.</div>
+				<pre><code>print(f'Total rows: {trans.shape[0]} ,columns: {trans.shape[1]}')
 transcation_users = trans['user_id'].nunique()
 print(f'Total users making transaction period August - October 2021 = {transcation_users} users
 	or {(transcation_users/total_user):.2%}')
@@ -787,13 +832,13 @@ trans.info()</code>
 	12  Campuran_invested_amount             5352 non-null    float64
 	13  Campuran_transaction_amount          5117 non-null    float64
 	dtypes: float64(12), int64(1), object(1)</pre>
-	<div class="desc">From the data description above, we can see that there are 158811 rows and 14 column of data in the transactions' dataset.
-	Furthermore, it's only 8277 users making transaction or equal to 56.26% from the total users.
-	The company can create some campaigne to encourage the new users to make a new transaction.
-	In addition, we can see from the data information we have plenty of column contained null value.
-	We will check to confirmed this information and change the 'date' column name to trans_date to avoid ambiguity with the method.
-	</div>
-	<pre><code>trans.rename(columns={"date": "trans_date"}, inplace=True)
+				<div class="desc">From the data description above, we can see that there are 158811 rows and 14 columns of data in the transactions' dataset.
+                    Furthermore, it's only 8277 users made transactions or equal to 56.26% of the total users.
+                    The company can create some campaigns to encourage new users to make new transactions.
+                    In addition, we can see from the data information we have plenty of columns containing the null value.
+                    We will check to confirm this information and change the 'date' column name to trans_date to avoid ambiguity with the method.
+				</div>
+				<pre><code>trans.rename(columns={"date": "trans_date"}, inplace=True)
 trans['trans_date'] = pd.to_datetime(trans['trans_date'])
 trans.isnull().sum()</code>
 	user_id                                     0
@@ -811,9 +856,9 @@ trans.isnull().sum()</code>
 	Campuran_invested_amount               153459
 	Campuran_transaction_amount            153694
 	dtype: int64</pre>
-	<div class="desc">The information above confirmed our findings, and refer to the dataset information all of the column with the null value is a transactions column.
-		So, we will be changing the data to 0 instead of null.</div>
-<pre><code>trans.fillna(0, inplace=True)
+				<div class="desc">The information above confirmed our findings and referring to the dataset information all of the columns with the null value is a transactions columns.
+                    So, we will be changing the data to 0 instead of null.</div>
+				<pre><code>trans.fillna(0, inplace=True)
 trans.isnull().sum()</code>
 	user_id                                0
 	trans_date                             0
@@ -830,10 +875,9 @@ trans.isnull().sum()</code>
 	Campuran_invested_amount               0
 	Campuran_transaction_amount            0
 	dtype: int64</pre>
-	<div class="desc">The null value has been replaced, the next step we will do find how many times transaction has been made by the user.
-		We will create some boolean flag column 1 if the user making transaction on certain dates, and 0 if not. Later we will visualise this columns to see the daily growth.
-		</div>
-<pre><code>trans['count_saham'] = np.where(trans['Saham_transaction_amount']!=0.00,1,0)
+				<div class="desc">The null value has been replaced, in the next step, we will find how many times a transaction has been made by the user.
+                    We will create some boolean flag column 1 if the user making a transaction on certain dates, and 0 if not. Later we will visualise this column to see the daily growth.				</div>
+				<pre><code>trans['count_saham'] = np.where(trans['Saham_transaction_amount']!=0.00,1,0)
 trans['count_uang'] = np.where(trans['Pasar_Uang_transaction_amount']!=0.00,1,0)
 trans['count_fixed'] = np.where(trans['Pendapatan_Tetap_transaction_amount']!=0.00,1,0)
 trans['count_mixed'] = np.where(trans['Campuran_transaction_amount']!=0.00,1,0)
@@ -849,12 +893,12 @@ plt.legend(['Saham', 'Pasar Uang', 'Pendapatan Tetap', 'Campuran'])
 plt.setp(ax.xaxis.get_ticklabels(), rotation=90)
 
 plt.show()</code></pre>
-<div class="center"><img src="/images/bonds/transaction_growth.png" alt=""></div>
-<div class="desc">From the number of transactions chart, the higher type of transaction is Pasar Uang (Money Market) follow by Pendapatan Tetap (fixed income) and Saham (stocks) respectively.
-	As we can see from the dataset, the AUM and invested amount is updated daily, meanwhile transactions is filled when the users make any buy or sell transactions and it will fill with 0 if no transactions has been made.
-	Furthermore, we will be separating buy and sell transactions into new columns, to avoid biased data when summarise the transactions.</div>
+				<div class="center"><img src="/images/bonds/transaction_growth.png" alt=""></div>
+				<div class="desc">From the number of transactions chart, the higher type of transaction is Pasar Uang (Money Market) followed by Pendapatan Tetap (fixed income) and Saham (stocks) respectively.
+                    As we can see from the dataset, the AUM and the invested amount is updated daily, meanwhile, transactions are filled when the users make any buy or sell transactions and it will fill with 0 if no transactions have been made.
+                    Furthermore, we will be separating buy and sell transactions into new columns, to avoid biased data when summarising the transactions.</div>
 
-<pre><code>trans_buysell = ['Saham_transaction_amount','Pasar_Uang_transaction_amount', 'Pendapatan_Tetap_transaction_amount',
+				<pre><code>trans_buysell = ['Saham_transaction_amount','Pasar_Uang_transaction_amount', 'Pendapatan_Tetap_transaction_amount',
 	'Campuran_transaction_amount']
 
 for x in trans_buysell:
@@ -863,317 +907,318 @@ for x in trans_buysell:
 	trans[x+'_sell'] = trans[x].mask(~mask).abs()
 
 trans.loc[trans.Saham_transaction_amount !=0.00,:].head()</code></pre>
-<div class="table-wrapper">
-	<table>
-		<thead>
-			<tr style="text-align: right;">
-			  <th></th>
-			  <th>user_id</th>
-			  <th>trans_date</th>
-			  <th>Saham_AUM</th>
-			  <th>Saham_invested_amount</th>
-			  <th>Saham_transaction_amount</th>
-			  <th>Pasar_Uang_AUM</th>
-			  <th>Pasar_Uang_invested_amount</th>
-			  <th>Pasar_Uang_transaction_amount</th>
-			  <th>Pendapatan_Tetap_AUM</th>
-			  <th>Pendapatan_Tetap_invested_amount</th>
-			  <th>...</th>
-			  <th>count_fixed</th>
-			  <th>count_mixed</th>
-			  <th>Saham_transaction_amount_buy</th>
-			  <th>Saham_transaction_amount_sell</th>
-			  <th>Pasar_Uang_transaction_amount_buy</th>
-			  <th>Pasar_Uang_transaction_amount_sell</th>
-			  <th>Pendapatan_Tetap_transaction_amount_buy</th>
-			  <th>Pendapatan_Tetap_transaction_amount_sell</th>
-			  <th>Campuran_transaction_amount_buy</th>
-			  <th>Campuran_transaction_amount_sell</th>
-			</tr>
-		  </thead>
-		  <tbody>
-			<tr>
-			  <th>25</th>
-			  <td>50961</td>
-			  <td>2021-09-01</td>
-			  <td>1705566.0</td>
-			  <td>1700000.0</td>
-			  <td>1000000.0</td>
-			  <td>100065.0</td>
-			  <td>100000.0</td>
-			  <td>0.0</td>
-			  <td>200124.0</td>
-			  <td>200000.0</td>
-			  <td>...</td>
-			  <td>0</td>
-			  <td>0</td>
-			  <td>1000000.0</td>
-			  <td>NaN</td>
-			  <td>0.0</td>
-			  <td>NaN</td>
-			  <td>0.0</td>
-			  <td>NaN</td>
-			  <td>0.0</td>
-			  <td>NaN</td>
-			</tr>
-			<tr>
-			  <th>46</th>
-			  <td>50961</td>
-			  <td>2021-09-30</td>
-			  <td>2063909.0</td>
-			  <td>2000000.0</td>
-			  <td>300000.0</td>
-			  <td>700603.0</td>
-			  <td>700000.0</td>
-			  <td>600000.0</td>
-			  <td>1398998.0</td>
-			  <td>1400000.0</td>
-			  <td>...</td>
-			  <td>1</td>
-			  <td>0</td>
-			  <td>300000.0</td>
-			  <td>NaN</td>
-			  <td>600000.0</td>
-			  <td>NaN</td>
-			  <td>1200000.0</td>
-			  <td>NaN</td>
-			  <td>0.0</td>
-			  <td>NaN</td>
-			</tr>
-			<tr>
-			  <th>102</th>
-			  <td>61414</td>
-			  <td>2021-08-13</td>
-			  <td>0.0</td>
-			  <td>0.0</td>
-			  <td>-10000.0</td>
-			  <td>0.0</td>
-			  <td>0.0</td>
-			  <td>0.0</td>
-			  <td>0.0</td>
-			  <td>0.0</td>
-			  <td>...</td>
-			  <td>0</td>
-			  <td>0</td>
-			  <td>NaN</td>
-			  <td>10000.0</td>
-			  <td>0.0</td>
-			  <td>NaN</td>
-			  <td>0.0</td>
-			  <td>NaN</td>
-			  <td>0.0</td>
-			  <td>NaN</td>
-			</tr>
-			<tr>
-			  <th>154</th>
-			  <td>66145</td>
-			  <td>2021-09-29</td>
-			  <td>248015.0</td>
-			  <td>240000.0</td>
-			  <td>140000.0</td>
-			  <td>29992.0</td>
-			  <td>30000.0</td>
-			  <td>0.0</td>
-			  <td>129929.0</td>
-			  <td>130000.0</td>
-			  <td>...</td>
-			  <td>0</td>
-			  <td>0</td>
-			  <td>140000.0</td>
-			  <td>NaN</td>
-			  <td>0.0</td>
-			  <td>NaN</td>
-			  <td>0.0</td>
-			  <td>NaN</td>
-			  <td>0.0</td>
-			  <td>NaN</td>
-			</tr>
-			<tr>
-			  <th>166</th>
-			  <td>67251</td>
-			  <td>2021-09-20</td>
-			  <td>562777.0</td>
-			  <td>570000.0</td>
-			  <td>530000.0</td>
-			  <td>110065.0</td>
-			  <td>110000.0</td>
-			  <td>100000.0</td>
-			  <td>420268.0</td>
-			  <td>420000.0</td>
-			  <td>...</td>
-			  <td>1</td>
-			  <td>0</td>
-			  <td>530000.0</td>
-			  <td>NaN</td>
-			  <td>100000.0</td>
-			  <td>NaN</td>
-			  <td>370000.0</td>
-			  <td>NaN</td>
-			  <td>0.0</td>
-			  <td>NaN</td>
-			</tr>
-		  </tbody>
-	</table>
-<pre>5 rows × 26 columns</pre>
-</div>
-<div class="desc">Since we split the transactions into buy and sell, we will drop the original transaction column.</div>
-<pre><code>trans.drop(trans_buysell, axis=1, inplace=True)
+				<div class="table-wrapper">
+					<table>
+						<thead>
+							<tr style="text-align: right;">
+								<th></th>
+								<th>user_id</th>
+								<th>trans_date</th>
+								<th>Saham_AUM</th>
+								<th>Saham_invested_amount</th>
+								<th>Saham_transaction_amount</th>
+								<th>Pasar_Uang_AUM</th>
+								<th>Pasar_Uang_invested_amount</th>
+								<th>Pasar_Uang_transaction_amount</th>
+								<th>Pendapatan_Tetap_AUM</th>
+								<th>Pendapatan_Tetap_invested_amount</th>
+								<th>...</th>
+								<th>count_fixed</th>
+								<th>count_mixed</th>
+								<th>Saham_transaction_amount_buy</th>
+								<th>Saham_transaction_amount_sell</th>
+								<th>Pasar_Uang_transaction_amount_buy</th>
+								<th>Pasar_Uang_transaction_amount_sell</th>
+								<th>Pendapatan_Tetap_transaction_amount_buy</th>
+								<th>Pendapatan_Tetap_transaction_amount_sell</th>
+								<th>Campuran_transaction_amount_buy</th>
+								<th>Campuran_transaction_amount_sell</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th>25</th>
+								<td>50961</td>
+								<td>2021-09-01</td>
+								<td>1705566.0</td>
+								<td>1700000.0</td>
+								<td>1000000.0</td>
+								<td>100065.0</td>
+								<td>100000.0</td>
+								<td>0.0</td>
+								<td>200124.0</td>
+								<td>200000.0</td>
+								<td>...</td>
+								<td>0</td>
+								<td>0</td>
+								<td>1000000.0</td>
+								<td>NaN</td>
+								<td>0.0</td>
+								<td>NaN</td>
+								<td>0.0</td>
+								<td>NaN</td>
+								<td>0.0</td>
+								<td>NaN</td>
+							</tr>
+							<tr>
+								<th>46</th>
+								<td>50961</td>
+								<td>2021-09-30</td>
+								<td>2063909.0</td>
+								<td>2000000.0</td>
+								<td>300000.0</td>
+								<td>700603.0</td>
+								<td>700000.0</td>
+								<td>600000.0</td>
+								<td>1398998.0</td>
+								<td>1400000.0</td>
+								<td>...</td>
+								<td>1</td>
+								<td>0</td>
+								<td>300000.0</td>
+								<td>NaN</td>
+								<td>600000.0</td>
+								<td>NaN</td>
+								<td>1200000.0</td>
+								<td>NaN</td>
+								<td>0.0</td>
+								<td>NaN</td>
+							</tr>
+							<tr>
+								<th>102</th>
+								<td>61414</td>
+								<td>2021-08-13</td>
+								<td>0.0</td>
+								<td>0.0</td>
+								<td>-10000.0</td>
+								<td>0.0</td>
+								<td>0.0</td>
+								<td>0.0</td>
+								<td>0.0</td>
+								<td>0.0</td>
+								<td>...</td>
+								<td>0</td>
+								<td>0</td>
+								<td>NaN</td>
+								<td>10000.0</td>
+								<td>0.0</td>
+								<td>NaN</td>
+								<td>0.0</td>
+								<td>NaN</td>
+								<td>0.0</td>
+								<td>NaN</td>
+							</tr>
+							<tr>
+								<th>154</th>
+								<td>66145</td>
+								<td>2021-09-29</td>
+								<td>248015.0</td>
+								<td>240000.0</td>
+								<td>140000.0</td>
+								<td>29992.0</td>
+								<td>30000.0</td>
+								<td>0.0</td>
+								<td>129929.0</td>
+								<td>130000.0</td>
+								<td>...</td>
+								<td>0</td>
+								<td>0</td>
+								<td>140000.0</td>
+								<td>NaN</td>
+								<td>0.0</td>
+								<td>NaN</td>
+								<td>0.0</td>
+								<td>NaN</td>
+								<td>0.0</td>
+								<td>NaN</td>
+							</tr>
+							<tr>
+								<th>166</th>
+								<td>67251</td>
+								<td>2021-09-20</td>
+								<td>562777.0</td>
+								<td>570000.0</td>
+								<td>530000.0</td>
+								<td>110065.0</td>
+								<td>110000.0</td>
+								<td>100000.0</td>
+								<td>420268.0</td>
+								<td>420000.0</td>
+								<td>...</td>
+								<td>1</td>
+								<td>0</td>
+								<td>530000.0</td>
+								<td>NaN</td>
+								<td>100000.0</td>
+								<td>NaN</td>
+								<td>370000.0</td>
+								<td>NaN</td>
+								<td>0.0</td>
+								<td>NaN</td>
+							</tr>
+						</tbody>
+					</table>
+					<pre>5 rows × 26 columns</pre>
+				</div>
+				<div class="desc">Since we split the transactions into buy and sell, we will drop the original
+					transaction column.</div>
+				<pre><code>trans.drop(trans_buysell, axis=1, inplace=True)
 trans.head()</code></pre>
-<div class="table-wrapper">
-	<table>
-		<thead>
-			<tr style="text-align: right;">
-			  <th></th>
-			  <th>user_id</th>
-			  <th>trans_date</th>
-			  <th>Saham_AUM</th>
-			  <th>Saham_invested_amount</th>
-			  <th>Pasar_Uang_AUM</th>
-			  <th>Pasar_Uang_invested_amount</th>
-			  <th>Pendapatan_Tetap_AUM</th>
-			  <th>Pendapatan_Tetap_invested_amount</th>
-			  <th>Campuran_AUM</th>
-			  <th>Campuran_invested_amount</th>
-			  <th>...</th>
-			  <th>count_fixed</th>
-			  <th>count_mixed</th>
-			  <th>Saham_transaction_amount_buy</th>
-			  <th>Saham_transaction_amount_sell</th>
-			  <th>Pasar_Uang_transaction_amount_buy</th>
-			  <th>Pasar_Uang_transaction_amount_sell</th>
-			  <th>Pendapatan_Tetap_transaction_amount_buy</th>
-			  <th>Pendapatan_Tetap_transaction_amount_sell</th>
-			  <th>Campuran_transaction_amount_buy</th>
-			  <th>Campuran_transaction_amount_sell</th>
-			</tr>
-		  </thead>
-		  <tbody>
-			<tr>
-			  <th>0</th>
-			  <td>50701</td>
-			  <td>2021-08-30</td>
-			  <td>0.0</td>
-			  <td>0.0</td>
-			  <td>0.0</td>
-			  <td>0.0</td>
-			  <td>0.0</td>
-			  <td>0.0</td>
-			  <td>10132277.0</td>
-			  <td>10000000.0</td>
-			  <td>...</td>
-			  <td>0</td>
-			  <td>0</td>
-			  <td>0.0</td>
-			  <td>NaN</td>
-			  <td>0.0</td>
-			  <td>NaN</td>
-			  <td>0.0</td>
-			  <td>NaN</td>
-			  <td>0.0</td>
-			  <td>NaN</td>
-			</tr>
-			<tr>
-			  <th>1</th>
-			  <td>50701</td>
-			  <td>2021-08-31</td>
-			  <td>0.0</td>
-			  <td>0.0</td>
-			  <td>0.0</td>
-			  <td>0.0</td>
-			  <td>0.0</td>
-			  <td>0.0</td>
-			  <td>10206945.0</td>
-			  <td>10000000.0</td>
-			  <td>...</td>
-			  <td>0</td>
-			  <td>0</td>
-			  <td>0.0</td>
-			  <td>NaN</td>
-			  <td>0.0</td>
-			  <td>NaN</td>
-			  <td>0.0</td>
-			  <td>NaN</td>
-			  <td>0.0</td>
-			  <td>NaN</td>
-			</tr>
-			<tr>
-			  <th>2</th>
-			  <td>50701</td>
-			  <td>2021-09-01</td>
-			  <td>0.0</td>
-			  <td>0.0</td>
-			  <td>0.0</td>
-			  <td>0.0</td>
-			  <td>0.0</td>
-			  <td>0.0</td>
-			  <td>9956556.0</td>
-			  <td>10000000.0</td>
-			  <td>...</td>
-			  <td>0</td>
-			  <td>0</td>
-			  <td>0.0</td>
-			  <td>NaN</td>
-			  <td>0.0</td>
-			  <td>NaN</td>
-			  <td>0.0</td>
-			  <td>NaN</td>
-			  <td>0.0</td>
-			  <td>NaN</td>
-			</tr>
-			<tr>
-			  <th>3</th>
-			  <td>50701</td>
-			  <td>2021-09-02</td>
-			  <td>0.0</td>
-			  <td>0.0</td>
-			  <td>0.0</td>
-			  <td>0.0</td>
-			  <td>0.0</td>
-			  <td>0.0</td>
-			  <td>9914858.0</td>
-			  <td>10000000.0</td>
-			  <td>...</td>
-			  <td>0</td>
-			  <td>0</td>
-			  <td>0.0</td>
-			  <td>NaN</td>
-			  <td>0.0</td>
-			  <td>NaN</td>
-			  <td>0.0</td>
-			  <td>NaN</td>
-			  <td>0.0</td>
-			  <td>NaN</td>
-			</tr>
-			<tr>
-			  <th>4</th>
-			  <td>50701</td>
-			  <td>2021-09-03</td>
-			  <td>0.0</td>
-			  <td>0.0</td>
-			  <td>0.0</td>
-			  <td>0.0</td>
-			  <td>0.0</td>
-			  <td>0.0</td>
-			  <td>10016360.0</td>
-			  <td>10000000.0</td>
-			  <td>...</td>
-			  <td>0</td>
-			  <td>0</td>
-			  <td>0.0</td>
-			  <td>NaN</td>
-			  <td>0.0</td>
-			  <td>NaN</td>
-			  <td>0.0</td>
-			  <td>NaN</td>
-			  <td>0.0</td>
-			  <td>NaN</td>
-			</tr>
-		  </tbody>
-	</table>
-	<pre>5 rows × 22 columns</pre>
-</div>
-<div class="desc">The next thing is we will visualise the buy sell transactions to see the total amount of transactions growth.</div>
-<pre><code>buysell = trans[['Saham_transaction_amount_buy', 'Saham_transaction_amount_sell', 'Pasar_Uang_transaction_amount_buy', 'Pasar_Uang_transaction_amount_sell',
+				<div class="table-wrapper">
+					<table>
+						<thead>
+							<tr style="text-align: right;">
+								<th></th>
+								<th>user_id</th>
+								<th>trans_date</th>
+								<th>Saham_AUM</th>
+								<th>Saham_invested_amount</th>
+								<th>Pasar_Uang_AUM</th>
+								<th>Pasar_Uang_invested_amount</th>
+								<th>Pendapatan_Tetap_AUM</th>
+								<th>Pendapatan_Tetap_invested_amount</th>
+								<th>Campuran_AUM</th>
+								<th>Campuran_invested_amount</th>
+								<th>...</th>
+								<th>count_fixed</th>
+								<th>count_mixed</th>
+								<th>Saham_transaction_amount_buy</th>
+								<th>Saham_transaction_amount_sell</th>
+								<th>Pasar_Uang_transaction_amount_buy</th>
+								<th>Pasar_Uang_transaction_amount_sell</th>
+								<th>Pendapatan_Tetap_transaction_amount_buy</th>
+								<th>Pendapatan_Tetap_transaction_amount_sell</th>
+								<th>Campuran_transaction_amount_buy</th>
+								<th>Campuran_transaction_amount_sell</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th>0</th>
+								<td>50701</td>
+								<td>2021-08-30</td>
+								<td>0.0</td>
+								<td>0.0</td>
+								<td>0.0</td>
+								<td>0.0</td>
+								<td>0.0</td>
+								<td>0.0</td>
+								<td>10132277.0</td>
+								<td>10000000.0</td>
+								<td>...</td>
+								<td>0</td>
+								<td>0</td>
+								<td>0.0</td>
+								<td>NaN</td>
+								<td>0.0</td>
+								<td>NaN</td>
+								<td>0.0</td>
+								<td>NaN</td>
+								<td>0.0</td>
+								<td>NaN</td>
+							</tr>
+							<tr>
+								<th>1</th>
+								<td>50701</td>
+								<td>2021-08-31</td>
+								<td>0.0</td>
+								<td>0.0</td>
+								<td>0.0</td>
+								<td>0.0</td>
+								<td>0.0</td>
+								<td>0.0</td>
+								<td>10206945.0</td>
+								<td>10000000.0</td>
+								<td>...</td>
+								<td>0</td>
+								<td>0</td>
+								<td>0.0</td>
+								<td>NaN</td>
+								<td>0.0</td>
+								<td>NaN</td>
+								<td>0.0</td>
+								<td>NaN</td>
+								<td>0.0</td>
+								<td>NaN</td>
+							</tr>
+							<tr>
+								<th>2</th>
+								<td>50701</td>
+								<td>2021-09-01</td>
+								<td>0.0</td>
+								<td>0.0</td>
+								<td>0.0</td>
+								<td>0.0</td>
+								<td>0.0</td>
+								<td>0.0</td>
+								<td>9956556.0</td>
+								<td>10000000.0</td>
+								<td>...</td>
+								<td>0</td>
+								<td>0</td>
+								<td>0.0</td>
+								<td>NaN</td>
+								<td>0.0</td>
+								<td>NaN</td>
+								<td>0.0</td>
+								<td>NaN</td>
+								<td>0.0</td>
+								<td>NaN</td>
+							</tr>
+							<tr>
+								<th>3</th>
+								<td>50701</td>
+								<td>2021-09-02</td>
+								<td>0.0</td>
+								<td>0.0</td>
+								<td>0.0</td>
+								<td>0.0</td>
+								<td>0.0</td>
+								<td>0.0</td>
+								<td>9914858.0</td>
+								<td>10000000.0</td>
+								<td>...</td>
+								<td>0</td>
+								<td>0</td>
+								<td>0.0</td>
+								<td>NaN</td>
+								<td>0.0</td>
+								<td>NaN</td>
+								<td>0.0</td>
+								<td>NaN</td>
+								<td>0.0</td>
+								<td>NaN</td>
+							</tr>
+							<tr>
+								<th>4</th>
+								<td>50701</td>
+								<td>2021-09-03</td>
+								<td>0.0</td>
+								<td>0.0</td>
+								<td>0.0</td>
+								<td>0.0</td>
+								<td>0.0</td>
+								<td>0.0</td>
+								<td>10016360.0</td>
+								<td>10000000.0</td>
+								<td>...</td>
+								<td>0</td>
+								<td>0</td>
+								<td>0.0</td>
+								<td>NaN</td>
+								<td>0.0</td>
+								<td>NaN</td>
+								<td>0.0</td>
+								<td>NaN</td>
+								<td>0.0</td>
+								<td>NaN</td>
+							</tr>
+						</tbody>
+					</table>
+					<pre>5 rows × 22 columns</pre>
+				</div>
+				<div class="desc">The next thing is we will visualise the buy-sell transactions to see the total amount of transactions growth.</div>
+				<pre><code>buysell = trans[['Saham_transaction_amount_buy', 'Saham_transaction_amount_sell', 'Pasar_Uang_transaction_amount_buy', 'Pasar_Uang_transaction_amount_sell',
 	'Pendapatan_Tetap_transaction_amount_buy', 'Pendapatan_Tetap_transaction_amount_sell','Campuran_transaction_amount_buy', 'Campuran_transaction_amount_sell',
 	'trans_date']].groupby('trans_date').sum()
 t_series = buysell.index.to_pydatetime()
@@ -1189,12 +1234,13 @@ plt.setp(ax.xaxis.get_ticklabels(), rotation=90)
 plt.ticklabel_format(style='plain', axis='y')
 
 plt.show()</code></pre>
-<div class="center"><img src="/images/bonds/buysell_sum.png" alt=""></div>
-<div class="desc">The summaries buying and selling chart shows that the total amount of Pendapatan Tetap (Buying) and Pasar Uang (Buying) are leading than other transactions.
-	We are also can see that the majority of the transactions are buying, this could meanings that our users more interested into investing their money. <br>
-	Since invested columns are updated daily with the last balanced of the users, we will drop the duplicate data and take the latest date.
-</div>
-<pre><code>invested_col = ['user_id', 'trans_date', 'Saham_AUM', 'Saham_invested_amount', 'Pasar_Uang_AUM',
+				<div class="center"><img src="/images/bonds/buysell_sum.png" alt=""></div>
+				<div class="desc">The summaries buying and selling chart shows that the total amount of Pendapatan Tetap (Buying) and Pasar Uang (Buying) are leading than other transactions.
+                    We are also can see that the majority of the transactions are buying, this could meanings that our users are more interested in investing their money. <br>
+					Since invested columns are updated daily with the last balanced of the users, we will drop the
+					duplicate data and take the latest date.
+				</div>
+				<pre><code>invested_col = ['user_id', 'trans_date', 'Saham_AUM', 'Saham_invested_amount', 'Pasar_Uang_AUM',
 	'Pasar_Uang_invested_amount', 'Pendapatan_Tetap_AUM', 'Pendapatan_Tetap_invested_amount', 'Campuran_AUM',
 	'Campuran_invested_amount']
 invested_AUM = trans.sort_values(by='trans_date').drop_duplicates(subset=['user_id'], keep='last').reset_index(drop=True)
@@ -1203,94 +1249,94 @@ print(f'Total rows: {invested_AUM.shape[0]}, columns: {invested_AUM.shape[1]}\nI
 invested_AUM.head()</code>
 	Total rows: 8277, columns: 10
 	Invested:</pre>
-	<div class="table-wrapper">
-		<table>
-			<thead>
-				<tr style="text-align: right;">
-				  <th></th>
-				  <th>user_id</th>
-				  <th>trans_date</th>
-				  <th>Saham_AUM</th>
-				  <th>Saham_invested_amount</th>
-				  <th>Pasar_Uang_AUM</th>
-				  <th>Pasar_Uang_invested_amount</th>
-				  <th>Pendapatan_Tetap_AUM</th>
-				  <th>Pendapatan_Tetap_invested_amount</th>
-				  <th>Campuran_AUM</th>
-				  <th>Campuran_invested_amount</th>
-				</tr>
-			  </thead>
-			  <tbody>
-				<tr>
-				  <th>0</th>
-				  <td>3786300</td>
-				  <td>2021-09-30</td>
-				  <td>0.00</td>
-				  <td>0.00</td>
-				  <td>0.00</td>
-				  <td>0.00</td>
-				  <td>0.00</td>
-				  <td>0.00</td>
-				  <td>0.00</td>
-				  <td>0.00</td>
-				</tr>
-				<tr>
-				  <th>1</th>
-				  <td>3760891</td>
-				  <td>2021-09-30</td>
-				  <td>258975.00</td>
-				  <td>249864.00</td>
-				  <td>0.00</td>
-				  <td>0.00</td>
-				  <td>553302.00</td>
-				  <td>550000.00</td>
-				  <td>0.00</td>
-				  <td>0.00</td>
-				</tr>
-				<tr>
-				  <th>2</th>
-				  <td>4096532</td>
-				  <td>2021-09-30</td>
-				  <td>13803192.00</td>
-				  <td>13352136.00</td>
-				  <td>2390277.00</td>
-				  <td>2387932.00</td>
-				  <td>8134491.00</td>
-				  <td>8149154.00</td>
-				  <td>0.00</td>
-				  <td>0.00</td>
-				</tr>
-				<tr>
-				  <th>3</th>
-				  <td>2836295</td>
-				  <td>2021-09-30</td>
-				  <td>0.00</td>
-				  <td>0.00</td>
-				  <td>0.00</td>
-				  <td>0.00</td>
-				  <td>0.00</td>
-				  <td>0.00</td>
-				  <td>0.00</td>
-				  <td>0.00</td>
-				</tr>
-				<tr>
-				  <th>4</th>
-				  <td>2839273</td>
-				  <td>2021-09-30</td>
-				  <td>0.00</td>
-				  <td>0.00</td>
-				  <td>10028.00</td>
-				  <td>10000.00</td>
-				  <td>0.00</td>
-				  <td>0.00</td>
-				  <td>0.00</td>
-				  <td>0.00</td>
-				</tr>
-			  </tbody>
-		</table>
-	</div>
-<div class="desc">Transactions dataframe:</div>
-<pre><code>sum_trans_total = trans.groupby('user_id')[['Saham_transaction_amount_buy',
+				<div class="table-wrapper">
+					<table>
+						<thead>
+							<tr style="text-align: right;">
+								<th></th>
+								<th>user_id</th>
+								<th>trans_date</th>
+								<th>Saham_AUM</th>
+								<th>Saham_invested_amount</th>
+								<th>Pasar_Uang_AUM</th>
+								<th>Pasar_Uang_invested_amount</th>
+								<th>Pendapatan_Tetap_AUM</th>
+								<th>Pendapatan_Tetap_invested_amount</th>
+								<th>Campuran_AUM</th>
+								<th>Campuran_invested_amount</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th>0</th>
+								<td>3786300</td>
+								<td>2021-09-30</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+							</tr>
+							<tr>
+								<th>1</th>
+								<td>3760891</td>
+								<td>2021-09-30</td>
+								<td>258975.00</td>
+								<td>249864.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>553302.00</td>
+								<td>550000.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+							</tr>
+							<tr>
+								<th>2</th>
+								<td>4096532</td>
+								<td>2021-09-30</td>
+								<td>13803192.00</td>
+								<td>13352136.00</td>
+								<td>2390277.00</td>
+								<td>2387932.00</td>
+								<td>8134491.00</td>
+								<td>8149154.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+							</tr>
+							<tr>
+								<th>3</th>
+								<td>2836295</td>
+								<td>2021-09-30</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+							</tr>
+							<tr>
+								<th>4</th>
+								<td>2839273</td>
+								<td>2021-09-30</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>10028.00</td>
+								<td>10000.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="desc">Transactions dataframe:</div>
+				<pre><code>sum_trans_total = trans.groupby('user_id')[['Saham_transaction_amount_buy',
 	'Saham_transaction_amount_sell', 'Pasar_Uang_transaction_amount_buy',
 	'Pasar_Uang_transaction_amount_sell',
 	'Pendapatan_Tetap_transaction_amount_buy',
@@ -1301,278 +1347,279 @@ print(f'Total rows:{sum_trans_total.shape[0]}, columns: {sum_trans_total.shape[1
 sum_trans_total.head()</code>
 	Total rows:8277, columns: 12
 	Transactions:</pre>
-<div class="table-wrapper">
-	<table>
-		<thead>
-			<tr style="text-align: right;">
-			  <th></th>
-			  <th>Saham_transaction_amount_buy</th>
-			  <th>Saham_transaction_amount_sell</th>
-			  <th>Pasar_Uang_transaction_amount_buy</th>
-			  <th>Pasar_Uang_transaction_amount_sell</th>
-			  <th>Pendapatan_Tetap_transaction_amount_buy</th>
-			  <th>Pendapatan_Tetap_transaction_amount_sell</th>
-			  <th>Campuran_transaction_amount_buy</th>
-			  <th>Campuran_transaction_amount_sell</th>
-			  <th>count_saham</th>
-			  <th>count_uang</th>
-			  <th>count_fixed</th>
-			  <th>count_mixed</th>
-			</tr>
-			<tr>
-			  <th>user_id</th>
-			  <th></th>
-			  <th></th>
-			  <th></th>
-			  <th></th>
-			  <th></th>
-			  <th></th>
-			  <th></th>
-			  <th></th>
-			  <th></th>
-			  <th></th>
-			  <th></th>
-			  <th></th>
-			</tr>
-		  </thead>
-		  <tbody>
-			<tr>
-			  <th>50701</th>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>0</td>
-			  <td>0</td>
-			  <td>0</td>
-			  <td>0</td>
-			</tr>
-			<tr>
-			  <th>50961</th>
-			  <td>1300000.00</td>
-			  <td>0.00</td>
-			  <td>600000.00</td>
-			  <td>0.00</td>
-			  <td>1200000.00</td>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>2</td>
-			  <td>1</td>
-			  <td>1</td>
-			  <td>0</td>
-			</tr>
-			<tr>
-			  <th>53759</th>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>0</td>
-			  <td>0</td>
-			  <td>0</td>
-			  <td>0</td>
-			</tr>
-			<tr>
-			  <th>54759</th>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>2000000.00</td>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>0</td>
-			  <td>1</td>
-			  <td>0</td>
-			  <td>0</td>
-			</tr>
-			<tr>
-			  <th>61414</th>
-			  <td>0.00</td>
-			  <td>10000.00</td>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>1</td>
-			  <td>0</td>
-			  <td>0</td>
-			  <td>0</td>
-			</tr>
-		  </tbody>
-	</table>
-</div>
-<div class="desc">After creating the invested and transactions dataframe, then we will merge both dataframe into new_trans and we will be using this dataset in the future.</div>
-<pre><code>new_trans = invested_AUM.merge(sum_trans_total, on='user_id')
+				<div class="table-wrapper">
+					<table>
+						<thead>
+							<tr style="text-align: right;">
+								<th></th>
+								<th>Saham_transaction_amount_buy</th>
+								<th>Saham_transaction_amount_sell</th>
+								<th>Pasar_Uang_transaction_amount_buy</th>
+								<th>Pasar_Uang_transaction_amount_sell</th>
+								<th>Pendapatan_Tetap_transaction_amount_buy</th>
+								<th>Pendapatan_Tetap_transaction_amount_sell</th>
+								<th>Campuran_transaction_amount_buy</th>
+								<th>Campuran_transaction_amount_sell</th>
+								<th>count_saham</th>
+								<th>count_uang</th>
+								<th>count_fixed</th>
+								<th>count_mixed</th>
+							</tr>
+							<tr>
+								<th>user_id</th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th>50701</th>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>0</td>
+								<td>0</td>
+								<td>0</td>
+								<td>0</td>
+							</tr>
+							<tr>
+								<th>50961</th>
+								<td>1300000.00</td>
+								<td>0.00</td>
+								<td>600000.00</td>
+								<td>0.00</td>
+								<td>1200000.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>2</td>
+								<td>1</td>
+								<td>1</td>
+								<td>0</td>
+							</tr>
+							<tr>
+								<th>53759</th>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>0</td>
+								<td>0</td>
+								<td>0</td>
+								<td>0</td>
+							</tr>
+							<tr>
+								<th>54759</th>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>2000000.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>0</td>
+								<td>1</td>
+								<td>0</td>
+								<td>0</td>
+							</tr>
+							<tr>
+								<th>61414</th>
+								<td>0.00</td>
+								<td>10000.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>1</td>
+								<td>0</td>
+								<td>0</td>
+								<td>0</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="desc">After creating the invested and transactions dataframe, then we will merge both
+					dataframe into new_trans and we will be using this dataset in the future.</div>
+				<pre><code>new_trans = invested_AUM.merge(sum_trans_total, on='user_id')
 print(f'Total rows: {new_trans.shape[0]}, columns:{new_trans.shape[1]}')
 del invested_AUM, sum_trans_total
 new_trans.head()</code>
 	Total rows: 8277, columns:22</pre>
-<div class="table-wrapper">
-	<table>
-		<thead>
-			<tr style="text-align: right;">
-			  <th></th>
-			  <th>user_id</th>
-			  <th>trans_date</th>
-			  <th>Saham_AUM</th>
-			  <th>Saham_invested_amount</th>
-			  <th>Pasar_Uang_AUM</th>
-			  <th>Pasar_Uang_invested_amount</th>
-			  <th>Pendapatan_Tetap_AUM</th>
-			  <th>Pendapatan_Tetap_invested_amount</th>
-			  <th>Campuran_AUM</th>
-			  <th>Campuran_invested_amount</th>
-			  <th>...</th>
-			  <th>Pasar_Uang_transaction_amount_buy</th>
-			  <th>Pasar_Uang_transaction_amount_sell</th>
-			  <th>Pendapatan_Tetap_transaction_amount_buy</th>
-			  <th>Pendapatan_Tetap_transaction_amount_sell</th>
-			  <th>Campuran_transaction_amount_buy</th>
-			  <th>Campuran_transaction_amount_sell</th>
-			  <th>count_saham</th>
-			  <th>count_uang</th>
-			  <th>count_fixed</th>
-			  <th>count_mixed</th>
-			</tr>
-		  </thead>
-		  <tbody>
-			<tr>
-			  <th>0</th>
-			  <td>3786300</td>
-			  <td>2021-09-30</td>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>...</td>
-			  <td>0.00</td>
-			  <td>10000.00</td>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>1</td>
-			  <td>1</td>
-			  <td>0</td>
-			  <td>0</td>
-			</tr>
-			<tr>
-			  <th>1</th>
-			  <td>3760891</td>
-			  <td>2021-09-30</td>
-			  <td>258975.00</td>
-			  <td>249864.00</td>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>553302.00</td>
-			  <td>550000.00</td>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>...</td>
-			  <td>310000.00</td>
-			  <td>410000.00</td>
-			  <td>499783.00</td>
-			  <td>49783.00</td>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>5</td>
-			  <td>7</td>
-			  <td>7</td>
-			  <td>0</td>
-			</tr>
-			<tr>
-			  <th>2</th>
-			  <td>4096532</td>
-			  <td>2021-09-30</td>
-			  <td>13803192.00</td>
-			  <td>13352136.00</td>
-			  <td>2390277.00</td>
-			  <td>2387932.00</td>
-			  <td>8134491.00</td>
-			  <td>8149154.00</td>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>...</td>
-			  <td>1937932.00</td>
-			  <td>0.00</td>
-			  <td>6619154.00</td>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>2</td>
-			  <td>1</td>
-			  <td>2</td>
-			  <td>0</td>
-			</tr>
-			<tr>
-			  <th>3</th>
-			  <td>2836295</td>
-			  <td>2021-09-30</td>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>...</td>
-			  <td>0.00</td>
-			  <td>100000.00</td>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>1</td>
-			  <td>1</td>
-			  <td>0</td>
-			  <td>0</td>
-			</tr>
-			<tr>
-			  <th>4</th>
-			  <td>2839273</td>
-			  <td>2021-09-30</td>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>10028.00</td>
-			  <td>10000.00</td>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>...</td>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>40000.00</td>
-			  <td>0.00</td>
-			  <td>0.00</td>
-			  <td>1</td>
-			  <td>0</td>
-			  <td>1</td>
-			  <td>0</td>
-			</tr>
-		  </tbody>
-	</table>
-</div>
-<!--<div class="desc">Now, we get a new dataset that has been clean and aggregate by users then we will
+				<div class="table-wrapper">
+					<table>
+						<thead>
+							<tr style="text-align: right;">
+								<th></th>
+								<th>user_id</th>
+								<th>trans_date</th>
+								<th>Saham_AUM</th>
+								<th>Saham_invested_amount</th>
+								<th>Pasar_Uang_AUM</th>
+								<th>Pasar_Uang_invested_amount</th>
+								<th>Pendapatan_Tetap_AUM</th>
+								<th>Pendapatan_Tetap_invested_amount</th>
+								<th>Campuran_AUM</th>
+								<th>Campuran_invested_amount</th>
+								<th>...</th>
+								<th>Pasar_Uang_transaction_amount_buy</th>
+								<th>Pasar_Uang_transaction_amount_sell</th>
+								<th>Pendapatan_Tetap_transaction_amount_buy</th>
+								<th>Pendapatan_Tetap_transaction_amount_sell</th>
+								<th>Campuran_transaction_amount_buy</th>
+								<th>Campuran_transaction_amount_sell</th>
+								<th>count_saham</th>
+								<th>count_uang</th>
+								<th>count_fixed</th>
+								<th>count_mixed</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th>0</th>
+								<td>3786300</td>
+								<td>2021-09-30</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>...</td>
+								<td>0.00</td>
+								<td>10000.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>1</td>
+								<td>1</td>
+								<td>0</td>
+								<td>0</td>
+							</tr>
+							<tr>
+								<th>1</th>
+								<td>3760891</td>
+								<td>2021-09-30</td>
+								<td>258975.00</td>
+								<td>249864.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>553302.00</td>
+								<td>550000.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>...</td>
+								<td>310000.00</td>
+								<td>410000.00</td>
+								<td>499783.00</td>
+								<td>49783.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>5</td>
+								<td>7</td>
+								<td>7</td>
+								<td>0</td>
+							</tr>
+							<tr>
+								<th>2</th>
+								<td>4096532</td>
+								<td>2021-09-30</td>
+								<td>13803192.00</td>
+								<td>13352136.00</td>
+								<td>2390277.00</td>
+								<td>2387932.00</td>
+								<td>8134491.00</td>
+								<td>8149154.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>...</td>
+								<td>1937932.00</td>
+								<td>0.00</td>
+								<td>6619154.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>2</td>
+								<td>1</td>
+								<td>2</td>
+								<td>0</td>
+							</tr>
+							<tr>
+								<th>3</th>
+								<td>2836295</td>
+								<td>2021-09-30</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>...</td>
+								<td>0.00</td>
+								<td>100000.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>1</td>
+								<td>1</td>
+								<td>0</td>
+								<td>0</td>
+							</tr>
+							<tr>
+								<th>4</th>
+								<td>2839273</td>
+								<td>2021-09-30</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>10028.00</td>
+								<td>10000.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>...</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>40000.00</td>
+								<td>0.00</td>
+								<td>0.00</td>
+								<td>1</td>
+								<td>0</td>
+								<td>1</td>
+								<td>0</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<!--<div class="desc">Now, we get a new dataset that has been clean and aggregate by users then we will
 	continue our investigation for our previous outliers with user age older than 53 years old.
 	The first thing we will do is to merge the new dataset with user_outliers to see how many of the outliers contribute with the transaction.</div>
 <pre><code>trans_outliers = user_outliers[['user_id', 'user_age']].merge(new_trans, on='user_id')
@@ -1718,11 +1765,10 @@ plt.xticks(X, idx)
 plt.legend()
 plt.title('Comparison max transactions outliers and whole')</code></pre>
 <div class="center"><img src="/images/bonds/compare_out.png" alt=""></div>-->
-<div class="desc">So we cleaned our transactions' dataset and aggregate the transactions column.
-	The next thing we will do is to do a quick exploration for our bonds order dataset before combining with dataset 1 and 2. 
-</div>
-<h2 class="major" id="dataset3">Bonds Order</h2>
-<pre><code>print(f'Total rows: {result.shape[0]}, columns:{result.shape[1]}')
+				<div class="desc">The next thing we will do is to do a quick exploration of our bonds order dataset before combining it with user and transaction.
+				</div>
+				<h2 class="major" id="dataset3">Bonds Order</h2>
+				<pre><code>print(f'Total rows: {result.shape[0]}, columns:{result.shape[1]}')
 print(f'Total User: {result.user_id.nunique()}')
 result.info()</code>
 	Total rows: 8484, columns:3
@@ -1735,9 +1781,9 @@ result.info()</code>
 	1   flag_order_bond     8484 non-null   int64
 	2   bond_units_ordered  8484 non-null   int64
 	dtypes: int64(3)</pre>
-<div class="desc">Since our problem statement is to find the prediction whether the user will order bonds based on their behaviour.
-	We want to see the percentage that users order bonds from the bonds order dataset to see the comparison between each class.</div>
-<pre><code>bond_order = result[['user_id', 'flag_order_bond']].groupby('flag_order_bond').count()
+				<div class="desc">Since our problem statement is to find the prediction of whether the user will order bonds based on their behaviour.
+                    We want to see the percentage that users who order bonds from the bonds order dataset to see the comparison between each class.</div>
+				<pre><code>bond_order = result[['user_id', 'flag_order_bond']].groupby('flag_order_bond').count()
 fig, ax = plt.subplots(figsize=(5, 5), subplot_kw=dict(aspect="equal"))
 wedges, texts, autotexts = ax.pie(bond_order.user_id, autopct=lambda pct: func(pct, bond_order.user_id),
 									textprops=dict(color="black"), explode=(0,0.1))
@@ -1747,10 +1793,10 @@ plt.show()
 bond_chart=sns.countplot(x=result["flag_order_bond"])
 plt.tight_layout()
 plt.show()</code></pre>
-<div class="center"><img src="/images/bonds/bonds_pie.png" alt=""></div>
-	<div class="desc">It shows that only 40.9% of our users order the Government Bonds. However, we found a difference on our number of users from transactions' dataset and 3. We have 8277 total users in transactions' dataset that making transactions, meanwhile 8484 users in bonds order dataset.
-	We will combine transactions' dataset and bonds order to see the details of it.</div>
-	<pre><code>trans_3 = result.merge(new_trans, how='left')
+				<div class="center"><img src="/images/bonds/bonds_pie.png" alt=""></div>
+				<div class="desc">It shows that only 40.9% of our users order Government Bonds. However, we found a difference in our number of users from the transactions' dataset and 3. We have 8277 total users in the transactions dataset that makes transactions, meanwhile, 8484 users in the bonds order dataset.
+                    We will combine the transactions' dataset and bonds in order to see the details of it.</div>
+				<pre><code>trans_3 = result.merge(new_trans, how='left')
 print(f'Total combined rows: {trans_3.shape[0]}, columns:{trans_3.shape[1]}')
 print(f'Difference total users:{trans_3.user_id.nunique()-transaction_users}')
 trans_3.isnull().sum()</code>	Total combined rows: 8484, columns:24
@@ -1773,24 +1819,24 @@ trans_3.isnull().sum()</code>	Total combined rows: 8484, columns:24
 	Pendapatan_Tetap_transaction_amount    207
 	Campuran_transaction_amount            207
 	dtype: int64</pre>
-	<div class="desc">We left joined our dataset since our bonds order dataset has more rows of data for a better understanding what is the difference.
-		There is 8484 rows of data and 16 columns after the merging. We also check how much the difference between both dataset and the null value.
-		Our difference number of user between transactions' dataset and 3 is 207 user, it also same with the number of our null values.
-		We will try to visualise the user with null values if they ordered bonds or not before we decide to exclude those user.
-		</div>
-		<pre><code>v = trans_3[trans_3.isnull().any(axis=1)]
+				<div class="desc">We left joined our dataset since our bonds order dataset has more rows of data for a better understanding what is the difference.
+                    There are 8484 rows of data and 16 columns after the merging. We also check how much the difference between the dataset and the null value.
+                    Our difference number of users between the transactions' dataset and 3 is 207 users, it is also the same as the number of our null values.
+                    We will try to visualise the user with null values if they ordered bonds or not before we decide to exclude those users.
+				</div>
+				<pre><code>v = trans_3[trans_3.isnull().any(axis=1)]
 v_null = v[['user_id', 'flag_order_bond']].groupby('flag_order_bond').count()
 fig, ax = plt.subplots(figsize=(5, 5), subplot_kw=dict(aspect="equal"))
 wedges, texts, autotexts = ax.pie(v_null.user_id, autopct=lambda pct: func(pct, v_null.user_id),
 	textprops=dict(color="black"), explode=(0,1))
 ax.legend(wedges, v_null.index, title='Null flag order bond', loc='upper right')
 plt.show()</code></pre>
-<div class="center"><img src="/images/bonds/bond_null.png" alt=""></div>
-<div class="desc">From the pie chart, we can see only 1 of 207 user ended up order bond from the company.
-	Since we don't have any transactional record for the 207 users, it safe to exclude them from our analysis.
-Now, we will merging all of our dataset into 1 before we preprocess our data for modelling.
-</div>
-<pre><code>df1 = new_trans.merge(user, how='inner', on='user_id')
+				<div class="center"><img src="/images/bonds/bond_null.png" alt=""></div>
+				<div class="desc">From the pie chart, we can see only 1 of 207 users ended up ordering bonds from the company.
+                    Since we don't have any transactional records for the 207 users, it is safe to exclude them from our analysis.
+                    Now, we will merge all of our datasets into 1 before we preprocess our data for modelling.
+				</div>
+				<pre><code>df1 = new_trans.merge(user, how='inner', on='user_id')
 full_data = df1.merge(result, how='inner', on='user_id')
 print(f'Total full rows: {full_data.shape[0]}, columns:{full_data.shape[1]}')
 print('Null Values:')
@@ -1830,10 +1876,10 @@ full_data.isnull().sum()</code>	Total full rows: 8277, columns:32
 	flag_order_bond                             0
 	bond_units_ordered                          0
 	dtype: int64</pre>
-</p> 
-<div class="desc">After we combined the 3 dataset, we have the total of 8277 rows of data and 32 columns. 
-	We will create an age group bin into 17-19,20-29,30-39 and so on instead of user_age.</div>
-<pre><code>bins = [17, 20, 30, 40, 50, 60, 70, 80, 100]
+				</p>
+				<div class="desc">After we combined the 3 datasets, we have a total of 8277 rows of data and 32 columns.
+                    We will create an age group bin into 17-19,20-29,30-39 and so on instead of user_age.</div>
+				<pre><code>bins = [17, 20, 30, 40, 50, 60, 70, 80, 100]
 labels = ['17-19','20-29','30-39', '40-49', '50-59', '60-69', '70-79', '80+']
 full_data['age_group'] = pd.cut(full_data['user_age'], bins, labels = labels,include_lowest = True)
 full_data.drop(['user_age'], axis=1, inplace=True)
@@ -1841,7 +1887,7 @@ full_data.age_group.unique()
 </code>
 	['20-29', '40-49', '30-39', '50-59', '17-19', '60-69', '70-79', '80+']
 	Categories (8, object): ['17-19' < '20-29' < '30-39' < '40-49' < '50-59' < '60-69' < '70-79' < '80+']</pre>
-<pre><code>trans_group = full_data[['age_group', 'Saham_transaction_amount_buy',
+				<pre><code>trans_group = full_data[['age_group', 'Saham_transaction_amount_buy',
 	'Saham_transaction_amount_sell', 'Pasar_Uang_transaction_amount_buy',
 	'Pasar_Uang_transaction_amount_sell',
 	'Pendapatan_Tetap_transaction_amount_buy',
@@ -1851,27 +1897,26 @@ full_data.age_group.unique()
 trans_group.plot(title='Summary transaction by age group', figsize=(8,5))
 plt.ticklabel_format(axis='y', style='plain')
 plt.show()</code></pre>
-<div class="center"><img src="/images/bonds/trans_age.png" alt=""></div>
-<div class="desc">When we visualise the amount of transaction mapped with the age group, we can see that the age group 20-29 years old contribute the most transactions,
-	and it started to slow down until as the user aged. <br>
-Then we will check the correlation from each of our features by ploting correlation matrix.</div>
-<pre><code>fig, ax = plt.subplots(figsize=(25,10))  
+				<div class="center"><img src="/images/bonds/trans_age.png" alt=""></div>
+				<div class="desc">When we visualise the number of transactions mapped with the age group, we can see that the age group 20-29 years old contribute the most transactions, and it started to slow down until the user aged. <br>
+                    Then we will check the correlation from each of our features by plotting the correlation matrix.</div>
+				<pre><code>fig, ax = plt.subplots(figsize=(25,10))  
 sns.heatmap(full_data.corr(), annot = True, ax=ax, cmap = 'Blues')
 plt.title("DataCorrelation")
 plt.show()</code></pre>
-<div class="center"><img src="/images/bonds/correlation_matrix.png" alt=""style='width: 100%;'></div>
-<div class="desc">The correlation matrix show that AUM and Invested column has a perfect positive correlation between each other as well as buying transactions.
-	Furthermore, bond_units_ordered also has a positif correlation with flag_order_bond. So, we will be dropping one of the features to avoid multicollinearity in the model performance.
-</div>
-<pre><code>pos_corr = ['Saham_AUM', 'Pasar_Uang_AUM', 'Pendapatan_Tetap_AUM', 'Campuran_AUM', 'Saham_transaction_amount_buy',
+				<div class="center"><img src="/images/bonds/correlation_matrix.png" alt="" style='width: 100%;'></div>
+				<div class="desc">The correlation matrix shows that AUM and Invested column has a perfect positive correlation between each other as well as buying transactions.
+                    Furthermore, bond_units_ordered also has a positive correlation with flag_order_bond. So, we will be dropping one of the features to avoid multicollinearity in the model performance.
+				</div>
+				<pre><code>pos_corr = ['Saham_AUM', 'Pasar_Uang_AUM', 'Pendapatan_Tetap_AUM', 'Campuran_AUM', 'Saham_transaction_amount_buy',
 	'Pasar_Uang_transaction_amount_buy', 'Pendapatan_Tetap_transaction_amount_buy', 'Campuran_transaction_amount_buy',
 	'bond_units_ordered']
 full_data.drop(pos_corr, axis=1, inplace=True)</code></pre>
-<h2 class="major" id="preprocessing">Preprocessing</h2>
-<div class="desc">So, we will convert our categorical data into numerical. We will print out the unique value from non numerical data.
-	Moreover, we will remove column transaction date, registration month, and user id.
-</div>
-<pre><code>for x in full_data:
+				<h2 class="major" id="preprocessing">Preprocessing</h2>
+				<div class="desc">So, we will convert our categorical data into numerical. We will print out the unique value from non-numerical data.
+                    Moreover, we will remove the column transaction date, registration month, and user id.
+				</div>
+				<pre><code>for x in full_data:
 	uniqueValues = full_data[x].unique()
 	n_values = len(uniqueValues)
 	if full_data[x].dtypes == object:
@@ -1885,8 +1930,8 @@ full_data.drop(pos_corr, axis=1, inplace=True)</code></pre>
 	Column: user_income_source -- total unique value: (10) ['Keuntungan Bisnis' 'Gaji' 'Lainnya' 'Warisan' 'Undian'
 	'Dari Orang Tua / Anak' 'Tabungan' 'Hasil Investasi' 'Dari Suami / istri'
 	'Bunga Simpanan']</pre>
-	<div class="desc">From the unique value details, it clearly shows that user_income_range is ordinal category. So we will be using label encoder to convert them into numerical data, meanwhile one hot encoding for the rest.</div>
-<pre><code>full_data.drop(['trans_date', 'registration_month', 'user_id'], axis=1, inplace=True)
+				<div class="desc">From the unique value details, it clearly shows that user_income_range is an ordinal category. So we will be using a label encoder to convert them into numerical data, meanwhile one hot encoding for the rest.</div>
+				<pre><code>full_data.drop(['trans_date', 'registration_month', 'user_id'], axis=1, inplace=True)
 one_hot_var = ['user_gender','user_occupation', 'referral_code_used', 'user_income_source']
 one_hot = pd.get_dummies(full_data, columns = one_hot_var)
 
@@ -1941,15 +1986,15 @@ one_hot.info()</code>
 	 36  user_income_source_Tabungan               8277 non-null   uint8  
 	 37  user_income_source_Undian                 8277 non-null   uint8  
 	 38  user_income_source_Warisan                8277 non-null   uint8  </pre>
-<div class="desc">After we convert our non numerical data into numeric, we can see our dataset shape is changed to 8277 rows and 39 columns.
-	We will use the current feature to create our model using multiple classification algorithm and evaluate which one give the best performance.
-	So, we will take out the target variable which is flag_order_bond from our dataset and divided them into training (60% of total data) 40% for validation and testing.
-	Also, we will scale our data between 0 and 1 using minmaxscaler from scikit-learn.
-</div>
-<pre><code>x_v1 = one_hot.drop(['flag_order_bond'], axis=1)
+				<div class="desc">After we convert our non-numerical data into numeric, we can see our dataset shape is changed to 8277 rows and 39 columns.
+                    We will use the current feature to create our model using multiple classification algorithms and evaluate which one gives the best performance.
+                    So, we will take out the target variable which is flag_order_bond from our dataset and divide them into training (60% of total data) and 40% for validation and testing.
+                    Also, we will scale our data between 0 and 1 using minmaxscaler from scikit-learn.
+				</div>
+				<pre><code>x_v1 = one_hot.drop(['flag_order_bond'], axis=1)
 y_v1 = one_hot['flag_order_bond'].copy()
 </code></pre>
-<pre>Function to split data into train, val and test also scaling<code>from sklearn.model_selection import train_test_split
+				<pre>Function to split data into train, val and test also scaling<code>from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
 
 def split_scaled(x,y):
@@ -1962,7 +2007,7 @@ def split_scaled(x,y):
 	xtest_scaled = scale.fit_transform(xtest)
 	return xtrain_scaled, ytrain, xvalid_scaled, yvalid, xtest_scaled, ytest</code></pre>
 
-<pre>Function to evaluate models<code>from sklearn.metrics import ConfusionMatrixDisplay, accuracy_score, confusion_matrix, mean_squared_error, r2_score
+				<pre>Function to evaluate models<code>from sklearn.metrics import ConfusionMatrixDisplay, accuracy_score, confusion_matrix, mean_squared_error, r2_score
 score_comp = []
 def eval(model, name, x1, y1, x2, y2, x3,y3):
 	predtrain = model.predict(x1)
@@ -1979,9 +2024,10 @@ def eval(model, name, x1, y1, x2, y2, x3,y3):
 	print('RMSE test: %.3f' % rmse)
 	print('R^2 test: %.3f' % r2)
 	score_comp.append([name, acctrain, accvalid, acctest, rmse, r2])</code></pre>
-<h2 class="major" id="logreg1">Model 1 - Logistic Regression</h2>
-<div class="desc">The first model that we will implement is using Logistic Regression with our original dataset.</div>
-<pre><code>xtrain, ytrain, xvalid, yvalid, xtest, ytest = split_scaled(x_v1, y_v1)
+				<h2 class="major" id="logreg1">Model 1 - Logistic Regression</h2>
+				<div class="desc">The first model that we will implement is using Logistic Regression with our original
+					dataset.</div>
+				<pre><code>xtrain, ytrain, xvalid, yvalid, xtest, ytest = split_scaled(x_v1, y_v1)
 
 from sklearn.linear_model import LogisticRegression
 
@@ -1999,10 +2045,11 @@ eval(logreg, 'logreg1', xtrain, ytrain, xvalid, yvalid, xtest, ytest)</code>
 	Recall class 0: 75.92%
 	F1: 45.92%
 	ROC AUC Training: 66.75% Testing: 64.66%</pre>
-<div class="center"><img src="/images/bonds/cm-lr1.png" alt=""> <img src="/images/bonds/roc_logreg.png" alt=""></div>
-<div class="desc">So, we can see that our model does not give a good accuracy score.
-	]We will try to tune the model using GridSearch Cross Validation to improve the performance.</div>
-<pre><code>from sklearn.model_selection import GridSearchCV
+				<div class="center"><img src="/images/bonds/cm-lr1.png" alt=""> <img src="/images/bonds/roc_logreg.png"
+						alt=""></div>
+				<div class="desc">So, we can see that our model does not give a good accuracy score.
+					We will try to tune the model using GridSearch Cross Validation to improve the performance.</div>
+				<pre><code>from sklearn.model_selection import GridSearchCV
 log_param = [
 	{
 		'C': [0.01, 0.1, 1.0, 10, 100], 
@@ -2018,8 +2065,9 @@ opt_log = GridSearchCV(LogisticRegression(), param_grid = log_param, scoring='ac
 opt_log.fit(xtrain, ytrain) 
 print(opt_log.best_params_) </code>
 	{'C': 100, 'max_iter': 800, 'penalty': 'l1', 'solver': 'saga'}</pre>
-<div class="desc">We will fit our dataset to a new model with the parameters result from the Grid Search.</div>
-<pre><code>lr = LogisticRegression(C= 100, penalty= 'l1', solver= 'saga', max_iter=800)
+				<div class="desc">We will fit our dataset to a new model with the parameters resulting from the Grid
+					Search.</div>
+				<pre><code>lr = LogisticRegression(C= 100, penalty= 'l1', solver= 'saga', max_iter=800)
 lr.fit(xtrain, ytrain)
 eval(lr,'logreg_tuned', xtrain, ytrain, xvalid, yvalid, xtest, ytest)</code>
 	Training accuracy: 65.40% 
@@ -2033,9 +2081,10 @@ eval(lr,'logreg_tuned', xtrain, ytrain, xvalid, yvalid, xtest, ytest)</code>
 	Recall class 0: 78.52%
 	F1: 50.90%
 	ROC AUC Training: 70.22% Testing: 69.73%</pre>
-<div class="center"><img src="/images/bonds/cm-lr1-tuned.png" alt=""><img src="/images/bonds/roc_logreg_tuned.png" alt=""></div>
-<div class="desc">It seems the hypertuned increase the performance of the model. The next thing we will try to check the features coefficient and try to modify our features.</div>
-<pre><code>coefs_df = pd.DataFrame()
+				<div class="center"><img src="/images/bonds/cm-lr1-tuned.png" alt=""><img
+						src="/images/bonds/roc_logreg_tuned.png" alt=""></div>
+				<div class="desc">It seems the tuning increases the performance of the model. The next thing we will try to check the features coefficient and try to modify our features.</div>
+				<pre><code>coefs_df = pd.DataFrame()
 coefs_df['features'] = x_v1.columns
 coefs_df['coefs'] = logreg.coef_[0]
 print(coefs_df.sort_values('coefs', ascending=False).head(20))
@@ -2062,10 +2111,10 @@ plt.show()</code>
 	5         Pasar_Uang_transaction_amount_sell   0.09
 	22                 user_occupation_Pengusaha   0.08
 	25                user_occupation_TNI/Polisi   0.04</pre>
-	<div class="center"><img src="/images/bonds/coefs.png" alt=""></div>
-	<div class="desc">We will remove the low coefficient features that less than 0.2.</div>
+				<div class="center"><img src="/images/bonds/coefs.png" alt=""></div>
+				<div class="desc">We will remove the low coefficient features that less than 0.2.</div>
 
-<pre><code>dropslv2 = coefs_df.loc[coefs_df['coefs']<0.2].features
+				<pre><code>dropslv2 = coefs_df.loc[coefs_df['coefs']<0.2].features
 dropslv2 = dropslv2.to_list()
 encoded2 = one_hot.drop(dropslv2, axis=1)
 x_v2 = encoded2.drop(['flag_order_bond'], axis=1)
@@ -2087,11 +2136,13 @@ eval(lr2, 'logreg_coef', xtrain2, ytrain2, xvalid2, yvalid2, xtest2, ytest2)</co
 	Recall class 0: 76.12%
 	F1: 44.25%
 	ROC AUC Training: 65.84% Testing: 64.27%</pre>
-	<div class="center"><img src="/images/bonds/cm-lr-coef.png" alt=""><img src="/images/bonds/roc-coef.png" alt=""></div>
-<div class="desc">It seems that our previous model before removing the low coefficient features has a better performance.
-	We will try to tune the model and see if the accuracy will improve.
-</div>
-<pre><code>from sklearn.model_selection import GridSearchCV
+				<div class="center"><img src="/images/bonds/cm-lr-coef.png" alt=""><img src="/images/bonds/roc-coef.png"
+						alt=""></div>
+				<div class="desc">It seems that our previous model before removing the low coefficient features has a
+					better performance.
+					We will try to tune the model and see if the accuracy will improve.
+				</div>
+				<pre><code>from sklearn.model_selection import GridSearchCV
 log_param = [
 	{
 		'C': [0.01, 0.1, 1.0, 10, 100], 
@@ -2108,7 +2159,7 @@ opt_log.fit(xtrain2, ytrain2)
 print(opt_log.best_params_) #best parameter tuning result</code>
 	{'C': 100, 'max_iter': 600, 'penalty': 'l1', 'solver': 'saga'}</pre>
 
-<pre>Fit the model with new parameter from hypertuning.
+				<pre>Fit the model with new parameter from hypertuning.
 <code>lr3 = LogisticRegression(C=100, penalty='l1', solver='saga', max_iter=600)
 lr3.fit(xtrain2, ytrain2)
 eval(lr3, 'logreg_coef_tuned', xtrain2, ytrain2, xvalid2, yvalid2, xtest2, ytest2)</code>
@@ -2124,13 +2175,550 @@ eval(lr3, 'logreg_coef_tuned', xtrain2, ytrain2, xvalid2, yvalid2, xtest2, ytest
 	F1: 50.64%
 	ROC AUC Training: 69.33% Testing: 68.66%</pre>
 
-	<div class="center"><img src="/images/bonds/cm-lr-coef-tuned.png" alt=""><img src="/images/bonds/roc-coef-lr-tuned.png" alt=""></div>
-<div class="desc">Unfortunately, when we reduce the low coefficient features it doesn't perform better than our previous dataset.
-	We will try to create a new model using different algorithms.</div>
-<h2 class="major" id="svm">Model 2 - Support Vector Machine</h2>
-</div>
-				</section>
-		</div>
+				<div class="center"><img src="/images/bonds/cm-lr-coef-tuned.png" alt=""><img
+						src="/images/bonds/roc-coef-lr-tuned.png" alt=""></div>
+				<div class="desc">Unfortunately, when we reduce the low coefficient features it doesn't perform better
+					than our previous dataset.
+					We will try to create a new model using different algorithms.</div>
+				<h2 class="major" id="svm">Model 2 - Support Vector Machine</h2>
+				<pre><code>from sklearn.svm import SVC
+svm_v1 = SVC(probability=True)
+svm_v1.fit(xtrain, ytrain)
+eval(svm_v1, 'svm1', xtrain, ytrain, xvalid, yvalid, xtest, ytest)</code>
+	Training accuracy: 63.85% 
+	Validation accuracy: 60.06%
+	Testing accuracy: 61.11% 
+	Overfitting: 2.74%
+	Log Loss Training: 13.028263760262844, Log Loss Testing: 14.016976317990002
+	Precision class 1: 51.24% 
+	Precision class 0: 64.74%
+	Recall class 1: 34.81% 
+	Recall class 0: 78.32%
+	F1: 41.45%
+	ROC AUC Training: 68.65% Testing: 62.84%</pre>
+				<div class="center"><img src="/images/bonds/cm-svm.png" alt=""> <img src="/images/bonds/roc-svm.png"
+						alt=""></div>
+				<div class="desc">We will try to hyperparameter tuning our model to see if we can improve the
+					performance.</div>
+				<pre><code>param_grid = [
+		{
+			'C': [0.01, 0.1, 1.0, 10, 100], 
+			'gamma': ['scale', 0.001, 0.01],
+			'kernel': ['rbf','linear','sigmoid', 'poly']
+		},
+	]
+	
+	#tuned the model using gridsearch and kfold
+	opt_log = GridSearchCV(SVC(), param_grid, scoring='accuracy', cv=10)
+	#fit the tuned model with training dataset
+	opt_log.fit(xtrain, ytrain) 
+	#best parameter tuning result
+	print(opt_log.best_params_) </code>
+	{'C': 100, 'gamma': 'scale', 'kernel': 'poly'}</pre>
+				<pre><code>svm_v2 = SVC(probability=True, C=100, gamma='scale', kernel='poly')
+svm_v2.fit(xtrain, ytrain)
+eval(svm_v2, 'svm2', xtrain, ytrain, xvalid, yvalid, xtest, ytest)</code>
+	Training accuracy: 70.18% 
+	Validation accuracy: 61.93%
+	Testing accuracy: 63.83% 
+	Overfitting: 6.35%
+	Log Loss Training: 10.749224862924386, Log Loss Testing: 13.037529215024863
+	Precision class 1: 55.45% 
+	Precision class 0: 67.60%
+	Recall class 1: 43.51% 
+	Recall class 0: 77.12%
+	F1: 48.76%
+	ROC AUC Training: 76.66% Testing: 65.07%</pre>
+				<div class="center"><img src="/images/bonds/cm-svm-tuned.png" alt=""><img
+						src="/images/bonds/roc-svm-tuned.png" alt=""></div>
+				<div class="desc">It seems that both of SVM model that we have created has an overfitting problem. After the
+					tuning, the accuracy score is increased but the overfitting is as well.</div>
+
+				<h2 class="major" id="randomforest">Model 3 - Random Forest Classifier</h2>
+				<pre><code>from sklearn.ensemble import RandomForestClassifier
+rf = RandomForestClassifier()
+rf.fit(xtrain, ytrain)
+eval(rf, 'random_forest', xtrain, ytrain, xvalid, yvalid, xtest, ytest)</code>
+	Training accuracy: 99.74% 
+	Validation accuracy: 67.49%
+	Testing accuracy: 66.55% 
+	Overfitting: 33.19%
+	Log Loss Training: 0.09435511358407653, Log Loss Testing: 12.058082112059724
+	Precision class 1: 55.78% 
+	Precision class 0: 78.54%
+	Recall class 1: 74.35% 
+	Recall class 0: 61.44%
+	F1: 63.74%
+	ROC AUC Training: 100.00% Testing: 76.33%</pre>
+				<div class="center"><img src="/images/bonds/cm-rf.png" alt=""> <img src="/images/bonds/roc-rf.png"
+						alt=""></div>
+				<div class="desc">The Random Forest Classifier model results in an outstanding accuracy score with the training dataset.
+                    However, it does not have the same performance in the validation and testing dataset, which results in overfitting. Since it takes a lot of computation for the hyperparameter tuning, we will try to visualise the validation manually.</div>
+				<pre>Function for calculate and visualise validation curve
+<code>def validations(model, param, prange, x, y, k):
+    train_scoreNum, test_scoreNum = validation_curve(
+                                model,
+                                X = x, y = y, 
+                                param_name = param, 
+                                param_range = prange, cv = k, scoring = "accuracy")
+    # Calculating mean and standard deviation of training score
+    mean_train_score = np.mean(train_scoreNum, axis = 1)
+    std_train_score = np.std(train_scoreNum, axis = 1)
+    
+    # Calculating mean and standard deviation of testing score
+    mean_test_score = np.mean(test_scoreNum, axis = 1)
+    std_test_score = np.std(test_scoreNum, axis = 1)
+    
+    # Plot mean accuracy scores for training and testing scores
+    plt.plot(prange, mean_train_score,
+        label = "Training Score", color = 'b')
+    plt.plot(prange, mean_test_score,
+    label = "Cross Validation Score", color = 'g')
+    
+    # Creating the plot
+    plt.title("Validation Curve with RF Classifier")
+    plt.xlabel(param)
+    plt.ylabel("Accuracy")
+    plt.tight_layout()
+    plt.legend(loc = 'best')
+    plt.show()
+parameter_range = np.arange(1, 100, 1)
+validations(rf, 'min_samples_split', parameter_range, xtrain, ytrain, 10)</code></pre>
+				<div class="center"><img src="/images/bonds/rf-min-split.png" alt=""></div>
+				<pre><code>parameter_range = np.arange(1, 15, 1)
+validations(rf, 'max_depth', parameter_range, xtrain, ytrain, 10)</code></pre>
+				<div class="center"><img src="/images/bonds/rf-max-depth.png" alt=""></div>
+				<pre><code>parameter_range = np.arange(1, 10, 1)
+validations(rf, 'n_estimators', parameter_range, xtrain, ytrain, 10)</code></pre>
+				<div class="center"><img src="/images/bonds/rf-nesti.png" alt=""></div>
+				<pre><code>validations(rf, 'min_samples_leaf', parameter_range, xtrain, ytrain, 10)</code></pre>
+				<div class="center"><img src="/images/bonds/rf-min-leaf.png" alt=""></div>
+				<pre><code>parameter_range = np.arange(1, 10, 1)
+validations(rf, 'max_features', parameter_range, xtrain, ytrain, 10)</code></pre>
+				<div class="center"><img src="/images/bonds/rfmax-features.png" alt=""></div>
+				<pre>Fitting the parameter based on validation_curve visualisation
+<code>RF_tuned = RandomForestClassifier(min_samples_split=100, max_depth=3, min_samples_leaf=15, n_estimators=1, max_features=7)
+	RF_tuned.fit(xtrain, ytrain)
+	eval(RF_tuned, 'rf_tuned', xtrain, ytrain, xvalid, yvalid, xtest, ytest)</code>
+	Training accuracy: 63.15% 
+	Validation accuracy: 62.48%
+	Testing accuracy: 61.90% 
+	Overfitting: 1.25%
+	Log Loss Training: 13.282296758373823, Log Loss Testing: 13.734024932688962
+	Precision class 1: 51.35% 
+	Precision class 0: 74.09%
+	Recall class 1: 69.62% 
+	Recall class 0: 56.84%
+	F1: 59.11%
+	ROC AUC Training: 68.15% Testing: 65.19%</pre>
+				<div class="center"><img src="/images/bonds/rf-tuned.png" alt=""><img
+						src="/images/bonds/roc-rf-tuned.png" alt=""></div>
+				<div class="desc">We successfully reduce the overfitting to 1.25% from our Random Forest algorithm from 33.19%. However, our accuracy score is also decreasing.
+                    So, we will move on to our next model.
+				</div>
+
+				<h2 class="major" id="knn">Model 4 - K-Nearest Neighbor Classifier</h2>
+				<pre><code>from sklearn.neighbors import KNeighborsClassifier
+knn1 = KNeighborsClassifier()
+knn1.fit(xtrain, ytrain)
+eval(knn1, 'knn', xtrain, ytrain, xvalid, yvalid, xtest, ytest)</code>
+	Training accuracy: 72.51% 
+	Validation accuracy: 56.92%
+	Testing accuracy: 58.82% 
+	Overfitting: 13.70%
+	Log Loss Training: 9.907286926328014, Log Loss Testing: 14.84406498271612
+	Precision class 1: 47.65% 
+	Precision class 0: 64.75%
+	Recall class 1: 41.83% 
+	Recall class 0: 69.93%
+	F1: 44.55%
+	ROC AUC Training: 78.96% Testing: 58.57%</pre>
+				<div class="center"><img src="/images/bonds/cm-knn.png" alt=""><img src="/images/bonds/roc-knn.png"
+						alt=""></div>
+				<div class="desc">Our KNN model also has the same problem as our previous models. Furthermore, this model also yields the lowest accuracy score up to now.
+                    We will do the same thing as our previous model with hyperparameter tuning. </div>
+				<pre><code>#parameter dict
+tuning_params = {
+	'n_neighbors' : [19], #from the plot above
+	"leaf_size":[5,10,20,30],
+	"p":[1,2],
+	'algorithm':['ball_tree', 'kd_tree', 'brute', 'auto']
+}
+
+#implement hyperparameter tuning to the model
+opt_knn = GridSearchCV(KNeighborsClassifier(), param_grid = tuning_params, cv = 10, scoring='accuracy')
+#fit the model with training dataset
+opt_knn.fit(xtrain, ytrain) 
+print(opt_knn.best_params_)</code>{'algorithm': 'ball_tree', 'leaf_size': 10, 'n_neighbors': 19, 'p': 1}</pre>
+				<pre><code>knn_tuned = KNeighborsClassifier(leaf_size=10, n_neighbors=19, p=1, algorithm='ball_tree')
+knn_tuned.fit(xtrain, ytrain)
+eval(knn_tuned, 'knn_tuned', xtrain, ytrain, xvalid, yvalid, xtest, ytest)</code>
+	Training accuracy: 65.18% 
+	Validation accuracy: 58.91%
+	Testing accuracy: 59.66% 
+	Overfitting: 5.52%
+	Log Loss Training: 12.54923010668215, Log Loss Testing: 14.539348106238078
+	Precision class 1: 48.77% 
+	Precision class 0: 64.77%
+	Recall class 1: 39.39% 
+	Recall class 0: 72.93%
+	F1: 43.58%
+	ROC AUC Training: 69.89% Testing: 61.47%</pre>
+				<div class="center"><img src="/images/bonds/cm-knn-tuned.png" alt=""><img
+						src="/images/bonds/roc-knn-tuned.png" alt=""></div>
+				<div class="desc">We were able to reduce the overfitting percentage and increase the accuracy score a little bit. It seems this model is the most underperformed compared to others.</div>
+				<h2 class="major" id="dtree">Model 5 - Decision Tree Classifier </h2>
+				<pre><code>from sklearn.tree import DecisionTreeClassifier
+dt = DecisionTreeClassifier()
+dt.fit(xtrain, ytrain)
+eval(dt, 'decision_tree', xtrain, ytrain, xvalid, yvalid, xtest, ytest)</code>
+	Training accuracy: 99.74% 
+	Validation accuracy: 65.26%
+	Testing accuracy: 66.00% 
+	Overfitting: 33.74%
+	Log Loss Training: 0.09435511358407653, Log Loss Testing: 12.253971532652752
+	Precision class 1: 56.18% 
+	Precision class 0: 74.01%
+	Recall class 1: 63.82% 
+	Recall class 0: 67.43%
+	F1: 59.76%
+	ROC AUC Training: 100.00% Testing: 65.68%</pre>
+				<div class="center"><img src="/images/bonds/cm-dt.png" alt=""><img src="/images/bonds/roc-dt.png"
+						alt=""></div>
+				<div class="desc">From the result above, it looks like decision tree has the similar results with random
+					forest Classifier.</div>
+				<pre><code>random_tree = {'criterion': ['gini', 'entropy'],
+	'max_depth': [int(x) for x in np.linspace(start = 1, stop = 20, num = 1)],
+	'min_samples_split': [int(x) for x in np.linspace(start = 1, stop = 20, num = 1)],
+	'min_samples_leaf': [int(x) for x in np.linspace(start = 1, stop = 20, num = 1)]}
+
+#implement hyperparameter tuning to the model
+opt_decTree = GridSearchCV(DecisionTreeClassifier(), param_grid= random_tree, cv = 10, scoring='accuracy')
+#fit the model with training dataset
+opt_decTree.fit(xtrain, ytrain) 
+print(opt_decTree.best_params_)</code>
+	{'criterion': 'gini', 'max_depth': 1, 'min_samples_leaf': 1, 'min_samples_split': 1}</pre>
+				<pre><code>dt_tuned = DecisionTreeClassifier(criterion='gini', max_depth=1, min_samples_leaf=1, min_samples_split=1)
+dt_tuned.fit(xtrain, ytrain)
+eval(dt_tuned, 'dt_tuned', xtrain, ytrain, xvalid, yvalid, xtest, ytest)</code>
+	Training accuracy: 67.52% 
+	Validation accuracy: 66.47%
+	Testing accuracy: 66.79% 
+	Overfitting: 0.73%
+	Log Loss Training: 11.707292170085777, Log Loss Testing: 11.97102014735171
+	Precision class 1: 55.45% 
+	Precision class 0: 82.54%
+	Recall class 1: 81.53% 
+	Recall class 0: 57.14%
+	F1: 66.01%
+	ROC AUC Training: 69.48% Testing: 69.33%</pre>
+				<div class="center"><img src="/images/bonds/cm-dt-tuned.png" alt=""><img
+						src="/images/bonds/roc-dt-tuned.png" alt=""></div>
+				<div class="desc">The hyperparameter tuning successfully lowers the overfitting percentage by more than 30% and slightly increases the accuracy score. We will implement our last algorithm before we compare which algorithm is performing better.</div>
+
+				<h2 class="major" id="naive">Model 6 - Naive Bayes</h2>
+				<pre><code>from sklearn.naive_bayes import GaussianNB
+nb = GaussianNB()
+nb.fit(xtrain, ytrain)
+eval(nb, 'naive', xtrain, ytrain, xvalid, yvalid, xtest, ytest)</code>
+	Training accuracy: 62.00% 
+	Validation accuracy: 60.06%
+	Testing accuracy: 63.10% 
+	Overfitting: -1.10%
+	Log Loss Training: 13.696007641011693, Log Loss Testing: 13.298715109148901
+	Precision class 1: 57.86% 
+	Precision class 0: 64.17%
+	Recall class 1: 24.73% 
+	Recall class 0: 88.21%
+	F1: 34.65%
+	ROC AUC Training: 65.56% Testing: 64.16%</pre>
+				<div class="center"><img src="/images/bonds/cm-naive.png" alt=""><img src="/images/bonds/roc-naive.png"
+						alt=""></div>
+				<div class="desc">Unlike our other model, this model has an underfitting problem. We will perform the same procedure with hyperparameter tuning.</div>
+				<pre><code>params_NB = {'var_smoothing': np.logspace(0,-9, num=100)}
+opt = GridSearchCV(GaussianNB(), param_grid=params_NB, cv=10,verbose=1,scoring='accuracy')
+opt.fit(xtrain, ytrain) 
+print(opt.best_params_)</code>
+	{'var_smoothing': 1.873817422860383e-08}</pre>
+				<pre><code>nbtuned = GaussianNB(var_smoothing=1.873817422860383e-08)
+nbtuned.fit(xtrain, ytrain)
+eval(nbtuned, 'naive_tuned', xtrain, ytrain, xvalid, yvalid, xtest, ytest)</code>
+	Training accuracy: 62.08% 
+	Validation accuracy: 60.12%
+	Testing accuracy: 62.92% 
+	Overfitting: -0.84%
+	Log Loss Training: 13.666975298370438, Log Loss Testing: 13.36401158267991
+	Precision class 1: 57.19% 
+	Precision class 0: 64.11%
+	Recall class 1: 24.89% 
+	Recall class 0: 87.81%
+	F1: 34.68%
+	ROC AUC Training: 65.55% Testing: 64.13%</pre>
+				<div class="center"><img src="/images/bonds/cm-naive-tuned.png" alt=""><img
+						src="/images/bonds/roc-naive-tuned.png" alt=""></div>
+				<div class="desc">Unfortunately, our hyperparameter tuning does not give the best results. So we will compare all of our models and see which one performs better than the others.</div>
+				<h2 class="major" id="conclusion">Conclusion - Model Selection</h2>
+				<div class="desc">We have been implementing 6 classification algorithms to our dataset for the bonds order prediction.
+                    We will see which one has a better performance.
+				</div>
+				<pre><code>scores = pd.DataFrame(score_comp, columns=['Algorithm','accuracy_train','accuracy_valid','accuracy_test', 'overfit', 'precision1', 'precision0', 'recall1', 'recall0','f1','loss_train', 'loss_test', 'roc_train', 'roc_test'])
+scores</code></pre>
+				<div class="table-wrapper">
+					<table>
+						<thead>
+							<tr style="text-align: right;">
+								<th>Algorithm</th>
+								<th>accuracy_train</th>
+								<th>accuracy_valid</th>
+								<th>accuracy_test</th>
+								<th>overfit</th>
+								<th>precision1</th>
+								<th>precision0</th>
+								<th>recall1</th>
+								<th>recall0</th>
+								<th>f1</th>
+								<th>loss_train</th>
+								<th>loss_test</th>
+								<th>roc_train</th>
+								<th>roc_test</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>logreg1</td>
+								<td>0.63</td>
+								<td>0.62</td>
+								<td>0.62</td>
+								<td>0.01</td>
+								<td>0.53</td>
+								<td>0.66</td>
+								<td>0.41</td>
+								<td>0.76</td>
+								<td>0.46</td>
+								<td>13.25</td>
+								<td>13.69</td>
+								<td>0.67</td>
+								<td>0.65</td>
+							</tr>
+							<tr>
+								<td>logreg_tuned</td>
+								<td>0.65</td>
+								<td>0.64</td>
+								<td>0.65</td>
+								<td>0.00</td>
+								<td>0.58</td>
+								<td>0.69</td>
+								<td>0.45</td>
+								<td>0.79</td>
+								<td>0.51</td>
+								<td>12.47</td>
+								<td>12.47</td>
+								<td>0.70</td>
+								<td>0.70</td>
+							</tr>
+							<tr>
+								<td>logreg_coef</td>
+								<td>0.62</td>
+								<td>0.61</td>
+								<td>0.61</td>
+								<td>0.01</td>
+								<td>0.52</td>
+								<td>0.66</td>
+								<td>0.39</td>
+								<td>0.76</td>
+								<td>0.44</td>
+								<td>13.63</td>
+								<td>13.93</td>
+								<td>0.66</td>
+								<td>0.64</td>
+							</tr>
+							<tr>
+								<td>logreg_coef_tuned</td>
+								<td>0.64</td>
+								<td>0.63</td>
+								<td>0.65</td>
+								<td>-0.00</td>
+								<td>0.57</td>
+								<td>0.68</td>
+								<td>0.45</td>
+								<td>0.78</td>
+								<td>0.50</td>
+								<td>12.83</td>
+								<td>12.71</td>
+								<td>0.69</td>
+								<td>0.68</td>
+							</tr>
+							<tr>
+								<td>svm1</td>
+								<td>0.64</td>
+								<td>0.60</td>
+								<td>0.61</td>
+								<td>0.03</td>
+								<td>0.51</td>
+								<td>0.65</td>
+								<td>0.35</td>
+								<td>0.78</td>
+								<td>0.41</td>
+								<td>13.03</td>
+								<td>14.02</td>
+								<td>0.69</td>
+								<td>0.63</td>
+							</tr>
+							<tr>
+								<td>svm2</td>
+								<td>0.70</td>
+								<td>0.62</td>
+								<td>0.64</td>
+								<td>0.06</td>
+								<td>0.55</td>
+								<td>0.68</td>
+								<td>0.44</td>
+								<td>0.77</td>
+								<td>0.49</td>
+								<td>10.75</td>
+								<td>13.04</td>
+								<td>0.77</td>
+								<td>0.65</td>
+							</tr>
+							<tr>
+								<td>random_forest</td>
+								<td>1.00</td>
+								<td>0.67</td>
+								<td>0.67</td>
+								<td>0.33</td>
+								<td>0.56</td>
+								<td>0.79</td>
+								<td>0.74</td>
+								<td>0.61</td>
+								<td>0.64</td>
+								<td>0.09</td>
+								<td>12.06</td>
+								<td>1.00</td>
+								<td>0.76</td>
+							</tr>
+							<tr>
+								<td>rf_tuned</td>
+								<td>0.63</td>
+								<td>0.62</td>
+								<td>0.62</td>
+								<td>0.01</td>
+								<td>0.51</td>
+								<td>0.74</td>
+								<td>0.70</td>
+								<td>0.57</td>
+								<td>0.59</td>
+								<td>13.28</td>
+								<td>13.73</td>
+								<td>0.68</td>
+								<td>0.65</td>
+							</tr>
+							<tr>
+								<td>knn</td>
+								<td>0.73</td>
+								<td>0.57</td>
+								<td>0.59</td>
+								<td>0.14</td>
+								<td>0.48</td>
+								<td>0.65</td>
+								<td>0.42</td>
+								<td>0.70</td>
+								<td>0.45</td>
+								<td>9.91</td>
+								<td>14.84</td>
+								<td>0.79</td>
+								<td>0.59</td>
+							</tr>
+							<tr>
+								<td>knn_tuned</td>
+								<td>0.65</td>
+								<td>0.59</td>
+								<td>0.60</td>
+								<td>0.06</td>
+								<td>0.49</td>
+								<td>0.65</td>
+								<td>0.39</td>
+								<td>0.73</td>
+								<td>0.44</td>
+								<td>12.55</td>
+								<td>14.54</td>
+								<td>0.70</td>
+								<td>0.61</td>
+							</tr>
+							<tr>
+								<td>decision_tree</td>
+								<td>1.00</td>
+								<td>0.65</td>
+								<td>0.66</td>
+								<td>0.34</td>
+								<td>0.56</td>
+								<td>0.74</td>
+								<td>0.64</td>
+								<td>0.67</td>
+								<td>0.60</td>
+								<td>0.09</td>
+								<td>12.25</td>
+								<td>1.00</td>
+								<td>0.66</td>
+							</tr>
+							<tr>
+								<td>dt_tuned</td>
+								<td>0.68</td>
+								<td>0.66</td>
+								<td>0.67</td>
+								<td>0.01</td>
+								<td>0.55</td>
+								<td>0.83</td>
+								<td>0.82</td>
+								<td>0.57</td>
+								<td>0.66</td>
+								<td>11.71</td>
+								<td>11.97</td>
+								<td>0.69</td>
+								<td>0.69</td>
+							</tr>
+							<tr>
+								<td>naive</td>
+								<td>0.62</td>
+								<td>0.60</td>
+								<td>0.63</td>
+								<td>-0.01</td>
+								<td>0.58</td>
+								<td>0.64</td>
+								<td>0.25</td>
+								<td>0.88</td>
+								<td>0.35</td>
+								<td>13.70</td>
+								<td>13.30</td>
+								<td>0.66</td>
+								<td>0.64</td>
+							</tr>
+							<tr>
+								<td>naive_tuned</td>
+								<td>0.62</td>
+								<td>0.60</td>
+								<td>0.63</td>
+								<td>-0.01</td>
+								<td>0.57</td>
+								<td>0.64</td>
+								<td>0.25</td>
+								<td>0.88</td>
+								<td>0.35</td>
+								<td>13.67</td>
+								<td>13.36</td>
+								<td>0.66</td>
+								<td>0.64</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="desc">From the score table above, we can see that KNN is the most less perform compare to others.
+                    When we see how precise the model is in predicting class 1 and 0, it seems that logistic regression has a better performance compared to others.
+                    However, the percentage of the score is not satisfying. If we can get more data to train our model, we could increase our accuracy score as the model has more data to learn.
+                    For now, tuned logistic regression is our better option with a 65% accuracy score, 58% precision in class 1 and 69% precision in class 0.
+				</div>
+			</div>
+		</section>
+	</div>
 
 	<!-- Footer -->
 	<footer id="footer" class="wrapper style1-alt">
@@ -2139,16 +2727,18 @@ eval(lr3, 'logreg_coef_tuned', xtrain2, ytrain2, xvalid2, yvalid2, xtest2, ytest
 				<li>&copy; Devy Ratnasari</li>
 				<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
 			</ul>
-			</div>
-		</footer>
+		</div>
+	</footer>
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
 
-	</body></html>
+</body>
+
+</html>
