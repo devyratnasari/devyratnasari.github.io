@@ -1,77 +1,85 @@
 <!DOCTYPE HTML>
 <!--
-	Hyperspace by HTML5 UP
+	Solid State by HTML5 UP
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
 <html>
-
-<head>
-	<link rel="icon" type="image/x-icon" href="/assets/css/images/title.png">
+	<head>
+		<link rel="icon" type="image/x-icon" href="/assets/css/images/title.png">
 	<title>Bonds</title>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	<link rel="stylesheet" href="assets/css/main.css" />
-	<noscript>
-		<link rel="stylesheet" href="assets/css/noscript.css" />
-	</noscript>
-</head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
 
-<body class="is-preload">
+		<!-- Page Wrapper -->
+			<div id="page-wrapper">
 
-	<!-- Header -->
-	<section id="header">
-		<div class="inner" style="padding-left: 5em;">
-			<a href="index.html" class="title" style="font-size: x-large;">
-				<h2>DR</h2>
-			</a>
-		</div>
-		<nav style="font-size: larger;">
-			<ul>
-				<li>
-					<div class="dropdown">
-						<a href="#eda">EDA</a>
-						<div class="dropdown-content">
-							<a href="#eda">User</a>
-							<a href="#dataset2">Transaction</a>
-							<a href="#dataset3">Bonds Order</a>
+				<!-- Header -->
+					<header id="header">
+						<h1><a href="index.html">Devy Ratnasari</a></h1>
+						<nav>
+							<a href="#menu">On This Page</a>
+						</nav>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<div class="inner">
+							<h2>On This Page</h2>
+							<ul class="links">
+								<li><a href="index.html">Home</a></li>
+								<li>
+									<div class="dropdown">
+										<a href="#eda">EDA</a>
+										<div class="dropdown-content">
+											<a href="#eda">User</a>
+											<a href="#dataset2">Transaction</a>
+											<a href="#dataset3">Bonds Order</a>
+										</div>
+									</div>
+								</li>
+								<li><a href="#preprocessing">Preprocessing</a></li>
+								<li>
+									<div class="dropdown">
+										<a href="#logreg1">Models</a>
+										<div class="dropdown-content">
+											<a href="#logreg1">Logistic Regression</a>
+											<a href="#svm">Support Vector Machine</a>
+											<a href="#randomforest">Random Forest</a>
+											<a href="#knn">K-Nearest Neighbor</a>
+											<a href="#dtree">Decision Tree</a>
+											<a href="#naive">Gaussian Naive Bayes</a>
+										</div>
+									</div>
+								<li><a href="#conclusion">Conclusion</a></li>
+								<li><a href="ml.html">Back to projects</a></li>
+							</ul>
+							<a href="#" class="close">Close</a>
 						</div>
-					</div>
-				</li>
-				<li><a href="#preprocessing">Preprocessing</a></li>
-				<li>
-					<div class="dropdown">
-						<a href="#logreg1">Models</a>
-						<div class="dropdown-content">
-							<a href="#logreg1">Logistic Regression</a>
-							<a href="#svm">Support Vector Machine</a>
-							<a href="#randomforest">Random Forest</a>
-							<a href="#knn">K-Nearest Neighbor</a>
-							<a href="#dtree">Decision Tree</a>
-							<a href="#naive">Gaussian Naive Bayes</a>
-						</div>
-					</div>
-				<li><a href="#conclusion">Conclusion</a></li>
-				<li><a href="index.html">Back to projects</a></li>
-			</ul>
-		</nav>
-	</section>
+					</nav>
 
+				<!-- Wrapper -->
+					<section id="wrapper">
+						<header>
+							<div class="inner">
+								<h2>Government bonds buyer predictions</h2>
+								<p>The analysis is conducted to predict how much government bonds the company
+									has to order based on the users behaviour.
+									The dataset is sourced from Indonesia Fintech StartUp between August and October 2021.
+									There are 3 datasets that the company provided:</p>
+							</div>
+						</header>
 
-	<!-- Wrapper -->
-	<div id="wrapper">
+						<!-- Content -->
+							<div class="wrapper">
+								<div class="inner">
 
-		<!-- Main -->
-		<section id="dataset" class="wrapper">
-			<div class="inner" style="font-size: large;">
-				<h1 class="major">Government bonds buyer predictions</h1>
-				<p style="font-size: large;">The analysis is conducted to predict how much government bonds the company
-					has to order based on the users behaviour.
-					The dataset is sourced from Indonesia Fintech StartUp between August and October 2021.
-					There are 3 datasets that the company provided:
-				<ol style="font-size: large;">
-					<li><b>Users information</b> <br>
-						This dataset contains:
+									<h3 class="major">Users information</h3>
+									This dataset contains:
 						<ul style="list-style-type: circle;">
 							<li>user_id - User's identity</li>
 							<li>registration_import_datetime - Date of user registered</li>
@@ -154,8 +162,7 @@
 								</tr>
 							</tbody>
 						</table>
-					</li>
-					<li><b>Users's daily transaction</b><br>
+						<h3 class="major">User's daily transaction</h3>
 						This dataset contains:
 						<ul style="list-style-type: circle;">
 							<li>user_id - Id of user, it's same with the user_id from dataset 1</li>
@@ -292,8 +299,8 @@
 								</table>
 							</div>
 						</ul>
-					</li>
-					<li><b>Bonds history purchase</b><br>This dataset contains:
+						<h3 class="major">Bonds history purchase</h3>
+						This dataset contains:
 						<ul style="list-style: circle;">
 							<li>user_id - ID of the user, same as dataset 1 and 2</li>
 							<li>flag_order_bond - 1 if the user ordered bonds, 0 for the opposite</li>
@@ -340,471 +347,469 @@
 									<td>92</td>
 								</tr>
 							</tbody>
-						</table>
-					</li>
-				</ol>
-				</p>
-				<section>
-					<h2 class="major" id="eda">Users</h2>
-					<p>
-					<div class="desc">We want to see how much the total of data that we have and the datatype, if there
-						are any duplicate in our data, null value or any other problem that we need to taking care of.
-					</div>
-					<pre><code>print(f'Total Row: {user.shape[0]} , Column: {user.shape[1]}')
-user.info()</code></pre>
-					<pre>	Total Row: 14712 , Column: 8
-	RangeIndex: 14712 entries, 0 to 14711
-	Data columns (total 8 columns):
-	#   Column                        Non-Null Count  Dtype    
-	---  ------                        --------------  -----    
-	0   user_id                       14712 non-null  int64    
-	1   registration_import_datetime  14712 non-null  period[D]
-	2   user_gender                   14712 non-null  object   
-	3   user_age                      14712 non-null  int64    
-	4   user_occupation               14712 non-null  object   
-	5   user_income_range             14712 non-null  object   
-	6   referral_code_used            5604 non-null   object   
-	7   user_income_source            14712 non-null  object   
-	dtypes: int64(2), object(5), period[D](1)</pre>
-					<div class="desc">There are 14712 rows of data with 8 columns for the dataset 1, we can see that on
-						the column referral_code_used there are only 5604 rows of non-null data
-						the next step that we will do is to double check null value in the dataset and if any duplicate
-						user_id since the user_id is our primary key.</div>
-					<pre><code>is_duplicate_user = user.user_id.duplicated().sum()
-total_user = user.user_id.count()
-print(f'Total Duplicate User_ID : {is_duplicate_user}')
-print(f'Total User : {total_user}')
-user.isnull().sum()</code></pre>
-					<pre>	Total Duplicate User_ID : 0
-	Total User : 14712
-	user_id                            0
-	registration_import_datetime       0
-	user_gender                        0
-	user_age                           0
-	user_occupation                    0
-	user_income_range                  0
-	referral_code_used              9108
-	user_income_source                 0
-	dtype: int64</pre>
-					<div class="desc">From the result above, it's confirmed that we have 9108 rows of null value in
-						column referral_code_used
-						and luckily, we don't have any duplicate data for the user_id so we can continue to decide what
-						to do with the null value.
-						We will be checking for the unique value from each column in the dataset to help us deciding
-						what to replace the null value with.</div>
-					<pre><code>for x in user:
-	uniqueValues = user[x].unique()
-	n_values = len(uniqueValues)
-	if n_values <=50:
-	print(f'Column: {x} -- total unique value: ({n_values}) {uniqueValues}')</code></pre>
-					<pre style="overflow-x: auto;">	Column: user_gender -- total unique value: (2) ['Female' 'Male']
-	Column: user_occupation -- total unique value: (9) ['Swasta' 'Others' 'IRT' 'PNS' 'Pengusaha' 'Pensiunan' 'TNI/Polisi' 'Guru''Pelajar']
-	Column: user_income_range -- total unique value: (6) ['> Rp 500 Juta - 1 Miliar' '> Rp 50 Juta - 100 Juta' 'Rp 10 Juta - 50 Juta' '< 10 Juta' '> Rp 100 Juta - 500 Juta' '> Rp 1 Miliar']
-	Column: referral_code_used -- total unique value: (2) [nan 'used referral']
-	Column: user_income_source -- total unique value: (10) ['Gaji' 'Keuntungan Bisnis' 'Lainnya' 'Dari Orang Tua / Anak' 'Undian' 'Tabungan' 'Warisan' 'Hasil Investasi' 'Dari Suami / istri' 'Bunga Simpanan']
-	</pre>
-					By checking the unique value, we can see the categorical data of each column. We notice that there
-					are only 2 categories from referral_code_used, which is nan or 'used referral'.
-					We will be converting the null value to none instead of nan or deleting the data.
-					<pre><code>user.referral_code_used.fillna('None', inplace = True)
-user.referral_code_used.unique()
-user.isnull().sum()</code></pre>
-					<pre style="overflow-x: auto;">	array(['None', 'used referral'], dtype=object)
-	user_id                         0
-	registration_import_datetime    0
-	user_gender                     0
-	user_age                        0
-	user_occupation                 0
-	user_income_range               0
-	referral_code_used              0
-	user_income_source              0
-	dtype: int64
-	</pre>
-					We successfully convert the null value to none. Then we will start our analysis by checking the user
-					registration growth between August and October 2021.
-					We will visualise the chart by daily and monthly registration.
-					<pre><code>user['registration_import_datetime'].value_counts().sort_index().plot()
-plt.title('User Join Growth by Day')
-user['registration_month'] = user.registration_import_datetime.dt.to_timestamp('m').copy()
-user.registration_month.value_counts().sort_index().plot()
-plt.title('User Join Growth by Month')
-plt.show()</code></pre>
-					<img src="/images/bonds/user_growth_linechart.png" alt="" class="vis"> <img
-						src="/images/bonds/user_month.png" alt="" class="vis">
-					<div class="desc">In the daily registration chart, we can see that October is the month with the
-						lowest and highest number of registrations,
-						meanwhile when we try to visualise it on monthly basis we can see that September is the month
-						with the highest number of registration, around 5200 users signed up.
-						Next, we want to see the comparison by user's gender.</div>
-					<pre><code>gender = user[['user_id', 'user_gender']].groupby('user_gender').count()
-plt.pie(gender.user_id, labels=gender.index , startangle=90, shadow=True,explode=(0.1, 0.1), autopct='%1.2f%%')
-plt.title('Users\' Gender Distribution')
-plt.show()			</code></pre>
-					<div class="center"><img src="/images/bonds/user_gender.png" alt="" class="center"></div>
-					<div class="desc">The user's gender distribution chart show that around 61.02% of our users are
-						male, meanwhile the rest are female.
-						Then we will try to visualise the user's range and source of income to see more details of it.
-					</div>
-					<pre><code>fig, ax = plt.subplots(figsize=(8, 8), subplot_kw=dict(aspect="equal"))
-income_source = user[['user_id', 'user_income_source']].groupby('user_income_source').count
-def func(pct, allvals):
-	absolute = int(np.round(pct/100.*np.sum(allvals)))
-	return "{:.1f}%\n({:d} users)".format(pct, absolute)
-
-wedges, texts, autotexts = ax.pie(income_source.user_id, autopct=lambda pct: func(pct, income_source.user_id),
-	textprops=dict(color="black"), explode=(1,0,0,0,0,0,0,0,0,0))
-ax.legend(wedges, income_source.index,
-	title="Income Source",
-	loc="upper left",
-	bbox_to_anchor=(1, 0, 0.5, 1))
-plt.setp(autotexts, size=8, weight="bold")
-ax.set_title("User's Income Source")
-plt.show()			</code></pre>
-					<div class="center"><img src="/images/bonds/user_income_source.png" alt=""></div>
-					<div class="desc">We read the chart counterclockwise starting from the exploded pie.
-						It shows that the lowest income source is from Bunga Simpanan (Saving's interest) with 0.2%.
-						whilst the majority of the income source is from Gaji (Salary) with 62.1% or equal to 9131
-						users.
-						Then we will see for the user's income range.</div>
-					<pre><code>fig, ax = plt.subplots(figsize=(6, 5))
-ax = sns.countplot(y= user.user_income_range, data = user)
-
-ax.set_title('User Income Range')
-for x in ax.containers:
-	ax.bar_label(x, label_type='edge')
-
-plt.show()			</code></pre>
-					<div class="center"><img src="/images/bonds/user_income_range.png" alt="" class="center"></div>
-					<div class="desc">The user income range chart shows that the majority of users' income range is less than 10 Million Rupiah (approx 630 USD) with 6275 users.
-						Nevertheless, there are 27 users with the highest income range - 1 Billion Rupiah (approx 63000 USD) which is our potential big investor.
-						We also will try to combine income sources and range to see the breakdown of it. 
-					</div>
-					<pre><code>fig, ax = plt.subplots(figsize=(12, 8))
-ax = sns.countplot(y= user.user_income_source, hue=user.user_income_range, data = user)
-ax.set_title('Income source and range')
-for x in ax.containers:
-	ax.bar_label(x, label_type='edge')
-ax.legend(loc='best', fontsize=8)
-plt.show()</code></pre>
-					<div class="center"><img src="/images/bonds/income_source_range.png" alt=""></div>
-					<div class="desc">From the income range and source chart, we can see that 2835 of our users had wages of less than 10 Million Rupiah. 
-                        Moreover, the majority of our user's salary income range is between 10 Million to 50 Million Rupiah with a total of 3483 users. 
-                        It is noticeable that there are 10 users had a salary of more than 1 Billion Rupiah. 
-                        We will try to visualise the distribution of our user's occupations.
-					</div>
-					<pre><code>fig, ax = plt.subplots(figsize=(10, 5))
-ax =sns.countplot(x=user.user_occupation)
-for x in ax.containers:
-	ax.bar_label(x, label_type='edge')
-ax.set_title('User occupation')
-plt.show()</code></pre>
-					<div class="center"><img src="/images/bonds/occupation.png" alt=""></div>
-					<div class="desc">The users' occupation chart shows that the majority of our users are Pelajar
-                        (Student) with a total of 7887 users.
-                        Which is make sense that our majority income range is less than 10 Million.
-                        We will try to combine the income range and user occupation to see more details about it.</div>
-					<pre><code>fig, ax = plt.subplots(figsize=(12, 8))
-ax = sns.countplot(y= user.user_occupation, hue=user.user_income_range, data = user)
-ax.set_title('Income range and occupation')
-for x in ax.containers:
-	ax.bar_label(x, label_type='edge')
-ax.legend(loc='right', fontsize=8)
-plt.show()</code></pre>
-					<div class="center"><img src="/images/bonds/income_range_occupation.png" alt=""></div>
-					<div class="desc">When we combined the income range and occupation, we found interesting
-                        information that we have 17 students with an income range of more than 500 Million Rupiah.
-                        So we will investigate a little bit further about the 17 students.
-					</div>
-					<pre><code>pelajar_age = user.query('user_occupation == \'Pelajar\' and (user_income_range == \'> Rp 500 Juta - 1 Miliar\'
-	sor user_income_range == \'> Rp 1 Miliar\')')</code></pre>
-					<table id="pelajar" style="overflow-y: scroll;">
-						<thead>
-							<tr style="text-align: right;">
-								<th></th>
-								<th>user_id</th>
-								<th>registration_import_datetime</th>
-								<th>user_gender</th>
-								<th>user_age</th>
-								<th>user_occupation</th>
-								<th>user_income_range</th>
-								<th>referral_code_used</th>
-								<th>user_income_source</th>
-								<th>registration_month</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th>619</th>
-								<td>4228712</td>
-								<td>2021-10-05</td>
-								<td>Male</td>
-								<td>17</td>
-								<td>Pelajar</td>
-								<td>&gt; Rp 1 Miliar</td>
-								<td>used referral</td>
-								<td>Keuntungan Bisnis</td>
-								<td>2021-10-31</td>
-							</tr>
-							<tr>
-								<th>899</th>
-								<td>3795261</td>
-								<td>2021-08-08</td>
-								<td>Male</td>
-								<td>18</td>
-								<td>Pelajar</td>
-								<td>&gt; Rp 1 Miliar</td>
-								<td>used referral</td>
-								<td>Lainnya</td>
-								<td>2021-08-31</td>
-							</tr>
-							<tr>
-								<th>1394</th>
-								<td>4376258</td>
-								<td>2021-10-19</td>
-								<td>Male</td>
-								<td>18</td>
-								<td>Pelajar</td>
-								<td>&gt; Rp 500 Juta - 1 Miliar</td>
-								<td>used referral</td>
-								<td>Gaji</td>
-								<td>2021-10-31</td>
-							</tr>
-							<tr>
-								<th>2282</th>
-								<td>3818578</td>
-								<td>2021-08-16</td>
-								<td>Male</td>
-								<td>19</td>
-								<td>Pelajar</td>
-								<td>&gt; Rp 1 Miliar</td>
-								<td>None</td>
-								<td>Keuntungan Bisnis</td>
-								<td>2021-08-31</td>
-							</tr>
-							<tr>
-								<th>2609</th>
-								<td>3742646</td>
-								<td>2021-08-09</td>
-								<td>Female</td>
-								<td>20</td>
-								<td>Pelajar</td>
-								<td>&gt; Rp 1 Miliar</td>
-								<td>None</td>
-								<td>Keuntungan Bisnis</td>
-								<td>2021-08-31</td>
-							</tr>
-							<tr>
-								<th>3999</th>
-								<td>3749935</td>
-								<td>2021-08-04</td>
-								<td>Female</td>
-								<td>21</td>
-								<td>Pelajar</td>
-								<td>&gt; Rp 1 Miliar</td>
-								<td>None</td>
-								<td>Keuntungan Bisnis</td>
-								<td>2021-08-31</td>
-							</tr>
-							<tr>
-								<th>4076</th>
-								<td>4245492</td>
-								<td>2021-10-07</td>
-								<td>Female</td>
-								<td>21</td>
-								<td>Pelajar</td>
-								<td>&gt; Rp 500 Juta - 1 Miliar</td>
-								<td>None</td>
-								<td>Keuntungan Bisnis</td>
-								<td>2021-10-31</td>
-							</tr>
-							<tr>
-								<th>4569</th>
-								<td>4355874</td>
-								<td>2021-10-17</td>
-								<td>Male</td>
-								<td>21</td>
-								<td>Pelajar</td>
-								<td>&gt; Rp 1 Miliar</td>
-								<td>used referral</td>
-								<td>Keuntungan Bisnis</td>
-								<td>2021-10-31</td>
-							</tr>
-							<tr>
-								<th>6135</th>
-								<td>4239037</td>
-								<td>2021-10-06</td>
-								<td>Female</td>
-								<td>23</td>
-								<td>Pelajar</td>
-								<td>&gt; Rp 500 Juta - 1 Miliar</td>
-								<td>used referral</td>
-								<td>Gaji</td>
-								<td>2021-10-31</td>
-							</tr>
-							<tr>
-								<th>8322</th>
-								<td>4371352</td>
-								<td>2021-10-19</td>
-								<td>Male</td>
-								<td>25</td>
-								<td>Pelajar</td>
-								<td>&gt; Rp 500 Juta - 1 Miliar</td>
-								<td>used referral</td>
-								<td>Gaji</td>
-								<td>2021-10-31</td>
-							</tr>
-							<tr>
-								<th>8871</th>
-								<td>3959126</td>
-								<td>2021-09-02</td>
-								<td>Female</td>
-								<td>26</td>
-								<td>Pelajar</td>
-								<td>&gt; Rp 500 Juta - 1 Miliar</td>
-								<td>used referral</td>
-								<td>Keuntungan Bisnis</td>
-								<td>2021-09-30</td>
-							</tr>
-							<tr>
-								<th>9063</th>
-								<td>4342801</td>
-								<td>2021-10-17</td>
-								<td>Male</td>
-								<td>26</td>
-								<td>Pelajar</td>
-								<td>&gt; Rp 500 Juta - 1 Miliar</td>
-								<td>None</td>
-								<td>Gaji</td>
-								<td>2021-10-31</td>
-							</tr>
-							<tr>
-								<th>9725</th>
-								<td>4270298</td>
-								<td>2021-10-09</td>
-								<td>Female</td>
-								<td>27</td>
-								<td>Pelajar</td>
-								<td>&gt; Rp 500 Juta - 1 Miliar</td>
-								<td>None</td>
-								<td>Keuntungan Bisnis</td>
-								<td>2021-10-31</td>
-							</tr>
-							<tr>
-								<th>10101</th>
-								<td>4134537</td>
-								<td>2021-09-24</td>
-								<td>Male</td>
-								<td>28</td>
-								<td>Pelajar</td>
-								<td>&gt; Rp 500 Juta - 1 Miliar</td>
-								<td>None</td>
-								<td>Keuntungan Bisnis</td>
-								<td>2021-09-30</td>
-							</tr>
-							<tr>
-								<th>10925</th>
-								<td>4338825</td>
-								<td>2021-10-15</td>
-								<td>Male</td>
-								<td>29</td>
-								<td>Pelajar</td>
-								<td>&gt; Rp 1 Miliar</td>
-								<td>used referral</td>
-								<td>Lainnya</td>
-								<td>2021-10-31</td>
-							</tr>
-							<tr>
-								<th>11617</th>
-								<td>4164878</td>
-								<td>2021-10-02</td>
-								<td>Male</td>
-								<td>31</td>
-								<td>Pelajar</td>
-								<td>&gt; Rp 500 Juta - 1 Miliar</td>
-								<td>used referral</td>
-								<td>Keuntungan Bisnis</td>
-								<td>2021-10-31</td>
-							</tr>
-							<tr>
-								<th>11950</th>
-								<td>3858112</td>
-								<td>2021-08-18</td>
-								<td>Female</td>
-								<td>32</td>
-								<td>Pelajar</td>
-								<td>&gt; Rp 500 Juta - 1 Miliar</td>
-								<td>None</td>
-								<td>Gaji</td>
-								<td>2021-08-31</td>
-							</tr>
-						</tbody>
-					</table>
-					<div class="desc">It's interesting that we have a few users aged below 20, as a student with
-                        an income range above 500 Million Rupiah and the income source is from business profit.
-                        There is a possibility with the wrong information the user provided.
-                        However, we just leave it as is for now and take notes just in case we might need some
-                        adjustments prior to building the model.
-                        The next thing we want to check is how many per cent of our users registered using referral codes.
-                        This might also will help to decide what type of campaign approach to increase the registration
-                        number.</div>
-					<pre><code>referral_code = user[['user_id', 'referral_code_used']].groupby('referral_code_used').count()
-plt.pie(referral_code.user_id, labels=referral_code.index, startangle=90, shadow=True,explode=(0.1, 0.1), autopct='%1.2f%%')
-plt.title('Referral Code Comparison')
-plt.show()</code></pre>
-					<div class="center"><img src="/images/bonds/referral_code.png" alt=""></div>
-					<div class="desc">We can see from the referral code comparison that only 38.09% of our users use referral codes during their registration process.
-                        We can create an announcement on the company website or application about bonus credit if the users refer some friends to register with us.
-                        This will increase the number of new users, and transactions, and also a cheaper version of the advertisement as we announce it using our private platform so third-party advertisement costs are needed.
-                        As well as encourage the current users to make more transactions using the bonus credit and so on.
-                        We will check the average age of our users.
-					</div>
-					<pre><code>user['user_age'].describe()</code>
-	count    14712.000000
-	mean        27.176591
-	std          8.552585
-	min         17.000000
-	25%         21.000000
-	50%         25.000000
-	75%         31.000000
-	max         83.000000
-	Name: user_age, dtype: float64</pre>
-					<div class="desc">The description shows that the average age of our users is 27 years old. The youngest is 17 and the oldest is 83 years old.
-                        We will try to visualise its distribution of it by using the histogram.					</div>
-					<pre><code>user['user_age'].hist(figsize = (5,5))
-plt.title('User age distribution')</code></pre>
-					<div class="center"><img src="/images/bonds/age_histogram.png" alt=""></div>
-					<div class="desc">The histogram shows that most of our users are in the age group 20's and 30's.
-                        The next step we will do is to use zscore to calculate if there are any outliers.</div>
-					<pre><code>mean = np.mean(user.user_age)
-std = np.std(user.user_age)
-outlier = []
-for i in user.user_age:
-	z = (i-mean)/std
-	if z > 3:
-		outlier.append(i)
-print('outliers in dataset are', set(outlier))
-sns.boxplot(x=user.user_age)</code>
-	outliers in dataset are {53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 69, 71, 73, 74, 76, 82, 83}</pre>
-					<div class="center"><img src="/images/bonds/outliers.png" alt=""></div>
-					<div class="desc">The z-score calculation, shows the outliers from the user's age are 53 years and older.
-                        We will visualise the distribution and check how many users are in the outliers then merge dataset 1 and the transactions' dataset to see how many percentages of the outlier's users contribute to the transaction before we decide to remove the outliers or just leave it as is.</div>
-					<pre><code>user_outliers = user.loc[user.user_age>=53,:]
-total_out = user_outliers.user_id.count()
-percentage_outliers = (total_out/total_user)
-print(f'Total users in outliers : {total_out} OR {percentage_outliers:.2%} from total user')
-fig, ax = plt.subplots(figsize=(6, 5))
-ax = sns.countplot(y= user_outliers.user_age, data = user_outliers)
-ax.set_title('User distribution above 53 years of age')
-for x in ax.containers:
-	ax.bar_label(x, label_type='edge')
-plt.show()</code>
-	Total users in outliers : 264 OR 1.79% from total user</pre>
-					<div class="center"><img src="/images/bonds/outliers_dist.png" alt=""></div>
-					<div class="desc">The chart above shows that we have a total of 264 users in the outliers category or equal to 1.79% of the total user.
-                        With the highest distribution at 54 years of age and the lowest starting from 73 years. Since the age outliers are still in the normal scope, we will keep the users 54 years of age and older included in our analysis.
-					</div>
-				</section>
-				<h2 class="major" id="dataset2">Transactions</h2>
+						</table>	
+						<section id="eda">
+							<h2 class="major">Users</h2>
+							<p>
+							<div class="desc">We want to see how much the total of data that we have and the datatype, if there
+								are any duplicate in our data, null value or any other problem that we need to taking care of.
+							</div>
+							<pre><code>print(f'Total Row: {user.shape[0]} , Column: {user.shape[1]}')
+		user.info()</code></pre>
+							<pre>	Total Row: 14712 , Column: 8
+			RangeIndex: 14712 entries, 0 to 14711
+			Data columns (total 8 columns):
+			#   Column                        Non-Null Count  Dtype    
+			---  ------                        --------------  -----    
+			0   user_id                       14712 non-null  int64    
+			1   registration_import_datetime  14712 non-null  period[D]
+			2   user_gender                   14712 non-null  object   
+			3   user_age                      14712 non-null  int64    
+			4   user_occupation               14712 non-null  object   
+			5   user_income_range             14712 non-null  object   
+			6   referral_code_used            5604 non-null   object   
+			7   user_income_source            14712 non-null  object   
+			dtypes: int64(2), object(5), period[D](1)</pre>
+							<div class="desc">There are 14712 rows of data with 8 columns for the dataset 1, we can see that on
+								the column referral_code_used there are only 5604 rows of non-null data
+								the next step that we will do is to double check null value in the dataset and if any duplicate
+								user_id since the user_id is our primary key.</div>
+							<pre><code>is_duplicate_user = user.user_id.duplicated().sum()
+		total_user = user.user_id.count()
+		print(f'Total Duplicate User_ID : {is_duplicate_user}')
+		print(f'Total User : {total_user}')
+		user.isnull().sum()</code></pre>
+							<pre>	Total Duplicate User_ID : 0
+			Total User : 14712
+			user_id                            0
+			registration_import_datetime       0
+			user_gender                        0
+			user_age                           0
+			user_occupation                    0
+			user_income_range                  0
+			referral_code_used              9108
+			user_income_source                 0
+			dtype: int64</pre>
+							<div class="desc">From the result above, it's confirmed that we have 9108 rows of null value in
+								column referral_code_used
+								and luckily, we don't have any duplicate data for the user_id so we can continue to decide what
+								to do with the null value.
+								We will be checking for the unique value from each column in the dataset to help us deciding
+								what to replace the null value with.</div>
+							<pre><code>for x in user:
+			uniqueValues = user[x].unique()
+			n_values = len(uniqueValues)
+			if n_values <=50:
+			print(f'Column: {x} -- total unique value: ({n_values}) {uniqueValues}')</code></pre>
+							<pre style="overflow-x: auto;">	Column: user_gender -- total unique value: (2) ['Female' 'Male']
+			Column: user_occupation -- total unique value: (9) ['Swasta' 'Others' 'IRT' 'PNS' 'Pengusaha' 'Pensiunan' 'TNI/Polisi' 'Guru''Pelajar']
+			Column: user_income_range -- total unique value: (6) ['> Rp 500 Juta - 1 Miliar' '> Rp 50 Juta - 100 Juta' 'Rp 10 Juta - 50 Juta' '< 10 Juta' '> Rp 100 Juta - 500 Juta' '> Rp 1 Miliar']
+			Column: referral_code_used -- total unique value: (2) [nan 'used referral']
+			Column: user_income_source -- total unique value: (10) ['Gaji' 'Keuntungan Bisnis' 'Lainnya' 'Dari Orang Tua / Anak' 'Undian' 'Tabungan' 'Warisan' 'Hasil Investasi' 'Dari Suami / istri' 'Bunga Simpanan']
+			</pre>
+							By checking the unique value, we can see the categorical data of each column. We notice that there
+							are only 2 categories from referral_code_used, which is nan or 'used referral'.
+							We will be converting the null value to none instead of nan or deleting the data.
+							<pre><code>user.referral_code_used.fillna('None', inplace = True)
+		user.referral_code_used.unique()
+		user.isnull().sum()</code></pre>
+							<pre style="overflow-x: auto;">	array(['None', 'used referral'], dtype=object)
+			user_id                         0
+			registration_import_datetime    0
+			user_gender                     0
+			user_age                        0
+			user_occupation                 0
+			user_income_range               0
+			referral_code_used              0
+			user_income_source              0
+			dtype: int64
+			</pre>
+							We successfully convert the null value to none. Then we will start our analysis by checking the user
+							registration growth between August and October 2021.
+							We will visualise the chart by daily and monthly registration.
+							<pre><code>user['registration_import_datetime'].value_counts().sort_index().plot()
+		plt.title('User Join Growth by Day')
+		user['registration_month'] = user.registration_import_datetime.dt.to_timestamp('m').copy()
+		user.registration_month.value_counts().sort_index().plot()
+		plt.title('User Join Growth by Month')
+		plt.show()</code></pre>
+							<img src="/images/bonds/user_growth_linechart.png" alt="" class="vis"> <img
+								src="/images/bonds/user_month.png" alt="" class="vis">
+							<div class="desc">In the daily registration chart, we can see that October is the month with the
+								lowest and highest number of registrations,
+								meanwhile when we try to visualise it on monthly basis we can see that September is the month
+								with the highest number of registration, around 5200 users signed up.
+								Next, we want to see the comparison by user's gender.</div>
+							<pre><code>gender = user[['user_id', 'user_gender']].groupby('user_gender').count()
+		plt.pie(gender.user_id, labels=gender.index , startangle=90, shadow=True,explode=(0.1, 0.1), autopct='%1.2f%%')
+		plt.title('Users\' Gender Distribution')
+		plt.show()			</code></pre>
+							<div class="center"><img src="/images/bonds/user_gender.png" alt="" class="center"></div>
+							<div class="desc">The user's gender distribution chart show that around 61.02% of our users are
+								male, meanwhile the rest are female.
+								Then we will try to visualise the user's range and source of income to see more details of it.
+							</div>
+							<pre><code>fig, ax = plt.subplots(figsize=(8, 8), subplot_kw=dict(aspect="equal"))
+		income_source = user[['user_id', 'user_income_source']].groupby('user_income_source').count
+		def func(pct, allvals):
+			absolute = int(np.round(pct/100.*np.sum(allvals)))
+			return "{:.1f}%\n({:d} users)".format(pct, absolute)
+		
+		wedges, texts, autotexts = ax.pie(income_source.user_id, autopct=lambda pct: func(pct, income_source.user_id),
+			textprops=dict(color="black"), explode=(1,0,0,0,0,0,0,0,0,0))
+		ax.legend(wedges, income_source.index,
+			title="Income Source",
+			loc="upper left",
+			bbox_to_anchor=(1, 0, 0.5, 1))
+		plt.setp(autotexts, size=8, weight="bold")
+		ax.set_title("User's Income Source")
+		plt.show()			</code></pre>
+							<div class="center"><img src="/images/bonds/user_income_source.png" alt=""></div>
+							<div class="desc">We read the chart counterclockwise starting from the exploded pie.
+								It shows that the lowest income source is from Bunga Simpanan (Saving's interest) with 0.2%.
+								whilst the majority of the income source is from Gaji (Salary) with 62.1% or equal to 9131
+								users.
+								Then we will see for the user's income range.</div>
+							<pre><code>fig, ax = plt.subplots(figsize=(6, 5))
+		ax = sns.countplot(y= user.user_income_range, data = user)
+		
+		ax.set_title('User Income Range')
+		for x in ax.containers:
+			ax.bar_label(x, label_type='edge')
+		
+		plt.show()			</code></pre>
+							<div class="center"><img src="/images/bonds/user_income_range.png" alt="" class="center"></div>
+							<div class="desc">The user income range chart shows that the majority of users' income range is less than 10 Million Rupiah (approx 630 USD) with 6275 users.
+								Nevertheless, there are 27 users with the highest income range - 1 Billion Rupiah (approx 63000 USD) which is our potential big investor.
+								We also will try to combine income sources and range to see the breakdown of it. 
+							</div>
+							<pre><code>fig, ax = plt.subplots(figsize=(12, 8))
+		ax = sns.countplot(y= user.user_income_source, hue=user.user_income_range, data = user)
+		ax.set_title('Income source and range')
+		for x in ax.containers:
+			ax.bar_label(x, label_type='edge')
+		ax.legend(loc='best', fontsize=8)
+		plt.show()</code></pre>
+							<div class="center"><img src="/images/bonds/income_source_range.png" alt=""></div>
+							<div class="desc">From the income range and source chart, we can see that 2835 of our users had wages of less than 10 Million Rupiah. 
+								Moreover, the majority of our user's salary income range is between 10 Million to 50 Million Rupiah with a total of 3483 users. 
+								It is noticeable that there are 10 users had a salary of more than 1 Billion Rupiah. 
+								We will try to visualise the distribution of our user's occupations.
+							</div>
+							<pre><code>fig, ax = plt.subplots(figsize=(10, 5))
+		ax =sns.countplot(x=user.user_occupation)
+		for x in ax.containers:
+			ax.bar_label(x, label_type='edge')
+		ax.set_title('User occupation')
+		plt.show()</code></pre>
+							<div class="center"><img src="/images/bonds/occupation.png" alt=""></div>
+							<div class="desc">The users' occupation chart shows that the majority of our users are Pelajar
+								(Student) with a total of 7887 users.
+								Which is make sense that our majority income range is less than 10 Million.
+								We will try to combine the income range and user occupation to see more details about it.</div>
+							<pre><code>fig, ax = plt.subplots(figsize=(12, 8))
+		ax = sns.countplot(y= user.user_occupation, hue=user.user_income_range, data = user)
+		ax.set_title('Income range and occupation')
+		for x in ax.containers:
+			ax.bar_label(x, label_type='edge')
+		ax.legend(loc='right', fontsize=8)
+		plt.show()</code></pre>
+							<div class="center"><img src="/images/bonds/income_range_occupation.png" alt=""></div>
+							<div class="desc">When we combined the income range and occupation, we found interesting
+								information that we have 17 students with an income range of more than 500 Million Rupiah.
+								So we will investigate a little bit further about the 17 students.
+							</div>
+							<pre><code>pelajar_age = user.query('user_occupation == \'Pelajar\' and (user_income_range == \'> Rp 500 Juta - 1 Miliar\'
+			sor user_income_range == \'> Rp 1 Miliar\')')</code></pre>
+							<table id="pelajar" style="overflow-y: scroll;">
+								<thead>
+									<tr style="text-align: right;">
+										<th></th>
+										<th>user_id</th>
+										<th>registration_import_datetime</th>
+										<th>user_gender</th>
+										<th>user_age</th>
+										<th>user_occupation</th>
+										<th>user_income_range</th>
+										<th>referral_code_used</th>
+										<th>user_income_source</th>
+										<th>registration_month</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<th>619</th>
+										<td>4228712</td>
+										<td>2021-10-05</td>
+										<td>Male</td>
+										<td>17</td>
+										<td>Pelajar</td>
+										<td>&gt; Rp 1 Miliar</td>
+										<td>used referral</td>
+										<td>Keuntungan Bisnis</td>
+										<td>2021-10-31</td>
+									</tr>
+									<tr>
+										<th>899</th>
+										<td>3795261</td>
+										<td>2021-08-08</td>
+										<td>Male</td>
+										<td>18</td>
+										<td>Pelajar</td>
+										<td>&gt; Rp 1 Miliar</td>
+										<td>used referral</td>
+										<td>Lainnya</td>
+										<td>2021-08-31</td>
+									</tr>
+									<tr>
+										<th>1394</th>
+										<td>4376258</td>
+										<td>2021-10-19</td>
+										<td>Male</td>
+										<td>18</td>
+										<td>Pelajar</td>
+										<td>&gt; Rp 500 Juta - 1 Miliar</td>
+										<td>used referral</td>
+										<td>Gaji</td>
+										<td>2021-10-31</td>
+									</tr>
+									<tr>
+										<th>2282</th>
+										<td>3818578</td>
+										<td>2021-08-16</td>
+										<td>Male</td>
+										<td>19</td>
+										<td>Pelajar</td>
+										<td>&gt; Rp 1 Miliar</td>
+										<td>None</td>
+										<td>Keuntungan Bisnis</td>
+										<td>2021-08-31</td>
+									</tr>
+									<tr>
+										<th>2609</th>
+										<td>3742646</td>
+										<td>2021-08-09</td>
+										<td>Female</td>
+										<td>20</td>
+										<td>Pelajar</td>
+										<td>&gt; Rp 1 Miliar</td>
+										<td>None</td>
+										<td>Keuntungan Bisnis</td>
+										<td>2021-08-31</td>
+									</tr>
+									<tr>
+										<th>3999</th>
+										<td>3749935</td>
+										<td>2021-08-04</td>
+										<td>Female</td>
+										<td>21</td>
+										<td>Pelajar</td>
+										<td>&gt; Rp 1 Miliar</td>
+										<td>None</td>
+										<td>Keuntungan Bisnis</td>
+										<td>2021-08-31</td>
+									</tr>
+									<tr>
+										<th>4076</th>
+										<td>4245492</td>
+										<td>2021-10-07</td>
+										<td>Female</td>
+										<td>21</td>
+										<td>Pelajar</td>
+										<td>&gt; Rp 500 Juta - 1 Miliar</td>
+										<td>None</td>
+										<td>Keuntungan Bisnis</td>
+										<td>2021-10-31</td>
+									</tr>
+									<tr>
+										<th>4569</th>
+										<td>4355874</td>
+										<td>2021-10-17</td>
+										<td>Male</td>
+										<td>21</td>
+										<td>Pelajar</td>
+										<td>&gt; Rp 1 Miliar</td>
+										<td>used referral</td>
+										<td>Keuntungan Bisnis</td>
+										<td>2021-10-31</td>
+									</tr>
+									<tr>
+										<th>6135</th>
+										<td>4239037</td>
+										<td>2021-10-06</td>
+										<td>Female</td>
+										<td>23</td>
+										<td>Pelajar</td>
+										<td>&gt; Rp 500 Juta - 1 Miliar</td>
+										<td>used referral</td>
+										<td>Gaji</td>
+										<td>2021-10-31</td>
+									</tr>
+									<tr>
+										<th>8322</th>
+										<td>4371352</td>
+										<td>2021-10-19</td>
+										<td>Male</td>
+										<td>25</td>
+										<td>Pelajar</td>
+										<td>&gt; Rp 500 Juta - 1 Miliar</td>
+										<td>used referral</td>
+										<td>Gaji</td>
+										<td>2021-10-31</td>
+									</tr>
+									<tr>
+										<th>8871</th>
+										<td>3959126</td>
+										<td>2021-09-02</td>
+										<td>Female</td>
+										<td>26</td>
+										<td>Pelajar</td>
+										<td>&gt; Rp 500 Juta - 1 Miliar</td>
+										<td>used referral</td>
+										<td>Keuntungan Bisnis</td>
+										<td>2021-09-30</td>
+									</tr>
+									<tr>
+										<th>9063</th>
+										<td>4342801</td>
+										<td>2021-10-17</td>
+										<td>Male</td>
+										<td>26</td>
+										<td>Pelajar</td>
+										<td>&gt; Rp 500 Juta - 1 Miliar</td>
+										<td>None</td>
+										<td>Gaji</td>
+										<td>2021-10-31</td>
+									</tr>
+									<tr>
+										<th>9725</th>
+										<td>4270298</td>
+										<td>2021-10-09</td>
+										<td>Female</td>
+										<td>27</td>
+										<td>Pelajar</td>
+										<td>&gt; Rp 500 Juta - 1 Miliar</td>
+										<td>None</td>
+										<td>Keuntungan Bisnis</td>
+										<td>2021-10-31</td>
+									</tr>
+									<tr>
+										<th>10101</th>
+										<td>4134537</td>
+										<td>2021-09-24</td>
+										<td>Male</td>
+										<td>28</td>
+										<td>Pelajar</td>
+										<td>&gt; Rp 500 Juta - 1 Miliar</td>
+										<td>None</td>
+										<td>Keuntungan Bisnis</td>
+										<td>2021-09-30</td>
+									</tr>
+									<tr>
+										<th>10925</th>
+										<td>4338825</td>
+										<td>2021-10-15</td>
+										<td>Male</td>
+										<td>29</td>
+										<td>Pelajar</td>
+										<td>&gt; Rp 1 Miliar</td>
+										<td>used referral</td>
+										<td>Lainnya</td>
+										<td>2021-10-31</td>
+									</tr>
+									<tr>
+										<th>11617</th>
+										<td>4164878</td>
+										<td>2021-10-02</td>
+										<td>Male</td>
+										<td>31</td>
+										<td>Pelajar</td>
+										<td>&gt; Rp 500 Juta - 1 Miliar</td>
+										<td>used referral</td>
+										<td>Keuntungan Bisnis</td>
+										<td>2021-10-31</td>
+									</tr>
+									<tr>
+										<th>11950</th>
+										<td>3858112</td>
+										<td>2021-08-18</td>
+										<td>Female</td>
+										<td>32</td>
+										<td>Pelajar</td>
+										<td>&gt; Rp 500 Juta - 1 Miliar</td>
+										<td>None</td>
+										<td>Gaji</td>
+										<td>2021-08-31</td>
+									</tr>
+								</tbody>
+							</table>
+							<div class="desc">It's interesting that we have a few users aged below 20, as a student with
+								an income range above 500 Million Rupiah and the income source is from business profit.
+								There is a possibility with the wrong information the user provided.
+								However, we just leave it as is for now and take notes just in case we might need some
+								adjustments prior to building the model.
+								The next thing we want to check is how many per cent of our users registered using referral codes.
+								This might also will help to decide what type of campaign approach to increase the registration
+								number.</div>
+							<pre><code>referral_code = user[['user_id', 'referral_code_used']].groupby('referral_code_used').count()
+		plt.pie(referral_code.user_id, labels=referral_code.index, startangle=90, shadow=True,explode=(0.1, 0.1), autopct='%1.2f%%')
+		plt.title('Referral Code Comparison')
+		plt.show()</code></pre>
+							<div class="center"><img src="/images/bonds/referral_code.png" alt=""></div>
+							<div class="desc">We can see from the referral code comparison that only 38.09% of our users use referral codes during their registration process.
+								We can create an announcement on the company website or application about bonus credit if the users refer some friends to register with us.
+								This will increase the number of new users, and transactions, and also a cheaper version of the advertisement as we announce it using our private platform so third-party advertisement costs are needed.
+								As well as encourage the current users to make more transactions using the bonus credit and so on.
+								We will check the average age of our users.
+							</div>
+							<pre><code>user['user_age'].describe()</code>
+			count    14712.000000
+			mean        27.176591
+			std          8.552585
+			min         17.000000
+			25%         21.000000
+			50%         25.000000
+			75%         31.000000
+			max         83.000000
+			Name: user_age, dtype: float64</pre>
+							<div class="desc">The description shows that the average age of our users is 27 years old. The youngest is 17 and the oldest is 83 years old.
+								We will try to visualise its distribution of it by using the histogram.					</div>
+							<pre><code>user['user_age'].hist(figsize = (5,5))
+		plt.title('User age distribution')</code></pre>
+							<div class="center"><img src="/images/bonds/age_histogram.png" alt=""></div>
+							<div class="desc">The histogram shows that most of our users are in the age group 20's and 30's.
+								The next step we will do is to use zscore to calculate if there are any outliers.</div>
+							<pre><code>mean = np.mean(user.user_age)
+		std = np.std(user.user_age)
+		outlier = []
+		for i in user.user_age:
+			z = (i-mean)/std
+			if z > 3:
+				outlier.append(i)
+		print('outliers in dataset are', set(outlier))
+		sns.boxplot(x=user.user_age)</code>
+			outliers in dataset are {53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 69, 71, 73, 74, 76, 82, 83}</pre>
+							<div class="center"><img src="/images/bonds/outliers.png" alt=""></div>
+							<div class="desc">The z-score calculation, shows the outliers from the user's age are 53 years and older.
+								We will visualise the distribution and check how many users are in the outliers then merge dataset 1 and the transactions' dataset to see how many percentages of the outlier's users contribute to the transaction before we decide to remove the outliers or just leave it as is.</div>
+							<pre><code>user_outliers = user.loc[user.user_age>=53,:]
+		total_out = user_outliers.user_id.count()
+		percentage_outliers = (total_out/total_user)
+		print(f'Total users in outliers : {total_out} OR {percentage_outliers:.2%} from total user')
+		fig, ax = plt.subplots(figsize=(6, 5))
+		ax = sns.countplot(y= user_outliers.user_age, data = user_outliers)
+		ax.set_title('User distribution above 53 years of age')
+		for x in ax.containers:
+			ax.bar_label(x, label_type='edge')
+		plt.show()</code>
+			Total users in outliers : 264 OR 1.79% from total user</pre>
+							<div class="center"><img src="/images/bonds/outliers_dist.png" alt=""></div>
+							<div class="desc">The chart above shows that we have a total of 264 users in the outliers category or equal to 1.79% of the total user.
+								With the highest distribution at 54 years of age and the lowest starting from 73 years. Since the age outliers are still in the normal scope, we will keep the users 54 years of age and older included in our analysis.
+							</div>
+						</section>
+						<section id="dataset2">
+							<h2 class="major" id="dataset2">Transactions</h2>
 				<div class="desc">We want to check how many rows of data we have on the transactions' dataset and the total number of users that making transactions.</div>
 				<pre><code>print(f'Total rows: {trans.shape[0]} ,columns: {trans.shape[1]}')
 transcation_users = trans['user_id'].nunique()
@@ -1619,155 +1624,11 @@ new_trans.head()</code>
 						</tbody>
 					</table>
 				</div>
-				<!--<div class="desc">Now, we get a new dataset that has been clean and aggregate by users then we will
-	continue our investigation for our previous outliers with user age older than 53 years old.
-	The first thing we will do is to merge the new dataset with user_outliers to see how many of the outliers contribute with the transaction.</div>
-<pre><code>trans_outliers = user_outliers[['user_id', 'user_age']].merge(new_trans, on='user_id')
-total_out_transaction = trans_outliers.user_id.nunique()
-percentage_out_transaction = (total_out_transaction/transcation_users)
-print(f'Total users in outliers making transaction: {total_out_transaction}
-	OR {percentage_out_transaction:.2%} from the user that making transaction.')
-trans_outliers.head()</code>
-	Total users in outliers making transaction: 145 OR 1.75% from the user that making transactions.</pre>
-	<div class="table-wrapper">
-		<table>
-			<thead>
-				<tr style="text-align: right;">
-				  <th></th>
-				  <th>user_id</th>
-				  <th>user_age</th>
-				  <th>trans_date</th>
-				  <th>Saham_AUM</th>
-				  <th>Saham_invested_amount</th>
-				  <th>Pasar_Uang_AUM</th>
-				  <th>Pasar_Uang_invested_amount</th>
-				  <th>Pendapatan_Tetap_AUM</th>
-				  <th>Pendapatan_Tetap_invested_amount</th>
-				  <th>Campuran_AUM</th>
-				  <th>Campuran_invested_amount</th>
-				  <th>Saham_transaction_amount</th>
-				  <th>Pasar_Uang_transaction_amount</th>
-				  <th>Pendapatan_Tetap_transaction_amount</th>
-				  <th>Campuran_transaction_amount</th>
-				</tr>
-			  </thead>
-			  <tbody>
-				<tr>
-				  <th>0</th>
-				  <td>3816789</td>
-				  <td>53</td>
-				  <td>2021-09-30</td>
-				  <td>297141.00</td>
-				  <td>290000.00</td>
-				  <td>40235.00</td>
-				  <td>40000.00</td>
-				  <td>270673.00</td>
-				  <td>270000.00</td>
-				  <td>0.00</td>
-				  <td>0.00</td>
-				  <td>100000.00</td>
-				  <td>0.00</td>
-				  <td>0.00</td>
-				  <td>0.00</td>
-				</tr>
-				<tr>
-				  <th>1</th>
-				  <td>3049927</td>
-				  <td>53</td>
-				  <td>2021-09-30</td>
-				  <td>41545.00</td>
-				  <td>40000.00</td>
-				  <td>9997.00</td>
-				  <td>10000.00</td>
-				  <td>49925.00</td>
-				  <td>50000.00</td>
-				  <td>910285.00</td>
-				  <td>899000.00</td>
-				  <td>0.00</td>
-				  <td>0.00</td>
-				  <td>0.00</td>
-				  <td>149000.00</td>
-				</tr>
-				<tr>
-				  <th>2</th>
-				  <td>3836491</td>
-				  <td>59</td>
-				  <td>2021-09-30</td>
-				  <td>0.00</td>
-				  <td>0.00</td>
-				  <td>10012.00</td>
-				  <td>10000.00</td>
-				  <td>0.00</td>
-				  <td>0.00</td>
-				  <td>0.00</td>
-				  <td>0.00</td>
-				  <td>0.00</td>
-				  <td>0.00</td>
-				  <td>0.00</td>
-				  <td>0.00</td>
-				</tr>
-				<tr>
-				  <th>3</th>
-				  <td>3783302</td>
-				  <td>57</td>
-				  <td>2021-09-30</td>
-				  <td>0.00</td>
-				  <td>0.00</td>
-				  <td>0.00</td>
-				  <td>0.00</td>
-				  <td>107322.00</td>
-				  <td>110431.00</td>
-				  <td>0.00</td>
-				  <td>0.00</td>
-				  <td>-370000.00</td>
-				  <td>-100000.00</td>
-				  <td>-419569.00</td>
-				  <td>0.00</td>
-				</tr>
-				<tr>
-				  <th>4</th>
-				  <td>3820160</td>
-				  <td>58</td>
-				  <td>2021-09-30</td>
-				  <td>62351.00</td>
-				  <td>60000.00</td>
-				  <td>20032.00</td>
-				  <td>20000.00</td>
-				  <td>145083.00</td>
-				  <td>145000.00</td>
-				  <td>0.00</td>
-				  <td>0.00</td>
-				  <td>30000.00</td>
-				  <td>0.00</td>
-				  <td>75000.00</td>
-				  <td>0.00</td>
-				</tr>
-			  </tbody>
-		</table>
-	</div>
-	<div class="desc">From the total of 264 outliers users, apparently there are only 145 of them making
-		transactions or it equal to 1.75% from the total of new transactions' dataset.
-		That number is relatively small, which it's okay if we just exclude the outliers from our analysis.
-		However, we will double check if they contribute in a big amount of transaction or
-		not to avoid removing big investor that hide in the outliers. 
-	</div>
-<pre><code>idx= ['saham', 'campuran', 'pasar uang', 'pendapatan tetap']
-sum_outliers = [trans_outliers.Saham_transaction_amount.max(), trans_outliers.Campuran_transaction_amount.max(),
-	trans_outliers.Pasar_Uang_transaction_amount.max(),	trans_outliers.Pendapatan_Tetap_transaction_amount.max()]
-sum_full = [new_trans.Saham_transaction_amount.max(), new_trans.Campuran_transaction_amount.max(),
-	new_trans.Pasar_Uang_transaction_amount.max(), new_trans.Pendapatan_Tetap_transaction_amount.max()]
-
-X = np.arange(4)
-plt.bar(X + 0.00, sum_outliers, width = 0.25, label='max outlier')
-plt.bar(X + 0.25, sum_full, width = 0.25, label='max total')
-plt.ticklabel_format(useOffset=False, style='plain')
-plt.xticks(X, idx)
-plt.legend()
-plt.title('Comparison max transactions outliers and whole')</code></pre>
-<div class="center"><img src="/images/bonds/compare_out.png" alt=""></div>-->
 				<div class="desc">The next thing we will do is to do a quick exploration of our bonds order dataset before combining it with user and transaction.
 				</div>
-				<h2 class="major" id="dataset3">Bonds Order</h2>
+						</section>
+						<section id="dataset3">
+							<h2 class="major" id="dataset3">Bonds Order</h2>
 				<pre><code>print(f'Total rows: {result.shape[0]}, columns:{result.shape[1]}')
 print(f'Total User: {result.user_id.nunique()}')
 result.info()</code>
@@ -1912,7 +1773,9 @@ plt.show()</code></pre>
 	'Pasar_Uang_transaction_amount_buy', 'Pendapatan_Tetap_transaction_amount_buy', 'Campuran_transaction_amount_buy',
 	'bond_units_ordered']
 full_data.drop(pos_corr, axis=1, inplace=True)</code></pre>
-				<h2 class="major" id="preprocessing">Preprocessing</h2>
+						</section>
+						<section id="preprocessing">
+							<h2 class="major" id="preprocessing">Preprocessing</h2>
 				<div class="desc">So, we will convert our categorical data into numerical. We will print out the unique value from non-numerical data.
                     Moreover, we will remove the column transaction date, registration month, and user id.
 				</div>
@@ -2024,7 +1887,10 @@ def eval(model, name, x1, y1, x2, y2, x3,y3):
 	print('RMSE test: %.3f' % rmse)
 	print('R^2 test: %.3f' % r2)
 	score_comp.append([name, acctrain, accvalid, acctest, rmse, r2])</code></pre>
-				<h2 class="major" id="logreg1">Model 1 - Logistic Regression</h2>
+						</section>
+
+						<section id="logreg1">
+							<h2 class="major" id="logreg1">Model 1 - Logistic Regression</h2>
 				<div class="desc">The first model that we will implement is using Logistic Regression with our original
 					dataset.</div>
 				<pre><code>xtrain, ytrain, xvalid, yvalid, xtest, ytest = split_scaled(x_v1, y_v1)
@@ -2045,8 +1911,8 @@ eval(logreg, 'logreg1', xtrain, ytrain, xvalid, yvalid, xtest, ytest)</code>
 	Recall class 0: 75.92%
 	F1: 45.92%
 	ROC AUC Training: 66.75% Testing: 64.66%</pre>
-				<div class="center"><img src="/images/bonds/cm-lr1.png" alt=""> <img src="/images/bonds/roc_logreg.png"
-						alt=""></div>
+				<div class="center"><img src="/images/bonds/cm-lr1.png" alt="" class="vis"> <img src="/images/bonds/roc_logreg.png"
+						alt="" class="vis"></div>
 				<div class="desc">So, we can see that our model does not give a good accuracy score.
 					We will try to tune the model using GridSearch Cross Validation to improve the performance.</div>
 				<pre><code>from sklearn.model_selection import GridSearchCV
@@ -2081,8 +1947,8 @@ eval(lr,'logreg_tuned', xtrain, ytrain, xvalid, yvalid, xtest, ytest)</code>
 	Recall class 0: 78.52%
 	F1: 50.90%
 	ROC AUC Training: 70.22% Testing: 69.73%</pre>
-				<div class="center"><img src="/images/bonds/cm-lr1-tuned.png" alt=""><img
-						src="/images/bonds/roc_logreg_tuned.png" alt=""></div>
+				<div class="center"><img src="/images/bonds/cm-lr1-tuned.png" alt="" class="vis"><img
+						src="/images/bonds/roc_logreg_tuned.png" alt="" class="vis"></div>
 				<div class="desc">It seems the tuning increases the performance of the model. The next thing we will try to check the features coefficient and try to modify our features.</div>
 				<pre><code>coefs_df = pd.DataFrame()
 coefs_df['features'] = x_v1.columns
@@ -2136,8 +2002,8 @@ eval(lr2, 'logreg_coef', xtrain2, ytrain2, xvalid2, yvalid2, xtest2, ytest2)</co
 	Recall class 0: 76.12%
 	F1: 44.25%
 	ROC AUC Training: 65.84% Testing: 64.27%</pre>
-				<div class="center"><img src="/images/bonds/cm-lr-coef.png" alt=""><img src="/images/bonds/roc-coef.png"
-						alt=""></div>
+				<div class="center"><img src="/images/bonds/cm-lr-coef.png" alt="" class="vis"><img src="/images/bonds/roc-coef.png"
+						alt="" class="vis"></div>
 				<div class="desc">It seems that our previous model before removing the low coefficient features has a
 					better performance.
 					We will try to tune the model and see if the accuracy will improve.
@@ -2175,12 +2041,14 @@ eval(lr3, 'logreg_coef_tuned', xtrain2, ytrain2, xvalid2, yvalid2, xtest2, ytest
 	F1: 50.64%
 	ROC AUC Training: 69.33% Testing: 68.66%</pre>
 
-				<div class="center"><img src="/images/bonds/cm-lr-coef-tuned.png" alt=""><img
-						src="/images/bonds/roc-coef-lr-tuned.png" alt=""></div>
+				<div class="center"><img src="/images/bonds/cm-lr-coef-tuned.png" alt="" class="vis"><img
+						src="/images/bonds/roc-coef-lr-tuned.png" alt="" class="vis"></div>
 				<div class="desc">Unfortunately, when we reduce the low coefficient features it doesn't perform better
 					than our previous dataset.
 					We will try to create a new model using different algorithms.</div>
-				<h2 class="major" id="svm">Model 2 - Support Vector Machine</h2>
+						</section>
+						<section id="svm">
+							<h2 class="major" id="svm">Model 2 - Support Vector Machine</h2>
 				<pre><code>from sklearn.svm import SVC
 svm_v1 = SVC(probability=True)
 svm_v1.fit(xtrain, ytrain)
@@ -2196,8 +2064,8 @@ eval(svm_v1, 'svm1', xtrain, ytrain, xvalid, yvalid, xtest, ytest)</code>
 	Recall class 0: 78.32%
 	F1: 41.45%
 	ROC AUC Training: 68.65% Testing: 62.84%</pre>
-				<div class="center"><img src="/images/bonds/cm-svm.png" alt=""> <img src="/images/bonds/roc-svm.png"
-						alt=""></div>
+				<div class="center"><img src="/images/bonds/cm-svm.png" alt="" class="vis"> <img src="/images/bonds/roc-svm.png"
+						alt="" class="vis"></div>
 				<div class="desc">We will try to hyperparameter tuning our model to see if we can improve the
 					performance.</div>
 				<pre><code>param_grid = [
@@ -2229,95 +2097,97 @@ eval(svm_v2, 'svm2', xtrain, ytrain, xvalid, yvalid, xtest, ytest)</code>
 	Recall class 0: 77.12%
 	F1: 48.76%
 	ROC AUC Training: 76.66% Testing: 65.07%</pre>
-				<div class="center"><img src="/images/bonds/cm-svm-tuned.png" alt=""><img
-						src="/images/bonds/roc-svm-tuned.png" alt=""></div>
+				<div class="center"><img src="/images/bonds/cm-svm-tuned.png" alt="" class="vis"><img
+						src="/images/bonds/roc-svm-tuned.png" alt="" class="vis"></div>
 				<div class="desc">It seems that both of SVM model that we have created has an overfitting problem. After the
 					tuning, the accuracy score is increased but the overfitting is as well.</div>
-
-				<h2 class="major" id="randomforest">Model 3 - Random Forest Classifier</h2>
-				<pre><code>from sklearn.ensemble import RandomForestClassifier
-rf = RandomForestClassifier()
-rf.fit(xtrain, ytrain)
-eval(rf, 'random_forest', xtrain, ytrain, xvalid, yvalid, xtest, ytest)</code>
-	Training accuracy: 99.74% 
-	Validation accuracy: 67.49%
-	Testing accuracy: 66.55% 
-	Overfitting: 33.19%
-	Log Loss Training: 0.09435511358407653, Log Loss Testing: 12.058082112059724
-	Precision class 1: 55.78% 
-	Precision class 0: 78.54%
-	Recall class 1: 74.35% 
-	Recall class 0: 61.44%
-	F1: 63.74%
-	ROC AUC Training: 100.00% Testing: 76.33%</pre>
-				<div class="center"><img src="/images/bonds/cm-rf.png" alt=""> <img src="/images/bonds/roc-rf.png"
-						alt=""></div>
-				<div class="desc">The Random Forest Classifier model results in an outstanding accuracy score with the training dataset.
-                    However, it does not have the same performance in the validation and testing dataset, which results in overfitting. Since it takes a lot of computation for the hyperparameter tuning, we will try to visualise the validation manually.</div>
-				<pre>Function for calculate and visualise validation curve
-<code>def validations(model, param, prange, x, y, k):
-    train_scoreNum, test_scoreNum = validation_curve(
-                                model,
-                                X = x, y = y, 
-                                param_name = param, 
-                                param_range = prange, cv = k, scoring = "accuracy")
-    # Calculating mean and standard deviation of training score
-    mean_train_score = np.mean(train_scoreNum, axis = 1)
-    std_train_score = np.std(train_scoreNum, axis = 1)
-    
-    # Calculating mean and standard deviation of testing score
-    mean_test_score = np.mean(test_scoreNum, axis = 1)
-    std_test_score = np.std(test_scoreNum, axis = 1)
-    
-    # Plot mean accuracy scores for training and testing scores
-    plt.plot(prange, mean_train_score,
-        label = "Training Score", color = 'b')
-    plt.plot(prange, mean_test_score,
-    label = "Cross Validation Score", color = 'g')
-    
-    # Creating the plot
-    plt.title("Validation Curve with RF Classifier")
-    plt.xlabel(param)
-    plt.ylabel("Accuracy")
-    plt.tight_layout()
-    plt.legend(loc = 'best')
-    plt.show()
-parameter_range = np.arange(1, 100, 1)
-validations(rf, 'min_samples_split', parameter_range, xtrain, ytrain, 10)</code></pre>
-				<div class="center"><img src="/images/bonds/rf-min-split.png" alt=""></div>
-				<pre><code>parameter_range = np.arange(1, 15, 1)
-validations(rf, 'max_depth', parameter_range, xtrain, ytrain, 10)</code></pre>
-				<div class="center"><img src="/images/bonds/rf-max-depth.png" alt=""></div>
-				<pre><code>parameter_range = np.arange(1, 10, 1)
-validations(rf, 'n_estimators', parameter_range, xtrain, ytrain, 10)</code></pre>
-				<div class="center"><img src="/images/bonds/rf-nesti.png" alt=""></div>
-				<pre><code>validations(rf, 'min_samples_leaf', parameter_range, xtrain, ytrain, 10)</code></pre>
-				<div class="center"><img src="/images/bonds/rf-min-leaf.png" alt=""></div>
-				<pre><code>parameter_range = np.arange(1, 10, 1)
-validations(rf, 'max_features', parameter_range, xtrain, ytrain, 10)</code></pre>
-				<div class="center"><img src="/images/bonds/rfmax-features.png" alt=""></div>
-				<pre>Fitting the parameter based on validation_curve visualisation
-<code>RF_tuned = RandomForestClassifier(min_samples_split=100, max_depth=3, min_samples_leaf=15, n_estimators=1, max_features=7)
-	RF_tuned.fit(xtrain, ytrain)
-	eval(RF_tuned, 'rf_tuned', xtrain, ytrain, xvalid, yvalid, xtest, ytest)</code>
-	Training accuracy: 63.15% 
-	Validation accuracy: 62.48%
-	Testing accuracy: 61.90% 
-	Overfitting: 1.25%
-	Log Loss Training: 13.282296758373823, Log Loss Testing: 13.734024932688962
-	Precision class 1: 51.35% 
-	Precision class 0: 74.09%
-	Recall class 1: 69.62% 
-	Recall class 0: 56.84%
-	F1: 59.11%
-	ROC AUC Training: 68.15% Testing: 65.19%</pre>
-				<div class="center"><img src="/images/bonds/rf-tuned.png" alt=""><img
-						src="/images/bonds/roc-rf-tuned.png" alt=""></div>
-				<div class="desc">We successfully reduce the overfitting to 1.25% from our Random Forest algorithm from 33.19%. However, our accuracy score is also decreasing.
-                    So, we will move on to our next model.
-				</div>
-
-				<h2 class="major" id="knn">Model 4 - K-Nearest Neighbor Classifier</h2>
+						</section>
+						<section id="randomforest">
+							<h2 class="major" id="randomforest">Model 3 - Random Forest Classifier</h2>
+							<pre><code>from sklearn.ensemble import RandomForestClassifier
+			rf = RandomForestClassifier()
+			rf.fit(xtrain, ytrain)
+			eval(rf, 'random_forest', xtrain, ytrain, xvalid, yvalid, xtest, ytest)</code>
+				Training accuracy: 99.74% 
+				Validation accuracy: 67.49%
+				Testing accuracy: 66.55% 
+				Overfitting: 33.19%
+				Log Loss Training: 0.09435511358407653, Log Loss Testing: 12.058082112059724
+				Precision class 1: 55.78% 
+				Precision class 0: 78.54%
+				Recall class 1: 74.35% 
+				Recall class 0: 61.44%
+				F1: 63.74%
+				ROC AUC Training: 100.00% Testing: 76.33%</pre>
+							<div class="center"><img src="/images/bonds/cm-rf.png" alt="" class="vis"> <img src="/images/bonds/roc-rf.png"
+									alt="" class="vis"></div>
+							<div class="desc">The Random Forest Classifier model results in an outstanding accuracy score with the training dataset.
+								However, it does not have the same performance in the validation and testing dataset, which results in overfitting. Since it takes a lot of computation for the hyperparameter tuning, we will try to visualise the validation manually.</div>
+							<pre>Function for calculate and visualise validation curve
+			<code>def validations(model, param, prange, x, y, k):
+				train_scoreNum, test_scoreNum = validation_curve(
+											model,
+											X = x, y = y, 
+											param_name = param, 
+											param_range = prange, cv = k, scoring = "accuracy")
+				# Calculating mean and standard deviation of training score
+				mean_train_score = np.mean(train_scoreNum, axis = 1)
+				std_train_score = np.std(train_scoreNum, axis = 1)
+				
+				# Calculating mean and standard deviation of testing score
+				mean_test_score = np.mean(test_scoreNum, axis = 1)
+				std_test_score = np.std(test_scoreNum, axis = 1)
+				
+				# Plot mean accuracy scores for training and testing scores
+				plt.plot(prange, mean_train_score,
+					label = "Training Score", color = 'b')
+				plt.plot(prange, mean_test_score,
+				label = "Cross Validation Score", color = 'g')
+				
+				# Creating the plot
+				plt.title("Validation Curve with RF Classifier")
+				plt.xlabel(param)
+				plt.ylabel("Accuracy")
+				plt.tight_layout()
+				plt.legend(loc = 'best')
+				plt.show()
+			parameter_range = np.arange(1, 100, 1)
+			validations(rf, 'min_samples_split', parameter_range, xtrain, ytrain, 10)</code></pre>
+							<div class="center"><img src="/images/bonds/rf-min-split.png" alt=""></div>
+							<pre><code>parameter_range = np.arange(1, 15, 1)
+			validations(rf, 'max_depth', parameter_range, xtrain, ytrain, 10)</code></pre>
+							<div class="center"><img src="/images/bonds/rf-max-depth.png" alt=""></div>
+							<pre><code>parameter_range = np.arange(1, 10, 1)
+			validations(rf, 'n_estimators', parameter_range, xtrain, ytrain, 10)</code></pre>
+							<div class="center"><img src="/images/bonds/rf-nesti.png" alt=""></div>
+							<pre><code>validations(rf, 'min_samples_leaf', parameter_range, xtrain, ytrain, 10)</code></pre>
+							<div class="center"><img src="/images/bonds/rf-min-leaf.png" alt=""></div>
+							<pre><code>parameter_range = np.arange(1, 10, 1)
+			validations(rf, 'max_features', parameter_range, xtrain, ytrain, 10)</code></pre>
+							<div class="center"><img src="/images/bonds/rfmax-features.png" alt=""></div>
+							<pre>Fitting the parameter based on validation_curve visualisation
+			<code>RF_tuned = RandomForestClassifier(min_samples_split=100, max_depth=3, min_samples_leaf=15, n_estimators=1, max_features=7)
+				RF_tuned.fit(xtrain, ytrain)
+				eval(RF_tuned, 'rf_tuned', xtrain, ytrain, xvalid, yvalid, xtest, ytest)</code>
+				Training accuracy: 63.15% 
+				Validation accuracy: 62.48%
+				Testing accuracy: 61.90% 
+				Overfitting: 1.25%
+				Log Loss Training: 13.282296758373823, Log Loss Testing: 13.734024932688962
+				Precision class 1: 51.35% 
+				Precision class 0: 74.09%
+				Recall class 1: 69.62% 
+				Recall class 0: 56.84%
+				F1: 59.11%
+				ROC AUC Training: 68.15% Testing: 65.19%</pre>
+							<div class="center"><img src="/images/bonds/rf-tuned.png" alt="" class="vis"><img
+									src="/images/bonds/roc-rf-tuned.png" alt="" class="vis"></div>
+							<div class="desc">We successfully reduce the overfitting to 1.25% from our Random Forest algorithm from 33.19%. However, our accuracy score is also decreasing.
+								So, we will move on to our next model.
+							</div>	
+						</section>
+						<section id="knn">
+							<h2 class="major" id="knn">Model 4 - K-Nearest Neighbor Classifier</h2>
 				<pre><code>from sklearn.neighbors import KNeighborsClassifier
 knn1 = KNeighborsClassifier()
 knn1.fit(xtrain, ytrain)
@@ -2333,8 +2203,8 @@ eval(knn1, 'knn', xtrain, ytrain, xvalid, yvalid, xtest, ytest)</code>
 	Recall class 0: 69.93%
 	F1: 44.55%
 	ROC AUC Training: 78.96% Testing: 58.57%</pre>
-				<div class="center"><img src="/images/bonds/cm-knn.png" alt=""><img src="/images/bonds/roc-knn.png"
-						alt=""></div>
+				<div class="center"><img src="/images/bonds/cm-knn.png" alt="" class="vis"><img src="/images/bonds/roc-knn.png"
+						alt="" class="vis"></div>
 				<div class="desc">Our KNN model also has the same problem as our previous models. Furthermore, this model also yields the lowest accuracy score up to now.
                     We will do the same thing as our previous model with hyperparameter tuning. </div>
 				<pre><code>#parameter dict
@@ -2364,10 +2234,12 @@ eval(knn_tuned, 'knn_tuned', xtrain, ytrain, xvalid, yvalid, xtest, ytest)</code
 	Recall class 0: 72.93%
 	F1: 43.58%
 	ROC AUC Training: 69.89% Testing: 61.47%</pre>
-				<div class="center"><img src="/images/bonds/cm-knn-tuned.png" alt=""><img
-						src="/images/bonds/roc-knn-tuned.png" alt=""></div>
+				<div class="center"><img src="/images/bonds/cm-knn-tuned.png" alt="" class="vis"><img
+						src="/images/bonds/roc-knn-tuned.png" alt="" class="vis"></div>
 				<div class="desc">We were able to reduce the overfitting percentage and increase the accuracy score a little bit. It seems this model is the most underperformed compared to others.</div>
-				<h2 class="major" id="dtree">Model 5 - Decision Tree Classifier </h2>
+						</section>
+						<section id="dtree">
+							<h2 class="major" id="dtree">Model 5 - Decision Tree Classifier </h2>
 				<pre><code>from sklearn.tree import DecisionTreeClassifier
 dt = DecisionTreeClassifier()
 dt.fit(xtrain, ytrain)
@@ -2383,8 +2255,8 @@ eval(dt, 'decision_tree', xtrain, ytrain, xvalid, yvalid, xtest, ytest)</code>
 	Recall class 0: 67.43%
 	F1: 59.76%
 	ROC AUC Training: 100.00% Testing: 65.68%</pre>
-				<div class="center"><img src="/images/bonds/cm-dt.png" alt=""><img src="/images/bonds/roc-dt.png"
-						alt=""></div>
+				<div class="center"><img src="/images/bonds/cm-dt.png" alt="" class="vis"><img src="/images/bonds/roc-dt.png"
+						alt="" class="vis"></div>
 				<div class="desc">From the result above, it looks like decision tree has the similar results with random
 					forest Classifier.</div>
 				<pre><code>random_tree = {'criterion': ['gini', 'entropy'],
@@ -2412,11 +2284,12 @@ eval(dt_tuned, 'dt_tuned', xtrain, ytrain, xvalid, yvalid, xtest, ytest)</code>
 	Recall class 0: 57.14%
 	F1: 66.01%
 	ROC AUC Training: 69.48% Testing: 69.33%</pre>
-				<div class="center"><img src="/images/bonds/cm-dt-tuned.png" alt=""><img
-						src="/images/bonds/roc-dt-tuned.png" alt=""></div>
+				<div class="center"><img src="/images/bonds/cm-dt-tuned.png" alt="" class="vis"><img
+						src="/images/bonds/roc-dt-tuned.png" alt="" class="vis"></div>
 				<div class="desc">The hyperparameter tuning successfully lowers the overfitting percentage by more than 30% and slightly increases the accuracy score. We will implement our last algorithm before we compare which algorithm is performing better.</div>
-
-				<h2 class="major" id="naive">Model 6 - Naive Bayes</h2>
+						</section>
+						<section id="naive">
+							<h2 class="major" id="naive">Model 6 - Naive Bayes</h2>
 				<pre><code>from sklearn.naive_bayes import GaussianNB
 nb = GaussianNB()
 nb.fit(xtrain, ytrain)
@@ -2432,8 +2305,8 @@ eval(nb, 'naive', xtrain, ytrain, xvalid, yvalid, xtest, ytest)</code>
 	Recall class 0: 88.21%
 	F1: 34.65%
 	ROC AUC Training: 65.56% Testing: 64.16%</pre>
-				<div class="center"><img src="/images/bonds/cm-naive.png" alt=""><img src="/images/bonds/roc-naive.png"
-						alt=""></div>
+				<div class="center"><img src="/images/bonds/cm-naive.png" alt="" class="vis"><img src="/images/bonds/roc-naive.png"
+						alt="" class="vis"></div>
 				<div class="desc">Unlike our other model, this model has an underfitting problem. We will perform the same procedure with hyperparameter tuning.</div>
 				<pre><code>params_NB = {'var_smoothing': np.logspace(0,-9, num=100)}
 opt = GridSearchCV(GaussianNB(), param_grid=params_NB, cv=10,verbose=1,scoring='accuracy')
@@ -2454,10 +2327,12 @@ eval(nbtuned, 'naive_tuned', xtrain, ytrain, xvalid, yvalid, xtest, ytest)</code
 	Recall class 0: 87.81%
 	F1: 34.68%
 	ROC AUC Training: 65.55% Testing: 64.13%</pre>
-				<div class="center"><img src="/images/bonds/cm-naive-tuned.png" alt=""><img
-						src="/images/bonds/roc-naive-tuned.png" alt=""></div>
+				<div class="center"><img src="/images/bonds/cm-naive-tuned.png" alt="" class="vis"><img
+						src="/images/bonds/roc-naive-tuned.png" alt="" class="vis"></div>
 				<div class="desc">Unfortunately, our hyperparameter tuning does not give the best results. So we will compare all of our models and see which one performs better than the others.</div>
-				<h2 class="major" id="conclusion">Conclusion - Model Selection</h2>
+						</section>
+						<section id="conclusion">
+							<h2 class="major" id="conclusion">Conclusion - Model Selection</h2>
 				<div class="desc">We have been implementing 6 classification algorithms to our dataset for the bonds order prediction.
                     We will see which one has a better performance.
 				</div>
@@ -2716,29 +2591,41 @@ scores</code></pre>
                     However, the percentage of the score is not satisfying. If we can get more data to train our model, we could increase our accuracy score as the model has more data to learn.
                     For now, tuned logistic regression is our better option with a 65% accuracy score, 58% precision in class 1 and 69% precision in class 0.
 				</div>
+						</section>
+					</div>
+							</div>
+
+					</section>
+				<!-- Footer -->
+				<section id="footer">
+					<div class="inner">
+						<h2 class="major">Get in touch</h2>
+						<section>
+							<ul class="contact">
+								<li class="icon solid fa-envelope"><a href="mailto:hello@devyratnasari.com">hello@devyratnasari.com</a></li>
+							</ul>
+							<h3>Let's Connect!</h3>
+							<ul class="icons">
+								<li><a href="https://github.com/devyratnasari" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+								<li><a href="https://linkedin.com/in/devy-ratnasari" class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+							</ul>
+						</section>
+						<ul class="copyright">
+							<li>&copy; Devy Ratnasari</li>
+							<li>Templates: <a href="http://html5up.net">HTML5 UP</a></li>
+							<li>Images: <a href="https://www.canva.com/">Canva</a></li>
+						</ul>
+					</div>
+				</section>
 			</div>
-		</section>
-	</div>
 
-	<!-- Footer -->
-	<footer id="footer" class="wrapper style1-alt">
-		<div class="inner">
-			<ul class="menu">
-				<li>&copy; Devy Ratnasari</li>
-				<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-			</ul>
-		</div>
-	</footer>
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
 
-	<!-- Scripts -->
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/jquery.scrollex.min.js"></script>
-	<script src="assets/js/jquery.scrolly.min.js"></script>
-	<script src="assets/js/browser.min.js"></script>
-	<script src="assets/js/breakpoints.min.js"></script>
-	<script src="assets/js/util.js"></script>
-	<script src="assets/js/main.js"></script>
-
-</body>
-
+	</body>
 </html>
