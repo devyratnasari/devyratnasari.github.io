@@ -90,78 +90,81 @@
 							<li>referral_code_used - If the user using referral code during registration or not</li>
 							<li>user_income_source - The source of income from the user</li>
 						</ul>
-						<table>
-							<thead>
-								<tr style="text-align: right;">
-									<th></th>
-									<th>user_id</th>
-									<th>registration_import_datetime</th>
-									<th>user_gender</th>
-									<th>user_age</th>
-									<th>user_occupation</th>
-									<th>user_income_range</th>
-									<th>referral_code_used</th>
-									<th>user_income_source</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<th>0</th>
-									<td>162882</td>
-									<td>2021-09-17</td>
-									<td>Female</td>
-									<td>51</td>
-									<td>Swasta</td>
-									<td>&gt; Rp 500 Juta - 1 Miliar</td>
-									<td>NaN</td>
-									<td>Gaji</td>
-								</tr>
-								<tr>
-									<th>1</th>
-									<td>3485491</td>
-									<td>2021-10-09</td>
-									<td>Female</td>
-									<td>55</td>
-									<td>Others</td>
-									<td>&gt; Rp 50 Juta - 100 Juta</td>
-									<td>NaN</td>
-									<td>Gaji</td>
-								</tr>
-								<tr>
-									<th>2</th>
-									<td>1071649</td>
-									<td>2021-10-08</td>
-									<td>Male</td>
-									<td>50</td>
-									<td>Swasta</td>
-									<td>Rp 10 Juta - 50 Juta</td>
-									<td>NaN</td>
-									<td>Gaji</td>
-								</tr>
-								<tr>
-									<th>3</th>
-									<td>3816789</td>
-									<td>2021-08-12</td>
-									<td>Female</td>
-									<td>53</td>
-									<td>IRT</td>
-									<td>&gt; Rp 50 Juta - 100 Juta</td>
-									<td>NaN</td>
-									<td>Gaji</td>
-								</tr>
-								<tr>
-									<th>4</th>
-									<td>3802293</td>
-									<td>2021-08-15</td>
-									<td>Female</td>
-									<td>47</td>
-									<td>PNS</td>
-									<td>&gt; Rp 500 Juta - 1 Miliar</td>
-									<td>used referral</td>
-									<td>Gaji</td>
-								</tr>
-							</tbody>
-						</table>
+						<div class="table-wrapper">
+							<table>
+								<thead>
+									<tr style="text-align: right;">
+										<th></th>
+										<th>user_id</th>
+										<th>registration_import_datetime</th>
+										<th>user_gender</th>
+										<th>user_age</th>
+										<th>user_occupation</th>
+										<th>user_income_range</th>
+										<th>referral_code_used</th>
+										<th>user_income_source</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<th>0</th>
+										<td>162882</td>
+										<td>2021-09-17</td>
+										<td>Female</td>
+										<td>51</td>
+										<td>Swasta</td>
+										<td>&gt; Rp 500 Juta - 1 Miliar</td>
+										<td>NaN</td>
+										<td>Gaji</td>
+									</tr>
+									<tr>
+										<th>1</th>
+										<td>3485491</td>
+										<td>2021-10-09</td>
+										<td>Female</td>
+										<td>55</td>
+										<td>Others</td>
+										<td>&gt; Rp 50 Juta - 100 Juta</td>
+										<td>NaN</td>
+										<td>Gaji</td>
+									</tr>
+									<tr>
+										<th>2</th>
+										<td>1071649</td>
+										<td>2021-10-08</td>
+										<td>Male</td>
+										<td>50</td>
+										<td>Swasta</td>
+										<td>Rp 10 Juta - 50 Juta</td>
+										<td>NaN</td>
+										<td>Gaji</td>
+									</tr>
+									<tr>
+										<th>3</th>
+										<td>3816789</td>
+										<td>2021-08-12</td>
+										<td>Female</td>
+										<td>53</td>
+										<td>IRT</td>
+										<td>&gt; Rp 50 Juta - 100 Juta</td>
+										<td>NaN</td>
+										<td>Gaji</td>
+									</tr>
+									<tr>
+										<th>4</th>
+										<td>3802293</td>
+										<td>2021-08-15</td>
+										<td>Female</td>
+										<td>47</td>
+										<td>PNS</td>
+										<td>&gt; Rp 500 Juta - 1 Miliar</td>
+										<td>used referral</td>
+										<td>Gaji</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						
 						<h3 class="major">User's daily transaction</h3>
 						This dataset contains:
 						<ul style="list-style-type: circle;">
@@ -188,7 +191,7 @@
 								date</li>
 							<li>Campuran_transaction_amount - Total value of the transaction to buy (if positive) or
 								sell (if negative) mixed mutual fund on the date.</li>
-							<div style="overflow-x: auto; margin-top: 1em;">
+							<div class="table-wrapper">
 								<table>
 									<thead>
 										<tr style="text-align: right;">
@@ -306,48 +309,51 @@
 							<li>flag_order_bond - 1 if the user ordered bonds, 0 for the opposite</li>
 							<li>bond_units_ordered - The total of bond that user ordered</li>
 						</ul>
-						<table>
-							<thead>
-								<tr style="text-align: right;">
-									<th></th>
-									<th>user_id</th>
-									<th>flag_order_bond</th>
-									<th>bond_units_ordered</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<th>0</th>
-									<td>50701</td>
-									<td>1</td>
-									<td>34</td>
-								</tr>
-								<tr>
-									<th>1</th>
-									<td>50961</td>
-									<td>1</td>
-									<td>99</td>
-								</tr>
-								<tr>
-									<th>2</th>
-									<td>51883</td>
-									<td>0</td>
-									<td>0</td>
-								</tr>
-								<tr>
-									<th>3</th>
-									<td>53759</td>
-									<td>0</td>
-									<td>0</td>
-								</tr>
-								<tr>
-									<th>4</th>
-									<td>54759</td>
-									<td>1</td>
-									<td>92</td>
-								</tr>
-							</tbody>
-						</table>	
+						<div class="table-wrapper">
+							<table>
+								<thead>
+									<tr style="text-align: right;">
+										<th></th>
+										<th>user_id</th>
+										<th>flag_order_bond</th>
+										<th>bond_units_ordered</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<th>0</th>
+										<td>50701</td>
+										<td>1</td>
+										<td>34</td>
+									</tr>
+									<tr>
+										<th>1</th>
+										<td>50961</td>
+										<td>1</td>
+										<td>99</td>
+									</tr>
+									<tr>
+										<th>2</th>
+										<td>51883</td>
+										<td>0</td>
+										<td>0</td>
+									</tr>
+									<tr>
+										<th>3</th>
+										<td>53759</td>
+										<td>0</td>
+										<td>0</td>
+									</tr>
+									<tr>
+										<th>4</th>
+										<td>54759</td>
+										<td>1</td>
+										<td>92</td>
+									</tr>
+								</tbody>
+							</table>	
+						</div>
+						
 						<section id="eda">
 							<h2 class="major">Users</h2>
 							<p>
