@@ -60,9 +60,13 @@ table {
 	margin-right: auto;
 	margin-bottom: 1em;
 }
+.center img{
+	max-width: 100%;
+}
 img.vis{
 	width: 544px;
 	height: 499px;
+	max-width: 100%;
 }
 body {
 	-webkit-text-size-adjust: none;
