@@ -1879,23 +1879,64 @@ def split_scaled(x,y):
 	xtest_scaled = scale.fit_transform(xtest)
 	return xtrain_scaled, ytrain, xvalid_scaled, yvalid, xtest_scaled, ytest</code></pre>
 
-				<pre>Function to evaluate models<code>from sklearn.metrics import ConfusionMatrixDisplay, accuracy_score, confusion_matrix, mean_squared_error, r2_score
+				<pre>Function to evaluate models<code>from sklearn.metrics import ConfusionMatrixDisplay, accuracy_score
+from sklearn.metrics import confusion_matrix, roc_auc_score, roc_curve, log_loss
 score_comp = []
 def eval(model, name, x1, y1, x2, y2, x3,y3):
+	#accuracy score
 	predtrain = model.predict(x1)
 	predvalid = model.predict(x2)
 	predtest = model.predict(x3)
-	acctest = (accuracy_score(y3, predtest))*100
-	accvalid = (accuracy_score(y2, predvalid))*100
-	acctrain = (accuracy_score(y1, predtrain))*100
+	acctest = (accuracy_score(y3, predtest))
+	accvalid = (accuracy_score(y2, predvalid))
+	acctrain = (accuracy_score(y1, predtrain))
 	overfit = acctrain - acctest
 	
-	rmse= (mean_squared_error(ytest,predtest))**(1/2)
-	r2 = r2_score(ytest, predtest)
-	print(f'Training accuracy: {acctrain} \nValidation accuracy: {accvalid} \nTesting accuracy: {acctest} \nOverfitting: {overfit}')
-	print('RMSE test: %.3f' % rmse)
-	print('R^2 test: %.3f' % r2)
-	score_comp.append([name, acctrain, accvalid, acctest, rmse, r2])</code></pre>
+	tn, fp, fn, tp = confusion_matrix(y3, predtest).ravel()
+	precision1 = (tp / (tp+fp))
+	precision0 = (tn/(tn+fn))
+	recall1 = (tp/(tp+fn))
+	recall0 = (tn/(tn+fp))
+	f1 = 2*(precision1 * recall1)/(precision1 + recall1)
+
+	#log loss
+	logtest = log_loss(y3,predtest)
+	logtrain = log_loss(y1,predtrain)
+
+	#roc auc score
+	test_prob = model.predict_proba(x3)[::,1]
+	train_prob = model.predict_proba(x1)[::,1]
+	roctest = (roc_auc_score(y3, test_prob))
+	roctrain = (roc_auc_score(y1, train_prob))
+	fpr_test, tpr_test, _ = roc_curve(y3,  test_prob)
+	fpr_train, tpr_train, _ = roc_curve(y1,  train_prob)
+
+	#print report
+	print(f'Training accuracy: {acctrain:.2%} \nValidation accuracy: {accvalid:.2%}\nTesting accuracy: {acctest:.2%} \nOverfitting: {overfit:.2%}')
+	print(f'Log Loss Training: {logtrain}, Log Loss Testing: {logtest}')
+	print(f'Precision class 1: {precision1:.2%} \nPrecision class 0: {precision0:.2%}')
+	print(f'Recall class 1: {recall1:.2%} \nRecall class 0: {recall0:.2%}')
+	print(f'F1: {f1:.2%}') 
+	print(f'ROC AUC Training: {roctrain:.2%} Testing: {roctest:.2%}')
+
+	#insert result to list for comparison
+	score_comp.append([name, acctrain, accvalid, acctest, overfit, precision1, precision0, recall1, recall0,
+	f1, logtrain, logtest, roctrain, roctest])
+
+	#confusion matrix plot
+	disp = ConfusionMatrixDisplay(confusion_matrix(y3, predtest),display_labels=model.classes_)
+	disp.plot()
+	plt.show()
+	
+	#roc auc learning curve plot
+	plt.title("Area Under Curve")
+	plt.plot(fpr_test,tpr_test,label="AUC Test="+str(roctest))
+	plt.plot(fpr_train,tpr_train,label="AUC Train="+str(roctrain))
+	plt.ylabel('True Positive Rate')
+	plt.xlabel('False Positive Rate')
+	plt.legend(loc=4)
+	plt.grid(True)
+	plt.show()</code></pre>
 						</section>
 
 						<section id="logreg1">
