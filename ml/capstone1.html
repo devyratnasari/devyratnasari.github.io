@@ -6,12 +6,12 @@
 -->
 <html>
 	<head>
-		<link rel="icon" type="image/x-icon" href="/assets/css/images/title.png">
+		<link rel="icon" type="image/x-icon" href="../assets/css/images/title.png">
 		<title>Credit Card Frauds</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<link rel="stylesheet" href="../assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
 	</head>
 	<body class="is-preload">
 
@@ -20,7 +20,7 @@
 
 				<!-- Header -->
 				<header id="header">
-					<h1><a href="index.html">Devy Ratnasari</a></h1>
+					<h1><a href="../index.html">Devy Ratnasari</a></h1>
 					<nav>
 						<a href="#menu">On This Page</a>
 					</nav>
@@ -31,7 +31,7 @@
 					<div class="inner">
 						<h2>On This Page</h2>
 						<ul class="links">
-							<li><a href="index.html">Home</a></li>
+							<li><a href="../index.html">Home</a></li>
 							<li><a href="#eda">EDA & Preprocessing</a>
 							</li>
 							<li>
@@ -50,7 +50,7 @@
 								</div>
 							</li>
 							<li><a href="#conclusion">Conclusion</a></li>
-							<li><a href="ml.html">Back to projects</a></li>
+							<li><a href="../ml.html">Back to projects</a></li>
 						</ul>
 						<a href="#" class="close">Close</a>
 					</div>
@@ -71,7 +71,7 @@ We combined 2 datasets to see the total number of data and the balance percentag
 </p>
 <ul class="actions">
 	<li><a href="https://www.youtube.com/watch?v=i9DjmUWxTlg" class="button">Youtube Presentation</a></li>
-	<li><a href="/visual.html#fraud" class="button">Tableau Story</a></li>
+	<li><a href="../visual/fraud.html" class="button">Tableau Story</a></li>
 </ul>
 
 
@@ -113,7 +113,7 @@ print(fullset.info())
 #print sample of data(the first 5 rows)
 fullset.head()</code>
 	(1852394, 23)
-	Int64Index: 1852394 entries, 0 to 555718
+	Int64../index: 1852394 entries, 0 to 555718
 	Data columns (total 23 columns):
 	#   Column                 Dtype  
 	---  ------                 -----  
@@ -307,7 +307,7 @@ fullset['Age']=fullset['dob'].apply(lambda x: from_dob_to_age(x))
 	<pre><code>fig= plt.figure(figsize=(10,5) )
 fig.add_subplot(1,3,1)
 ar_6=sns.boxplot(x=fullset["is_fraud"],y=fullset["Age"])</code></pre>
-<div class="center"><img src="/images/frauds/boxplot-age.png" alt=""></div>
+<div class="center"><img src="../images/frauds/boxplot-age.png" alt=""></div>
 <div class="desc">Then we will check if there is any null value in the dataset.</div>
 <pre><code>fullset.isna().sum()</code>
 	Unnamed: 0               0
@@ -377,15 +377,15 @@ ar_6=sns.boxplot(x=fullset["is_fraud"],y=fullset["Age"])</code></pre>
 		Unique Value Age -- 80</pre>
 		<div class="desc">We want to see the amount of fraud that happening from January 2019 to December 2020. </div>
 		<pre><code>fraud = fullset.query('is_fraud == 1')  
-fraud['trans_date_trans_time'].value_counts().sort_index().plot()
+fraud['trans_date_trans_time'].value_counts().sort_../index().plot()
 plt.title('Fraud growths')</code></pre>
-<div class="center"><img src="/images/frauds/fraud-growth.png" alt=""></div>
+<div class="center"><img src="../images/frauds/fraud-growth.png" alt=""></div>
 <div class="desc">It seems, the fraud peaking during the holiday season. We want to see what is category the most targeted by the fraudster.</div>
 <pre><code>sns.countplot(y=fraud.category, data=fraud, palette = 'Set3')
 plt.title('Fraud Category')
 plt.xlabel('Total')
 plt.show()</code></pre>
-<div class="center"><img src="/images/frauds/fraud-category.png" alt=""></div>
+<div class="center"><img src="../images/frauds/fraud-category.png" alt=""></div>
 <div class="desc">From the graph above, we can see most of the fraud happening through online shopping and grocery point-of-sale networks. Then we want to see the percentage of positive and negative fraud transactions.</div>
 
 <pre><code>print(fullset['is_fraud'].value_counts())
@@ -401,14 +401,14 @@ plt.show()</code></pre>
 	plt.show()</code>
 	0    1842743
 	1       9651</pre>
-<div class="center"><img src="/images/frauds/pie-target.png" alt=""></div>
+<div class="center"><img src="../images/frauds/pie-target.png" alt=""></div>
 <div class="desc">The imbalanced ratio is 99.47:0.52 which means that our dataset is highly imbalanced where majority of transactions are legitimate transactions and very few are fraudulent transactions.
 	The machine learning model trained on this data may yield high overall prediction towards majority class since 99.47% samples belong to majority class or class 0.
 	Since our dataset is huge, we treated class imbalance problem using random under-sampling techinque from imblearn. <br>
 	We want to check the distribution of our data using the histogram.
 </div>
 <pre><code>p = fullset.hist(figsize = (15,15))</code></pre>
-<div class="center"><img src="/images/frauds/histogram.png" alt=""></div>
+<div class="center"><img src="../images/frauds/histogram.png" alt=""></div>
 <div class="desc">We will convert our non numerical dataset to numerical then plot the correlation matrix to see the correlation between each features.</div>
 <pre><code>#apply label encoder to the dataset and put in the new dataset
 newset = fullset.apply(LabelEncoder().fit_transform)
@@ -418,7 +418,7 @@ fig, ax = plt.subplots(figsize=(25,10))
 sns.heatmap(newset.corr(), annot = True, ax=ax, cmap = 'Blues')
 plt.title("DataCorrelation")
 plt.show()</code></pre>
-<div class="center"><img src="/images/frauds/corr-matrix.png" alt=""></div>
+<div class="center"><img src="../images/frauds/corr-matrix.png" alt=""></div>
 <div class="desc">We will be dropping is_fraud because we will use it as our y axis and dropping variables which are highly correlated like merch_lat and merch_long</div>
 <pre><code>dropvar = ['is_fraud','Unnamed: 0', 'first', 'last', 'dob', 'trans_date_trans_time','trans_num', 'merch_lat', 'merch_long'] 
 #create our dependent variables
@@ -447,7 +447,7 @@ print('resample dataset shape', Counter(yund))</code>
 underfraud = pd.DataFrame(yund)
 sns.countplot(x = 'is_fraud', data = underfraud)
 plt.show()</code></pre>
-<div class="center"><img src="/images/frauds/undersampler.png" alt=""></div>
+<div class="center"><img src="../images/frauds/undersampler.png" alt=""></div>
 <div class="desc">After we implement Random Under Sampler, our target observation become 19302 rows.
 	<br>We will scale our data and perform PCA to reduce the dimensionality.
 </div>
@@ -465,7 +465,7 @@ plt.plot(np.cumsum(pca_15.explained_variance_ratio_))
 plt.xlabel('Number of components')
 plt.ylabel('Explained variance')
 plt.savefig('elbow_plot.png', dpi= 100)</code></pre>
-<div class="center"><img src="/images/frauds/pcs.png" alt=""></div>
+<div class="center"><img src="../images/frauds/pcs.png" alt=""></div>
 
 <div class="desc">From the chart above, it shows that the best number of features are 14. </div>
 <pre>Function for metrix evaluation
@@ -582,7 +582,7 @@ auc_plot(SVM1)
 	Recall class 0: 97.89%
 	F1: 84.40%
 	ROC AUC Training-> 91.93% Testing-> 88.39%</pre>
-	<div class="center"><img src="/images/frauds/cm-svm.png" alt="" class="vis"><img src="/images/frauds/roc-svm.png" alt="" class="vis"></div>
+	<div class="center"><img src="../images/frauds/cm-svm.png" alt="" class="vis"><img src="../images/frauds/roc-svm.png" alt="" class="vis"></div>
 	<div class="desc">From the confusion matrix, the accuracy score is 86.22%.
 		Next, we will try to improve the prediction using cross validation to optimise the hyperparameters.
 		Cross-validation systematically creates and evaluates multiple models on multiple subsets of the dataset.</div>
@@ -627,7 +627,7 @@ auc_plot(optimal_param)</code>
 	Recall class 0: 94.02%
 	F1: 86.82%
 	ROC AUC Training-> 97.61% Testing-> 93.11%</pre>
-<div class="center"><img src="/images/frauds/cm-svm-tuned.png" alt="" class="vis"><img src="/images/frauds/roc-svm-tuned.png" alt="" class="vis"></div>
+<div class="center"><img src="../images/frauds/cm-svm-tuned.png" alt="" class="vis"><img src="../images/frauds/roc-svm-tuned.png" alt="" class="vis"></div>
 <div class="desc">Before Tuning Accuracy Score - 86.22%
 <br>After Tuning Accuracy score is 87.71%
 <br>However, model is slightly overfit after hypertuning.</div>
@@ -652,7 +652,7 @@ auc_plot(logreg)</code>
 	Recall class 0: 93.44%
 	F1: 83.15%
 	ROC AUC Training-> 85.19% Testing-> 84.35%</pre>
-	<div class="center"><img src="/images/frauds/cm-lr.png" alt="" class="vis"><img src="/images/frauds/roc-lr.png" alt="" class="vis"></div>
+	<div class="center"><img src="../images/frauds/cm-lr.png" alt="" class="vis"><img src="../images/frauds/roc-lr.png" alt="" class="vis"></div>
 	<div class="desc">The accuracy score is 84.63%, it's lower compared to SVM.
 		We will tune the model using grid search cross validation.</div>
 		<pre><code>log_param = [
@@ -688,7 +688,7 @@ auc_plot(opt_log)</code>
 	Recall class 0: 95.03%
 	F1: 83.55%
 	ROC AUC Training-> 84.62% Testing-> 83.81%</pre>
-	<div class="center"><img src="/images/frauds/cm-lr-tuned.png" alt="" class="vis"><img src="/images/frauds/roc-lr-tuned.png" alt=""></div>
+	<div class="center"><img src="../images/frauds/cm-lr-tuned.png" alt="" class="vis"><img src="../images/frauds/roc-lr-tuned.png" alt=""></div>
 	<div class="desc">Before Tuning Accuracy = 84.63%<br>After Tuning Accuracy = 85.17%
 <br>Overfitting is reduced as well.</div>
 <h2 class="major" id="rf">Model 3 - Random Forest</h2>
@@ -712,7 +712,7 @@ auc_plot(RF)</code>
 	Recall class 0: 96.86%
 	F1: 87.54%
 	ROC AUC Training-> 100.00% Testing-> 93.87%</pre>
-	<div class="center"><img src="/images/frauds/cm-rf.png" alt="" class="vis"><img src="/images/frauds/roc-rf.png" alt="" class="vis"></div>
+	<div class="center"><img src="../images/frauds/cm-rf.png" alt="" class="vis"><img src="../images/frauds/roc-rf.png" alt="" class="vis"></div>
 	<div class="desc">The accuracy score is 88.50%, it's higher compared to SVM and Logistic Regression. However, the model is overfitting as the training accuracy score is 100%</div>
 	<pre><code># Number of trees in random forest
 n_estimators = [int(x) for x in np.linspace(start = 100, stop = 1000, num = 50)]
@@ -783,7 +783,7 @@ auc_plot(decTree)</code>
 	Recall class 0: 82.56%
 	F1: 82.97%
 	ROC AUC Training-> 100.00% Testing-> 82.90%</pre>
-	<div class="center"><img src="/images/frauds/cm-dt.png" alt="" class="vis"><img src="/images/frauds/roc-dt.png" alt="" class="vis"></div>
+	<div class="center"><img src="../images/frauds/cm-dt.png" alt="" class="vis"><img src="../images/frauds/roc-dt.png" alt="" class="vis"></div>
 	<pre><code>#parameter variables
 criterion = ['gini', 'entropy']
 max_depth = [3,6,9]
@@ -818,7 +818,7 @@ print(opt_decTree.best_params_)</code>
 	Recall class 0: 93.61%
 	F1: 84.61%
 	ROC AUC Training-> 94.47% Testing-> 89.99%</pre>
-	<div class="center"><img src="/images/frauds/cm-dt-tuned.png" alt="" class="vis"><img src="/images/frauds/roc-dt-tuned.png" alt="" class="vis"></div>
+	<div class="center"><img src="../images/frauds/cm-dt-tuned.png" alt="" class="vis"><img src="../images/frauds/roc-dt-tuned.png" alt="" class="vis"></div>
 	<h2 class="major" id="knn">Model 5 - K-Nearest Neighbor</h2>
 	<pre><code>from sklearn.neighbors import KNeighborsClassifier
 
@@ -842,7 +842,7 @@ auc_plot(neigh)</code>
 	Recall class 0: 84.39%
 	F1: 81.57%
 	ROC AUC Training-> 97.18% Testing-> 88.02%</pre>
-	<div class="center"><img src="/images/frauds/cm-knn.png" alt="" class="vis"><img src="/images/frauds/roc-knn.png" alt="" class="vis">	</div>
+	<div class="center"><img src="../images/frauds/cm-knn.png" alt="" class="vis"><img src="../images/frauds/roc-knn.png" alt="" class="vis">	</div>
 	<div class="desc">The accuracy score is 83.15%, it's the lowest accuracy compared to the other algorithms. Also, this model has overfitting problem.</div>
 	<pre><code>tuning_params = {
 	'n_neighbors' : [71,75,77,83], #from the plot above
@@ -873,7 +873,7 @@ auc_plot(opt_knn)</code>
 	Recall class 0: 97.72%
 	F1: 83.13%
 	ROC AUC Training-> 90.07% Testing-> 88.92%</pre>
-	<div class="center"><img src="/images/frauds/cm-knn-tuned.png" alt="" class="vis"><img src="/images/frauds/roc-knn-tuned.png" alt="" class="vis"></div>
+	<div class="center"><img src="../images/frauds/cm-knn-tuned.png" alt="" class="vis"><img src="../images/frauds/roc-knn-tuned.png" alt="" class="vis"></div>
 	<h2 class="major" id="ann">Model 6 - Artificial Neural Network</h2>
 	<div class="desc">Let's say we want to split the data in 60:20:20 for train:valid:test dataset. In the first step we will split the data in training and remaining dataset.
 		Since we want the valid and test size to be equal (10% each of overall data). We have to define valid_size=0.5 (that is 50% of remaining data)
@@ -888,7 +888,7 @@ ann.compile(optimizer='adam',loss='binary_crossentropy',metrics=['accuracy', tf.
 history=ann.fit(Xtrain,Ytrain,epochs=30,validation_data=(xvalid,yvalid))
 plot_learningCurve(history,30)
 	</code></pre>
-	<div class="center"><img src="/images/frauds/ann-accuracy.png" alt="" class="vis"><img src="/images/frauds/ann-loss.png" alt="" class="vis"></div>
+	<div class="center"><img src="../images/frauds/ann-accuracy.png" alt="" class="vis"><img src="../images/frauds/ann-loss.png" alt="" class="vis"></div>
 	<pre><code>testeval1 = ann.evaluate(xtest, ytest)
 traineval1 = ann.evaluate(xvalid, yvalid)
 yprediction=ann.predict(xtest)
@@ -921,12 +921,12 @@ calc(ann, 'ann', testeval1, traineval1, cmt)
 	Recall class 0: 97.75%
 	F1: 84.13%
 	ROC AUC Training-> 90.58% Testing-> 91.87%</pre>
-	<div class="center"><img src="/images/frauds/cm-ann.png" alt=""></div>
+	<div class="center"><img src="../images/frauds/cm-ann.png" alt=""></div>
 	<pre><code>opt_ann=create_my_model1()
 #train the model
 history=opt_ann.fit(Xtrain,Ytrain,epochs=50,batch_size = 15,validation_data=(xvalid,yvalid))
 plot_learningCurve(history,50)</code></pre>
-<div class="center"><img src="/images/frauds/ann-accuracy-tuned.png" alt="" class="vis"><img src="/images/frauds/ann-loss-tuned.png" alt="" class="vis"></div>
+<div class="center"><img src="../images/frauds/ann-accuracy-tuned.png" alt="" class="vis"><img src="../images/frauds/ann-loss-tuned.png" alt="" class="vis"></div>
 <pre><code>calc(opt_ann, 'ann_tuned', testeval, traineval, cm1)
 cm1 =tf.math.confusion_matrix(labels=ytest,predictions=ypred1)
 plt.figure(figsize=(7,5))
@@ -946,7 +946,7 @@ plt.ylabel('actual')</code>
 	Recall class 0: 97.24%
 	F1: 84.86%
 	ROC AUC Training-> 90.58% Testing-> 91.87%</pre>
-<div class="center"><img src="/images/frauds/cm-ann-tuned.png" alt=""></div>
+<div class="center"><img src="../images/frauds/cm-ann-tuned.png" alt=""></div>
 <h2 class="major">Model 7 - Convolutional Neural Networks</h2>
 <pre><code>epochs=20
 cnn=Sequential()
@@ -968,7 +968,7 @@ cnn.compile(optimizer=Adam(learning_rate=0.0001),loss='binary_crossentropy',metr
 
 	history=cnn.fit(Xtrain,Ytrain,epochs=epochs,validation_data=(xvalid,yvalid))
 plot_learningCurve(history,epochs)</code></pre>
-<div class="center"><img src="/images/frauds/cnn-accuracy.png" alt="" class="vis"><img src="/images/frauds/cnn-loss.png" alt=""></div>
+<div class="center"><img src="../images/frauds/cnn-accuracy.png" alt="" class="vis"><img src="../images/frauds/cnn-loss.png" alt=""></div>
 <pre><code>cntesteval = cnn.evaluate(xtest, ytest)
 cntraineval = cnn.evaluate(Xtrain,Ytrain)
 cnypredict=cnn.predict(xtest)
@@ -999,7 +999,7 @@ calc(cnn, 'cnn', cntesteval, cntraineval, cm2)</code>
 	Recall class 0: 97.75%
 	F1: 84.72%
 	ROC AUC Training-> 90.13% Testing-> 89.15%</pre>
-<div class="center"><img src="/images/frauds/cm-cnn.png" alt=""></div>
+<div class="center"><img src="../images/frauds/cm-cnn.png" alt=""></div>
 <pre><code>epochs=50
 cnnmax=Sequential()
 cnnmax.add(Conv1D(32,2, activation='relu',input_shape=Xtrain[0].shape))
@@ -1024,7 +1024,7 @@ history2=cnnmax.fit(Xtrain,Ytrain,epochs=100,validation_data=(xvalid,yvalid))
 
 plot_learningCurve(history2,100)</code></pre>
 
-<div class="center"><img src="/images/frauds/cnn-accuracy-tuned.png" alt="" class="vis"><img src="/images/frauds/cnn-loss-tuned.png" alt="" class="vis"></div>
+<div class="center"><img src="../images/frauds/cnn-accuracy-tuned.png" alt="" class="vis"><img src="../images/frauds/cnn-loss-tuned.png" alt="" class="vis"></div>
 
 <pre><code>calc(cnn, 'cnn_tuned', maxtesteval, maxtraineval, cm3)
 #plot confusion matrix
@@ -1046,7 +1046,7 @@ plt.ylabel('actual')</code>
 	Recall class 0: 92.88%
 	F1: 72.54%
 	ROC AUC Training-> 85.53% Testing-> 83.94%</pre>
-	<div class="center"><img src="/images/frauds/cm-cnn-tuned.png" alt=""></div>
+	<div class="center"><img src="../images/frauds/cm-cnn-tuned.png" alt=""></div>
 
 	<h2 class="major" id="conclusion">Conclusion</h2>
 	<pre><code>scoring = pd.DataFrame(score, columns = ['algo','c_matrix','acc_test','acc_train','overfit', 'loss_test',
@@ -1400,12 +1400,12 @@ plt.ylabel('actual')</code>
 			</div>
 
 		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+			<script src="../assets/js/jquery.min.js"></script>
+			<script src="../assets/js/jquery.scrollex.min.js"></script>
+			<script src="../assets/js/browser.min.js"></script>
+			<script src="../assets/js/breakpoints.min.js"></script>
+			<script src="../assets/js/util.js"></script>
+			<script src="../assets/js/main.js"></script>
 
 	</body>
 </html>

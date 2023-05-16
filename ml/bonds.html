@@ -6,12 +6,12 @@
 -->
 <html>
 	<head>
-		<link rel="icon" type="image/x-icon" href="/assets/css/images/title.png">
+		<link rel="icon" type="image/x-icon" href="../assets/css/images/title.png">
 	<title>Bonds</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<link rel="stylesheet" href="../assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
 	</head>
 	<body class="is-preload">
 
@@ -20,7 +20,7 @@
 
 				<!-- Header -->
 					<header id="header">
-						<h1><a href="index.html">Devy Ratnasari</a></h1>
+						<h1><a href="../index.html">Devy Ratnasari</a></h1>
 						<nav>
 							<a href="#menu">On This Page</a>
 						</nav>
@@ -31,7 +31,7 @@
 						<div class="inner">
 							<h2>On This Page</h2>
 							<ul class="links">
-								<li><a href="index.html">Home</a></li>
+								<li><a href="../index.html">Home</a></li>
 								<li>
 									<div class="dropdown">
 										<a href="#eda">EDA</a>
@@ -57,7 +57,7 @@
 									</div>
 								</li>
 								<li><a href="#conclusion">Conclusion</a></li>
-								<li><a href="ml.html">Back to projects</a></li>
+								<li><a href="../ml.html">Back to projects</a></li>
 							</ul>
 							<a href="#" class="close">Close</a>
 						</div>
@@ -73,7 +73,7 @@
 									The dataset is sourced from Indonesia Fintech StartUp between August and October 2021.
 								</p>
 								<ul class="actions">
-									<li><a href="/visual.html#bonds" class="button">Tableau Dashboard</a></li>
+									<li><a href="../visual/bonds.html" class="button">Tableau Dashboard</a></li>
 								</ul>
 							</div>
 						</header>
@@ -174,7 +174,7 @@
 						<ul style="list-style-type: circle;">
 							<li>user_id - Id of user, it's same with the user_id from dataset 1</li>
 							<li>date - Transaction date</li>
-							<li>Saham_AUM - AUM (Assets Under Management) of equity mutual fund held by client to date
+							<li>Saham_AUM - AUM (../assets Under Management) of equity mutual fund held by client to date
 							</li>
 							<li>Saham_invested_amount - The total price paid by client to buy equity mutual fund to
 								date.</li>
@@ -443,8 +443,8 @@
 		user.registration_month.value_counts().sort_index().plot()
 		plt.title('User Join Growth by Month')
 		plt.show()</code></pre>
-							<img src="/images/bonds/user_growth_linechart.png" alt="" class="vis"> <img
-								src="/images/bonds/user_month.png" alt="" class="vis">
+							<img src="../images/bonds/user_growth_linechart.png" alt="" class="vis"> <img
+								src="../images/bonds/user_month.png" alt="" class="vis">
 							<div class="desc">In the daily registration chart, we can see that October is the month with the
 								lowest and highest number of registrations,
 								meanwhile when we try to visualise it on monthly basis we can see that September is the month
@@ -454,7 +454,7 @@
 		plt.pie(gender.user_id, labels=gender.index , startangle=90, shadow=True,explode=(0.1, 0.1), autopct='%1.2f%%')
 		plt.title('Users\' Gender Distribution')
 		plt.show()			</code></pre>
-							<div class="center"><img src="/images/bonds/user_gender.png" alt="" class="center"></div>
+							<div class="center"><img src="../images/bonds/user_gender.png" alt="" class="center"></div>
 							<div class="desc">The user's gender distribution chart show that around 61.02% of our users are
 								male, meanwhile the rest are female.
 								Then we will try to visualise the user's range and source of income to see more details of it.
@@ -474,7 +474,7 @@
 		plt.setp(autotexts, size=8, weight="bold")
 		ax.set_title("User's Income Source")
 		plt.show()			</code></pre>
-							<div class="center"><img src="/images/bonds/user_income_source.png" alt=""></div>
+							<div class="center"><img src="../images/bonds/user_income_source.png" alt=""></div>
 							<div class="desc">We read the chart counterclockwise starting from the exploded pie.
 								It shows that the lowest income source is from Bunga Simpanan (Saving's interest) with 0.2%.
 								whilst the majority of the income source is from Gaji (Salary) with 62.1% or equal to 9131
@@ -488,7 +488,7 @@
 			ax.bar_label(x, label_type='edge')
 		
 		plt.show()			</code></pre>
-							<div class="center"><img src="/images/bonds/user_income_range.png" alt="" class="center"></div>
+							<div class="center"><img src="../images/bonds/user_income_range.png" alt="" class="center"></div>
 							<div class="desc">The user income range chart shows that the majority of users' income range is less than 10 Million Rupiah (approx 630 USD) with 6275 users.
 								Nevertheless, there are 27 users with the highest income range - 1 Billion Rupiah (approx 63000 USD) which is our potential big investor.
 								We also will try to combine income sources and range to see the breakdown of it. 
@@ -500,7 +500,7 @@
 			ax.bar_label(x, label_type='edge')
 		ax.legend(loc='best', fontsize=8)
 		plt.show()</code></pre>
-							<div class="center"><img src="/images/bonds/income_source_range.png" alt=""></div>
+							<div class="center"><img src="../images/bonds/income_source_range.png" alt=""></div>
 							<div class="desc">From the income range and source chart, we can see that 2835 of our users had wages of less than 10 Million Rupiah. 
 								Moreover, the majority of our user's salary income range is between 10 Million to 50 Million Rupiah with a total of 3483 users. 
 								It is noticeable that there are 10 users had a salary of more than 1 Billion Rupiah. 
@@ -512,7 +512,7 @@
 			ax.bar_label(x, label_type='edge')
 		ax.set_title('User occupation')
 		plt.show()</code></pre>
-							<div class="center"><img src="/images/bonds/occupation.png" alt=""></div>
+							<div class="center"><img src="../images/bonds/occupation.png" alt=""></div>
 							<div class="desc">The users' occupation chart shows that the majority of our users are Pelajar
 								(Student) with a total of 7887 users.
 								Which is make sense that our majority income range is less than 10 Million.
@@ -524,7 +524,7 @@
 			ax.bar_label(x, label_type='edge')
 		ax.legend(loc='right', fontsize=8)
 		plt.show()</code></pre>
-							<div class="center"><img src="/images/bonds/income_range_occupation.png" alt=""></div>
+							<div class="center"><img src="../images/bonds/income_range_occupation.png" alt=""></div>
 							<div class="desc">When we combined the income range and occupation, we found interesting
 								information that we have 17 students with an income range of more than 500 Million Rupiah.
 								So we will investigate a little bit further about the 17 students.
@@ -768,7 +768,7 @@
 		plt.pie(referral_code.user_id, labels=referral_code.index, startangle=90, shadow=True,explode=(0.1, 0.1), autopct='%1.2f%%')
 		plt.title('Referral Code Comparison')
 		plt.show()</code></pre>
-							<div class="center"><img src="/images/bonds/referral_code.png" alt=""></div>
+							<div class="center"><img src="../images/bonds/referral_code.png" alt=""></div>
 							<div class="desc">We can see from the referral code comparison that only 38.09% of our users use referral codes during their registration process.
 								We can create an announcement on the company website or application about bonus credit if the users refer some friends to register with us.
 								This will increase the number of new users, and transactions, and also a cheaper version of the advertisement as we announce it using our private platform so third-party advertisement costs are needed.
@@ -789,7 +789,7 @@
 								We will try to visualise its distribution of it by using the histogram.					</div>
 							<pre><code>user['user_age'].hist(figsize = (5,5))
 		plt.title('User age distribution')</code></pre>
-							<div class="center"><img src="/images/bonds/age_histogram.png" alt=""></div>
+							<div class="center"><img src="../images/bonds/age_histogram.png" alt=""></div>
 							<div class="desc">The histogram shows that most of our users are in the age group 20's and 30's.
 								The next step we will do is to use zscore to calculate if there are any outliers.</div>
 							<pre><code>mean = np.mean(user.user_age)
@@ -802,7 +802,7 @@
 		print('outliers in dataset are', set(outlier))
 		sns.boxplot(x=user.user_age)</code>
 			outliers in dataset are {53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 69, 71, 73, 74, 76, 82, 83}</pre>
-							<div class="center"><img src="/images/bonds/outliers.png" alt=""></div>
+							<div class="center"><img src="../images/bonds/outliers.png" alt=""></div>
 							<div class="desc">The z-score calculation, shows the outliers from the user's age are 53 years and older.
 								We will visualise the distribution and check how many users are in the outliers then merge dataset 1 and the transactions' dataset to see how many percentages of the outlier's users contribute to the transaction before we decide to remove the outliers or just leave it as is.</div>
 							<pre><code>user_outliers = user.loc[user.user_age>=53,:]
@@ -816,7 +816,7 @@
 			ax.bar_label(x, label_type='edge')
 		plt.show()</code>
 			Total users in outliers : 264 OR 1.79% from total user</pre>
-							<div class="center"><img src="/images/bonds/outliers_dist.png" alt=""></div>
+							<div class="center"><img src="../images/bonds/outliers_dist.png" alt=""></div>
 							<div class="desc">The chart above shows that we have a total of 264 users in the outliers category or equal to 1.79% of the total user.
 								With the highest distribution at 54 years of age and the lowest starting from 73 years. Since the age outliers are still in the normal scope, we will keep the users 54 years of age and older included in our analysis.
 							</div>
@@ -911,7 +911,7 @@ plt.legend(['Saham', 'Pasar Uang', 'Pendapatan Tetap', 'Campuran'])
 plt.setp(ax.xaxis.get_ticklabels(), rotation=90)
 
 plt.show()</code></pre>
-				<div class="center"><img src="/images/bonds/transaction_growth.png" alt=""></div>
+				<div class="center"><img src="../images/bonds/transaction_growth.png" alt=""></div>
 				<div class="desc">From the number of transactions chart, the higher type of transaction is Pasar Uang (Money Market) followed by Pendapatan Tetap (fixed income) and Saham (stocks) respectively.
                     As we can see from the dataset, the AUM and the invested amount is updated daily, meanwhile, transactions are filled when the users make any buy or sell transactions and it will fill with 0 if no transactions have been made.
                     Furthermore, we will be separating buy and sell transactions into new columns, to avoid biased data when summarising the transactions.</div>
@@ -1252,7 +1252,7 @@ plt.setp(ax.xaxis.get_ticklabels(), rotation=90)
 plt.ticklabel_format(style='plain', axis='y')
 
 plt.show()</code></pre>
-				<div class="center"><img src="/images/bonds/buysell_sum.png" alt=""></div>
+				<div class="center"><img src="../images/bonds/buysell_sum.png" alt=""></div>
 				<div class="desc">The summaries buying and selling chart shows that the total amount of Pendapatan Tetap (Buying) and Pasar Uang (Buying) are leading than other transactions.
                     We are also can see that the majority of the transactions are buying, this could meanings that our users are more interested in investing their money. <br>
 					Since invested columns are updated daily with the last balanced of the users, we will drop the
@@ -1667,7 +1667,7 @@ plt.show()
 bond_chart=sns.countplot(x=result["flag_order_bond"])
 plt.tight_layout()
 plt.show()</code></pre>
-				<div class="center"><img src="/images/bonds/bonds_pie.png" alt=""></div>
+				<div class="center"><img src="../images/bonds/bonds_pie.png" alt=""></div>
 				<div class="desc">It shows that only 40.9% of our users order Government Bonds. However, we found a difference in our number of users from the transactions' dataset and 3. We have 8277 total users in the transactions dataset that makes transactions, meanwhile, 8484 users in the bonds order dataset.
                     We will combine the transactions' dataset and bonds in order to see the details of it.</div>
 				<pre><code>trans_3 = result.merge(new_trans, how='left')
@@ -1705,7 +1705,7 @@ wedges, texts, autotexts = ax.pie(v_null.user_id, autopct=lambda pct: func(pct, 
 	textprops=dict(color="black"), explode=(0,1))
 ax.legend(wedges, v_null.index, title='Null flag order bond', loc='upper right')
 plt.show()</code></pre>
-				<div class="center"><img src="/images/bonds/bond_null.png" alt=""></div>
+				<div class="center"><img src="../images/bonds/bond_null.png" alt=""></div>
 				<div class="desc">From the pie chart, we can see only 1 of 207 users ended up ordering bonds from the company.
                     Since we don't have any transactional records for the 207 users, it is safe to exclude them from our analysis.
                     Now, we will merge all of our datasets into 1 before we preprocess our data for modelling.
@@ -1771,14 +1771,14 @@ full_data.age_group.unique()
 trans_group.plot(title='Summary transaction by age group', figsize=(8,5))
 plt.ticklabel_format(axis='y', style='plain')
 plt.show()</code></pre>
-				<div class="center"><img src="/images/bonds/trans_age.png" alt=""></div>
+				<div class="center"><img src="../images/bonds/trans_age.png" alt=""></div>
 				<div class="desc">When we visualise the number of transactions mapped with the age group, we can see that the age group 20-29 years old contribute the most transactions, and it started to slow down until the user aged. <br>
                     Then we will check the correlation from each of our features by plotting the correlation matrix.</div>
 				<pre><code>fig, ax = plt.subplots(figsize=(25,10))  
 sns.heatmap(full_data.corr(), annot = True, ax=ax, cmap = 'Blues')
 plt.title("DataCorrelation")
 plt.show()</code></pre>
-				<div class="center"><img src="/images/bonds/correlation_matrix.png" alt="" style='width: 100%;'></div>
+				<div class="center"><img src="../images/bonds/correlation_matrix.png" alt="" style='width: 100%;'></div>
 				<div class="desc">The correlation matrix shows that AUM and Invested column has a perfect positive correlation between each other as well as buying transactions.
                     Furthermore, bond_units_ordered also has a positive correlation with flag_order_bond. So, we will be dropping one of the features to avoid multicollinearity in the model performance.
 				</div>
@@ -1965,7 +1965,7 @@ eval(logreg, 'logreg1', xtrain, ytrain, xvalid, yvalid, xtest, ytest)</code>
 	Recall class 0: 75.92%
 	F1: 45.92%
 	ROC AUC Training: 66.75% Testing: 64.66%</pre>
-				<div class="center"><img src="/images/bonds/cm-lr1.png" alt="" class="vis"> <img src="/images/bonds/roc_logreg.png"
+				<div class="center"><img src="../images/bonds/cm-lr1.png" alt="" class="vis"> <img src="../images/bonds/roc_logreg.png"
 						alt="" class="vis"></div>
 				<div class="desc">So, we can see that our model does not give a good accuracy score.
 					We will try to tune the model using GridSearch Cross Validation to improve the performance.</div>
@@ -2001,8 +2001,8 @@ eval(lr,'logreg_tuned', xtrain, ytrain, xvalid, yvalid, xtest, ytest)</code>
 	Recall class 0: 78.52%
 	F1: 50.90%
 	ROC AUC Training: 70.22% Testing: 69.73%</pre>
-				<div class="center"><img src="/images/bonds/cm-lr1-tuned.png" alt="" class="vis"><img
-						src="/images/bonds/roc_logreg_tuned.png" alt="" class="vis"></div>
+				<div class="center"><img src="../images/bonds/cm-lr1-tuned.png" alt="" class="vis"><img
+						src="../images/bonds/roc_logreg_tuned.png" alt="" class="vis"></div>
 				<div class="desc">It seems the tuning increases the performance of the model. The next thing we will try to check the features coefficient and try to modify our features.</div>
 				<pre><code>coefs_df = pd.DataFrame()
 coefs_df['features'] = x_v1.columns
@@ -2031,7 +2031,7 @@ plt.show()</code>
 	5         Pasar_Uang_transaction_amount_sell   0.09
 	22                 user_occupation_Pengusaha   0.08
 	25                user_occupation_TNI/Polisi   0.04</pre>
-				<div class="center"><img src="/images/bonds/coefs.png" alt=""></div>
+				<div class="center"><img src="../images/bonds/coefs.png" alt=""></div>
 				<div class="desc">We will remove the low coefficient features that less than 0.2.</div>
 
 				<pre><code>dropslv2 = coefs_df.loc[coefs_df['coefs']<0.2].features
@@ -2056,7 +2056,7 @@ eval(lr2, 'logreg_coef', xtrain2, ytrain2, xvalid2, yvalid2, xtest2, ytest2)</co
 	Recall class 0: 76.12%
 	F1: 44.25%
 	ROC AUC Training: 65.84% Testing: 64.27%</pre>
-				<div class="center"><img src="/images/bonds/cm-lr-coef.png" alt="" class="vis"><img src="/images/bonds/roc-coef.png"
+				<div class="center"><img src="../images/bonds/cm-lr-coef.png" alt="" class="vis"><img src="../images/bonds/roc-coef.png"
 						alt="" class="vis"></div>
 				<div class="desc">It seems that our previous model before removing the low coefficient features has a
 					better performance.
@@ -2095,8 +2095,8 @@ eval(lr3, 'logreg_coef_tuned', xtrain2, ytrain2, xvalid2, yvalid2, xtest2, ytest
 	F1: 50.64%
 	ROC AUC Training: 69.33% Testing: 68.66%</pre>
 
-				<div class="center"><img src="/images/bonds/cm-lr-coef-tuned.png" alt="" class="vis"><img
-						src="/images/bonds/roc-coef-lr-tuned.png" alt="" class="vis"></div>
+				<div class="center"><img src="../images/bonds/cm-lr-coef-tuned.png" alt="" class="vis"><img
+						src="../images/bonds/roc-coef-lr-tuned.png" alt="" class="vis"></div>
 				<div class="desc">Unfortunately, when we reduce the low coefficient features it doesn't perform better
 					than our previous dataset.
 					We will try to create a new model using different algorithms.</div>
@@ -2118,7 +2118,7 @@ eval(svm_v1, 'svm1', xtrain, ytrain, xvalid, yvalid, xtest, ytest)</code>
 	Recall class 0: 78.32%
 	F1: 41.45%
 	ROC AUC Training: 68.65% Testing: 62.84%</pre>
-				<div class="center"><img src="/images/bonds/cm-svm.png" alt="" class="vis"> <img src="/images/bonds/roc-svm.png"
+				<div class="center"><img src="../images/bonds/cm-svm.png" alt="" class="vis"> <img src="../images/bonds/roc-svm.png"
 						alt="" class="vis"></div>
 				<div class="desc">We will try to hyperparameter tuning our model to see if we can improve the
 					performance.</div>
@@ -2151,8 +2151,8 @@ eval(svm_v2, 'svm2', xtrain, ytrain, xvalid, yvalid, xtest, ytest)</code>
 	Recall class 0: 77.12%
 	F1: 48.76%
 	ROC AUC Training: 76.66% Testing: 65.07%</pre>
-				<div class="center"><img src="/images/bonds/cm-svm-tuned.png" alt="" class="vis"><img
-						src="/images/bonds/roc-svm-tuned.png" alt="" class="vis"></div>
+				<div class="center"><img src="../images/bonds/cm-svm-tuned.png" alt="" class="vis"><img
+						src="../images/bonds/roc-svm-tuned.png" alt="" class="vis"></div>
 				<div class="desc">It seems that both of SVM model that we have created has an overfitting problem. After the
 					tuning, the accuracy score is increased but the overfitting is as well.</div>
 						</section>
@@ -2173,7 +2173,7 @@ eval(svm_v2, 'svm2', xtrain, ytrain, xvalid, yvalid, xtest, ytest)</code>
 				Recall class 0: 61.44%
 				F1: 63.74%
 				ROC AUC Training: 100.00% Testing: 76.33%</pre>
-							<div class="center"><img src="/images/bonds/cm-rf.png" alt="" class="vis"> <img src="/images/bonds/roc-rf.png"
+							<div class="center"><img src="../images/bonds/cm-rf.png" alt="" class="vis"> <img src="../images/bonds/roc-rf.png"
 									alt="" class="vis"></div>
 							<div class="desc">The Random Forest Classifier model results in an outstanding accuracy score with the training dataset.
 								However, it does not have the same performance in the validation and testing dataset, which results in overfitting. Since it takes a lot of computation for the hyperparameter tuning, we will try to visualise the validation manually.</div>
@@ -2207,18 +2207,18 @@ eval(svm_v2, 'svm2', xtrain, ytrain, xvalid, yvalid, xtest, ytest)</code>
 				plt.show()
 			parameter_range = np.arange(1, 100, 1)
 			validations(rf, 'min_samples_split', parameter_range, xtrain, ytrain, 10)</code></pre>
-							<div class="center"><img src="/images/bonds/rf-min-split.png" alt=""></div>
+							<div class="center"><img src="../images/bonds/rf-min-split.png" alt=""></div>
 							<pre><code>parameter_range = np.arange(1, 15, 1)
 			validations(rf, 'max_depth', parameter_range, xtrain, ytrain, 10)</code></pre>
-							<div class="center"><img src="/images/bonds/rf-max-depth.png" alt=""></div>
+							<div class="center"><img src="../images/bonds/rf-max-depth.png" alt=""></div>
 							<pre><code>parameter_range = np.arange(1, 10, 1)
 			validations(rf, 'n_estimators', parameter_range, xtrain, ytrain, 10)</code></pre>
-							<div class="center"><img src="/images/bonds/rf-nesti.png" alt=""></div>
+							<div class="center"><img src="../images/bonds/rf-nesti.png" alt=""></div>
 							<pre><code>validations(rf, 'min_samples_leaf', parameter_range, xtrain, ytrain, 10)</code></pre>
-							<div class="center"><img src="/images/bonds/rf-min-leaf.png" alt=""></div>
+							<div class="center"><img src="../images/bonds/rf-min-leaf.png" alt=""></div>
 							<pre><code>parameter_range = np.arange(1, 10, 1)
 			validations(rf, 'max_features', parameter_range, xtrain, ytrain, 10)</code></pre>
-							<div class="center"><img src="/images/bonds/rfmax-features.png" alt=""></div>
+							<div class="center"><img src="../images/bonds/rfmax-features.png" alt=""></div>
 							<pre>Fitting the parameter based on validation_curve visualisation
 			<code>RF_tuned = RandomForestClassifier(min_samples_split=100, max_depth=3, min_samples_leaf=15, n_estimators=1, max_features=7)
 				RF_tuned.fit(xtrain, ytrain)
@@ -2234,8 +2234,8 @@ eval(svm_v2, 'svm2', xtrain, ytrain, xvalid, yvalid, xtest, ytest)</code>
 				Recall class 0: 56.84%
 				F1: 59.11%
 				ROC AUC Training: 68.15% Testing: 65.19%</pre>
-							<div class="center"><img src="/images/bonds/rf-tuned.png" alt="" class="vis"><img
-									src="/images/bonds/roc-rf-tuned.png" alt="" class="vis"></div>
+							<div class="center"><img src="../images/bonds/rf-tuned.png" alt="" class="vis"><img
+									src="../images/bonds/roc-rf-tuned.png" alt="" class="vis"></div>
 							<div class="desc">We successfully reduce the overfitting to 1.25% from our Random Forest algorithm from 33.19%. However, our accuracy score is also decreasing.
 								So, we will move on to our next model.
 							</div>	
@@ -2257,7 +2257,7 @@ eval(knn1, 'knn', xtrain, ytrain, xvalid, yvalid, xtest, ytest)</code>
 	Recall class 0: 69.93%
 	F1: 44.55%
 	ROC AUC Training: 78.96% Testing: 58.57%</pre>
-				<div class="center"><img src="/images/bonds/cm-knn.png" alt="" class="vis"><img src="/images/bonds/roc-knn.png"
+				<div class="center"><img src="../images/bonds/cm-knn.png" alt="" class="vis"><img src="../images/bonds/roc-knn.png"
 						alt="" class="vis"></div>
 				<div class="desc">Our KNN model also has the same problem as our previous models. Furthermore, this model also yields the lowest accuracy score up to now.
                     We will do the same thing as our previous model with hyperparameter tuning. </div>
@@ -2288,8 +2288,8 @@ eval(knn_tuned, 'knn_tuned', xtrain, ytrain, xvalid, yvalid, xtest, ytest)</code
 	Recall class 0: 72.93%
 	F1: 43.58%
 	ROC AUC Training: 69.89% Testing: 61.47%</pre>
-				<div class="center"><img src="/images/bonds/cm-knn-tuned.png" alt="" class="vis"><img
-						src="/images/bonds/roc-knn-tuned.png" alt="" class="vis"></div>
+				<div class="center"><img src="../images/bonds/cm-knn-tuned.png" alt="" class="vis"><img
+						src="../images/bonds/roc-knn-tuned.png" alt="" class="vis"></div>
 				<div class="desc">We were able to reduce the overfitting percentage and increase the accuracy score a little bit. It seems this model is the most underperformed compared to others.</div>
 						</section>
 						<section id="dtree">
@@ -2309,7 +2309,7 @@ eval(dt, 'decision_tree', xtrain, ytrain, xvalid, yvalid, xtest, ytest)</code>
 	Recall class 0: 67.43%
 	F1: 59.76%
 	ROC AUC Training: 100.00% Testing: 65.68%</pre>
-				<div class="center"><img src="/images/bonds/cm-dt.png" alt="" class="vis"><img src="/images/bonds/roc-dt.png"
+				<div class="center"><img src="../images/bonds/cm-dt.png" alt="" class="vis"><img src="../images/bonds/roc-dt.png"
 						alt="" class="vis"></div>
 				<div class="desc">From the result above, it looks like decision tree has the similar results with random
 					forest Classifier.</div>
@@ -2338,8 +2338,8 @@ eval(dt_tuned, 'dt_tuned', xtrain, ytrain, xvalid, yvalid, xtest, ytest)</code>
 	Recall class 0: 57.14%
 	F1: 66.01%
 	ROC AUC Training: 69.48% Testing: 69.33%</pre>
-				<div class="center"><img src="/images/bonds/cm-dt-tuned.png" alt="" class="vis"><img
-						src="/images/bonds/roc-dt-tuned.png" alt="" class="vis"></div>
+				<div class="center"><img src="../images/bonds/cm-dt-tuned.png" alt="" class="vis"><img
+						src="../images/bonds/roc-dt-tuned.png" alt="" class="vis"></div>
 				<div class="desc">The hyperparameter tuning successfully lowers the overfitting percentage by more than 30% and slightly increases the accuracy score. We will implement our last algorithm before we compare which algorithm is performing better.</div>
 						</section>
 						<section id="naive">
@@ -2359,7 +2359,7 @@ eval(nb, 'naive', xtrain, ytrain, xvalid, yvalid, xtest, ytest)</code>
 	Recall class 0: 88.21%
 	F1: 34.65%
 	ROC AUC Training: 65.56% Testing: 64.16%</pre>
-				<div class="center"><img src="/images/bonds/cm-naive.png" alt="" class="vis"><img src="/images/bonds/roc-naive.png"
+				<div class="center"><img src="../images/bonds/cm-naive.png" alt="" class="vis"><img src="../images/bonds/roc-naive.png"
 						alt="" class="vis"></div>
 				<div class="desc">Unlike our other model, this model has an underfitting problem. We will perform the same procedure with hyperparameter tuning.</div>
 				<pre><code>params_NB = {'var_smoothing': np.logspace(0,-9, num=100)}
@@ -2381,8 +2381,8 @@ eval(nbtuned, 'naive_tuned', xtrain, ytrain, xvalid, yvalid, xtest, ytest)</code
 	Recall class 0: 87.81%
 	F1: 34.68%
 	ROC AUC Training: 65.55% Testing: 64.13%</pre>
-				<div class="center"><img src="/images/bonds/cm-naive-tuned.png" alt="" class="vis"><img
-						src="/images/bonds/roc-naive-tuned.png" alt="" class="vis"></div>
+				<div class="center"><img src="../images/bonds/cm-naive-tuned.png" alt="" class="vis"><img
+						src="../images/bonds/roc-naive-tuned.png" alt="" class="vis"></div>
 				<div class="desc">Unfortunately, our hyperparameter tuning does not give the best results. So we will compare all of our models and see which one performs better than the others.</div>
 						</section>
 						<section id="conclusion">
@@ -2674,12 +2674,12 @@ scores</code></pre>
 			</div>
 
 		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+			<script src="../assets/js/jquery.min.js"></script>
+			<script src="../assets/js/jquery.scrollex.min.js"></script>
+			<script src="../assets/js/browser.min.js"></script>
+			<script src="../assets/js/breakpoints.min.js"></script>
+			<script src="../assets/js/util.js"></script>
+			<script src="../assets/js/main.js"></script>
 
 	</body>
 </html>
