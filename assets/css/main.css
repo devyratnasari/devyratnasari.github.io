@@ -68,6 +68,7 @@ img.vis{
 	height: 499px;
 	max-width: 100%;
 }
+
 body {
 	-webkit-text-size-adjust: none;
 }
@@ -287,10 +288,13 @@ input, select, textarea {
 		}
 
 		h1.major, h2.major, h3.major, h4.major, h5.major, h6.major {
+			padding-top: 1em;
 			padding-bottom: 1em;
 			border-bottom: solid 2px rgba(255, 255, 255, 0.125);
 		}
-
+p{
+	text-align: justify;
+}
 	h2 {
 		font-size: 1.2em;
 	}
@@ -2498,6 +2502,10 @@ input, select, textarea {
 				width: 100%;
 			}
 
+			img.tab {
+				margin-top: 1em;
+				max-width: 100%;
+			}
 /* List */
 
 	ol {
