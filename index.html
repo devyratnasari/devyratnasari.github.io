@@ -63,10 +63,10 @@
 
 						
 						<!-- One -->
-							<section id="one" class="wrapper spotlight style1">
+							<section id="one" class="wrapper alt spotlight style2">
 								<div class="inner">
 									<div class="content">
-										<h2 class="major">About Me</h2>
+										<h2 class="major" style="text-align: left;">About Me</h2>
 										<div class="story">
 											<p>Hi, I'm Devy, a data scientist with a background in software development. With two years of experience as a software developer in Indonesia, I gained valuable skills before embarking on a working holiday in Australia. 
 												Throughout my journey, I've had the opportunity to work in diverse industries and assume various roles, contributing to my personal and professional growth.</p>
@@ -98,46 +98,46 @@
 							</section>
 
 							<!-- Two -->
-                            <section id="two" class="wrapper alt spotlight style2">
+                            <section id="two" class="wrapper spotlight style1">
                                 <div class="inner">
-                                    <a href="./visual/superstore.html" class="image"><img src="images/superstore.png" alt="" /></a>
-                                    <div class="content">
-                                        <h2 class="major">Sample Superstore</h2>
-                                        <p>Created analysis using Tableau that uncover valuable insights, identify growth opportunities, and enhance operational efficiency.</p>
-                                        <a href="./visual/superstore.html" class="special">Learn more</a>
-                                    </div>
+									<div class="content"><h2 class="major">my work</h2>
+										<div class="idx">
+											<article class="box">
+												<h2 class="major">Sample Superstore</h2>
+												<p>Created analysis using Tableau that uncover valuable insights, identify growth opportunities, and enhance operational efficiency.</p>
+												<a href="./visual/superstore.html" class="special">Learn more</a>
+											</article>
+											<article class="box">
+												<h2 class="major">Bonds Buyer Predictions</h2>
+												<p>This Analysis is based on data from Indonesia Fintech Startups company between August and October 2021.
+													The purpose from this analysis is to predict the likelihood of users to order the government bonds.</p>
+												<a href="./ml/bonds.html" class="special">Learn more</a>
+											</article>
+											<article class="box">
+												<h2 class="major">Credit Card Fraud Detection</h2>
+												<p>Implemented 7 different machine learning algorithms to classify transactions into fraud vs non-fraud.</p>
+												<a href="./ml/capstone1.html" class="special">Learn more</a>
+											</article>
+											<article class="box">
+												<h2 class="major">New York uber ride 2014</h2>
+												<p>Tableau data visualisation for New York Uber Ride 2014.</p>
+												<a href="./visual/uber2014.html" class="special">Learn more</a>
+											</article>
+											<article class="box">
+												<h2 class="major">AI Attendance</h2>
+												<p>Built web application for taking attendance by leveraging computer vision and Face Recognition model.</p>
+												<a href="./cv/attendance.html" class="special">Learn more</a>
+											</article>
+										</div>
+										<div id="load-more" class="button scrolly">Load more</div>
+									</div>
+										
                                 </div>
                             </section>
-							
-							<!--
-								#comment temporary until find css
-							<section id="two" class="wrapper alt spotlight style2">
-								<div class="inner">
-									<a href="./ml/bonds.html" class="image"><img src="images/bonds.png" alt="" /></a>
-									<div class="content">
-										<h2 class="major">Government Bonds Buyer Predictions</h2>
-										<p>This Analysis is based on data from Indonesia Fintech Startups company between August and October 2021.
-											The purpose from this analysis is to predict the likelihood of users to order the government bonds.</p>
-										<a href="./ml/bonds.html" class="special">Learn more</a>
-									</div>
-								</div>
-							</section>-->
-
-						<!-- Three -->
-							<section id="three" class="wrapper spotlight style3">
-								<div class="inner">
-									<a href="./ml/capstone1.html" class="image"><img src="images/frauds.png" alt="" /></a>
-									<div class="content">
-										<h2 class="major">Credit Card Fraud Detection</h2>
-										<p>Implemented 7 different machine learning algorithms to classify transactions into fraud vs non-fraud.</p>
-										<a href="./ml/capstone1.html" class="special">Learn more</a>
-									</div>
-								</div>
-							</section>
 						<!-- Four -->
 							<section id="four" class="wrapper alt">
 								<div class="inner">
-									<h2 class="major">My work</h2>
+									<h2 class="major">Area of interest</h2>
 									<section class="features">
 										<article>
 											<h3>Data Analysis</h3>
@@ -190,6 +190,22 @@
 			</div>
 
 		<!-- Scripts -->
+		<script>
+			let loadMoreBtn = document.querySelector('#load-more');
+			let currentItem = 2;
+
+			loadMoreBtn.onclick = () =>{
+			let boxes = [...document.querySelectorAll('.content .idx .box')];
+			for (var i = currentItem; i < currentItem + 2; i++){
+				boxes[i].style.display = 'inline-block';
+			}
+			currentItem += 2;
+
+			if(currentItem >= boxes.length){
+				loadMoreBtn.style.display = 'none';
+			}
+			}
+		</script>
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/jquery.scrollex.min.js"></script>
 			<script src="assets/js/browser.min.js"></script>
